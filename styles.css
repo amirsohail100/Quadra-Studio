@@ -220,9 +220,15 @@ body::before {
 .section h2 { font-size: 2.2rem; margin-bottom: 0.5rem; }
 .section-desc { color: var(--text-muted); margin-bottom: 3rem; }
 
-.stats-grid, .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
-.stat-card, .service-card { background-color: var(--card-bg); padding: 2rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.35s; }
+.stats-grid, .services-grid, .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+.stat-card, .service-card, .project-card { background-color: var(--card-bg); padding: 2rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.35s; text-align: left; }
 .hover-lift:hover { transform: translateY(-8px) scale(1.02); border-color: var(--accent); box-shadow: 0 12px 30px -5px var(--glow-color); }
+
+/* Projects Section Styling */
+.project-card { display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; }
+.project-header { display: flex; align-items: center; justify-content: space-between; }
+.project-icon { font-size: 1.8rem; color: var(--accent); }
+.project-type { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent); font-weight: 700; background: var(--tag-bg); padding: 0.3rem 0.6rem; border-radius: 6px; }
 
 /* --- Team Section (Fixed Avatar Aspect Ratio) --- */
 .team-timeline { display: flex; flex-direction: column; gap: 2.5rem; max-width: 1000px; margin: 0 auto; }

@@ -26,10 +26,24 @@ const teamDetails = {
   }
 };
 
-// --- Darker Mouse Glow Effect ---
+// --- Mouse Glow Effect ---
 window.addEventListener("mousemove", (e) => {
   document.documentElement.style.setProperty("--mouse-x", `${e.pageX}px`);
   document.documentElement.style.setProperty("--mouse-y", `${e.pageY}px`);
+});
+
+// --- Celestial Theme Switcher Logic ---
+const themeToggleBtn = document.getElementById("theme-toggle");
+const body = document.body;
+
+themeToggleBtn.addEventListener("click", () => {
+  if (body.classList.contains("dark-theme")) {
+    body.classList.remove("dark-theme");
+    body.classList.add("light-theme");
+  } else {
+    body.classList.remove("light-theme");
+    body.classList.add("dark-theme");
+  }
 });
 
 // --- Scroll Reveal Animations ---
@@ -46,7 +60,7 @@ const revealOnScroll = () => {
 };
 
 window.addEventListener("scroll", revealOnScroll);
-revealOnScroll(); // Trigger initial check
+revealOnScroll();
 
 // --- Animated Stats Counters ---
 const counters = document.querySelectorAll('.counter');
@@ -54,6 +68,8 @@ let counted = false;
 
 const startCounters = () => {
   const statsSection = document.getElementById('about');
+  if (!statsSection) return;
+  
   const sectionPos = statsSection.getBoundingClientRect().top;
   const screenPos = window.innerHeight;
 
@@ -61,7 +77,7 @@ const startCounters = () => {
     counters.forEach(counter => {
       const target = +counter.getAttribute('data-target');
       let count = 0;
-      const speed = target / 30; // speed control
+      const speed = target / 30;
 
       const updateCount = () => {
         count += speed;
@@ -79,23 +95,6 @@ const startCounters = () => {
 };
 
 window.addEventListener('scroll', startCounters);
-
-// --- Theme Toggle Logic ---
-const themeToggleBtn = document.getElementById("theme-toggle");
-const themeIcon = themeToggleBtn.querySelector(".theme-icon");
-const body = document.body;
-
-themeToggleBtn.addEventListener("click", () => {
-  if (body.classList.contains("dark-theme")) {
-    body.classList.remove("dark-theme");
-    body.classList.add("light-theme");
-    themeIcon.innerText = "☀️";
-  } else {
-    body.classList.remove("light-theme");
-    body.classList.add("dark-theme");
-    themeIcon.innerText = "🌙";
-  }
-});
 
 // --- Modal Functionality ---
 const modal = document.getElementById("team-modal");

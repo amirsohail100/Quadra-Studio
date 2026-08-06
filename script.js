@@ -26,7 +26,112 @@ const teamDetails = {
   }
 };
 
-// --- Mouse Glow Effect ---
+// --- Interactive Background Canvas Animation Engine ---
+const canvas = document.getElementById("bg-canvas");
+const ctx = canvas.getContext("2d");
+
+let width, height;
+let particles = [];
+
+function resizeCanvas() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+}
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+class BubbleParticle {
+  constructor() {
+    this.reset();
+  }
+
+  reset() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height + height;
+    this.radius = Math.random() * 18 + 6; // Bubble size
+    this.speedY = Math.random() * 0.8 + 0.3; // Upward floating speed
+    this.speedX = (Math.random() - 0.5) * 0.4;
+    this.alpha = Math.random() * 0.4 + 0.1;
+    this.pulse = Math.random() * 0.02;
+    this.maxAlpha = Math.random() * 0.5 + 0.2;
+  }
+
+  update() {
+    this.y -= this.speedY;
+    this.x += this.speedX;
+
+    // Pulse bubble opacity
+    this.alpha += this.pulse;
+    if (this.alpha > this.maxAlpha || this.alpha < 0.1) {
+      this.pulse = -this.pulse;
+    }
+
+    // Reset particle when floating out of view
+    if (this.y < -50 || this.x < -20 || this.x > width + 20) {
+      this.reset();
+      this.y = height + 20;
+    }
+  }
+
+  draw() {
+    const isDark = document.body.classList.contains("dark-theme");
+    
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+
+    // Glowing Gradient Bubble
+    const gradient = ctx.createRadialGradient(
+      this.x, this.y, 0,
+      this.x, this.y, this.radius
+    );
+
+    if (isDark) {
+      gradient.addColorStop(0, `rgba(56, 189, 248, ${this.alpha * 1.2})`);
+      gradient.addColorStop(0.6, `rgba(14, 165, 233, ${this.alpha * 0.4})`);
+      gradient.addColorStop(1, `rgba(2, 132, 199, 0)`);
+    } else {
+      gradient.addColorStop(0, `rgba(2, 132, 199, ${this.alpha * 0.8})`);
+      gradient.addColorStop(0.6, `rgba(56, 189, 248, ${this.alpha * 0.3})`);
+      gradient.addColorStop(1, `rgba(186, 230, 253, 0)`);
+    }
+
+    ctx.fillStyle = gradient;
+    ctx.fill();
+
+    // Subtle Outer Rim Ring
+    ctx.lineWidth = 0.8;
+    ctx.strokeStyle = isDark 
+      ? `rgba(248, 250, 252, ${this.alpha * 0.3})`
+      : `rgba(2, 132, 199, ${this.alpha * 0.25})`;
+    ctx.stroke();
+    
+    ctx.restore();
+  }
+}
+
+// Create 50 floating bubble particles
+for (let i = 0; i < 50; i++) {
+  const p = new BubbleParticle();
+  p.y = Math.random() * height; // Spread across screen initially
+  particles.push(p);
+}
+
+function animateCanvas() {
+  ctx.clearRect(0, 0, width, height);
+  
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
+
+  requestAnimationFrame(animateCanvas);
+}
+
+animateCanvas();
+
+// --- Mouse Glow Effect Listener ---
 window.addEventListener("mousemove", (e) => {
   document.documentElement.style.setProperty("--mouse-x", `${e.pageX}px`);
   document.documentElement.style.setProperty("--mouse-y", `${e.pageY}px`);

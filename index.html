@@ -10,7 +10,7 @@
 <body class="dark-theme">
 
   <!-- Navigation -->
-  <nav class="navbar">
+  <nav class="navbar fade-in-down">
     <div class="logo">Quadra<span>.</span></div>
     <ul class="nav-links">
       <li><a href="#hero">Home</a></li>
@@ -22,72 +22,72 @@
           <span class="theme-icon">🌙</span>
         </button>
       </li>
-      <li><a href="#contact" class="btn-nav">Contact Us</a></li>
+      <li><a href="#contact" class="btn-nav ripple-btn">Contact Us</a></li>
     </ul>
   </nav>
 
   <!-- Hero Section -->
   <header id="hero" class="hero">
-    <div class="hero-content">
-      <span class="badge">Freelance Collective</span>
-      <h1>Four Minds. Infinite Possibilities.</h1>
-      <p>We are a powerhouse team of designers, developers, and strategists crafting digital experiences that perform.</p>
+    <div class="hero-content fade-in-up">
+      <span class="badge pulse-animation">Freelance Collective</span>
+      <h1 class="gradient-text">Four Minds. Infinite Possibilities.</h1>
+      <p class="hero-subtext">We are a powerhouse team of designers, developers, and strategists crafting digital experiences that perform.</p>
       <div class="hero-buttons">
-        <a href="#team" class="btn btn-primary">Meet The Squad</a>
-        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        <a href="#team" class="btn btn-primary ripple-btn glow-btn">Meet The Squad</a>
+        <a href="#contact" class="btn btn-secondary ripple-btn">Get In Touch</a>
       </div>
     </div>
   </header>
 
   <!-- About Section -->
-  <section id="about" class="section">
+  <section id="about" class="section reveal-on-scroll">
     <h2>Who We Are</h2>
     <p class="section-desc">We operate as an agile collective—delivering agency-grade quality with the flexibility and speed of individual freelancers.</p>
     <div class="stats-grid">
-      <div class="stat-card">
-        <h3>4</h3>
+      <div class="stat-card hover-lift">
+        <h3 class="counter" data-target="4">0</h3>
         <p>Core Specialists</p>
       </div>
-      <div class="stat-card">
-        <h3>50+</h3>
+      <div class="stat-card hover-lift">
+        <h3 class="counter" data-target="50">0</h3>
         <p>Projects Delivered</p>
       </div>
-      <div class="stat-card">
-        <h3>100%</h3>
-        <p>Client Satisfaction</p>
+      <div class="stat-card hover-lift">
+        <h3 class="counter" data-target="100">0</h3>
+        <p>Client Satisfaction %</p>
       </div>
     </div>
   </section>
 
   <!-- Team Section -->
-  <section id="team" class="section bg-alt">
+  <section id="team" class="section bg-alt reveal-on-scroll">
     <h2>Meet Our Team</h2>
     <p class="section-desc">Click on any team member to explore their role and expertise.</p>
     
     <div class="team-grid">
-      <div class="team-card" data-member="1">
-        <div class="avatar">👑</div>
+      <div class="team-card hover-lift" data-member="1">
+        <div class="avatar bounce-icon">👑</div>
         <h3>You (Lead Dev)</h3>
         <span class="role">Full-Stack Architect</span>
         <p class="short-bio">Building scalable web applications and leading technical strategy.</p>
       </div>
 
-      <div class="team-card" data-member="2">
-        <div class="avatar">🎨</div>
+      <div class="team-card hover-lift" data-member="2">
+        <div class="avatar bounce-icon">🎨</div>
         <h3>Alex Rivera</h3>
         <span class="role">UI/UX Designer</span>
         <p class="short-bio">Crafting intuitive, accessible, and stunning user interfaces.</p>
       </div>
 
-      <div class="team-card" data-member="3">
-        <div class="avatar">⚡</div>
+      <div class="team-card hover-lift" data-member="3">
+        <div class="avatar bounce-icon">⚡</div>
         <h3>Jordan Lee</h3>
         <span class="role">Frontend Developer</span>
         <p class="short-bio">Specializing in high-performance animations and reactive UI components.</p>
       </div>
 
-      <div class="team-card" data-member="4">
-        <div class="avatar">🚀</div>
+      <div class="team-card hover-lift" data-member="4">
+        <div class="avatar bounce-icon">🚀</div>
         <h3>Morgan Smith</h3>
         <span class="role">Backend & DevOps</span>
         <p class="short-bio">Ensuring cloud reliability, API security, and database speed.</p>
@@ -97,7 +97,7 @@
 
   <!-- Dynamic Team Modal -->
   <div id="team-modal" class="modal">
-    <div class="modal-content">
+    <div class="modal-content scale-in">
       <span class="close-btn">&times;</span>
       <h3 id="modal-name">Member Name</h3>
       <p id="modal-role" class="modal-role-badge">Role</p>
@@ -107,18 +107,18 @@
   </div>
 
   <!-- Services Section -->
-  <section id="services" class="section">
+  <section id="services" class="section reveal-on-scroll">
     <h2>What We Do</h2>
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card hover-lift">
         <h3>Web Development</h3>
         <p>Custom, responsive websites built with modern frameworks and robust backend setups.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card hover-lift">
         <h3>UI/UX Design</h3>
         <p>User-centered research, wireframes, and high-fidelity interactive prototypes.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card hover-lift">
         <h3>API & Cloud Solutions</h3>
         <p>Secure database architecture, server management, and seamless integration.</p>
       </div>
@@ -126,13 +126,13 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="section bg-alt">
+  <section id="contact" class="section bg-alt reveal-on-scroll">
     <h2>Let's Work Together</h2>
     <form id="contact-form" class="contact-form">
       <input type="text" placeholder="Your Name" required>
       <input type="email" placeholder="Your Email" required>
       <textarea placeholder="Tell us about your project..." rows="5" required></textarea>
-      <button type="submit" class="btn btn-primary">Send Message</button>
+      <button type="submit" class="btn btn-primary ripple-btn glow-btn">Send Message</button>
     </form>
   </section>
 

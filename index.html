@@ -3,23 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Squad | Digital Collective</title>
+  <title>Quadra | Digital Collective</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="dark-theme">
 
   <!-- Interactive Background Canvas for Floating Bubbles & Glows -->
   <canvas id="bg-canvas"></canvas>
 
+  <!-- Canvas for Button Click Particle Burst -->
+  <canvas id="particle-canvas"></canvas>
+
   <!-- Navigation -->
   <nav class="navbar fade-in-down">
-    <div class="logo">Quadra<span>.</span></div>
+    <div class="logo">Quadra<span class="logo-dot">.</span></div>
     <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About Us</a></li>
-      <li><a href="#team">Team</a></li>
-      <li><a href="#services">Services</a></li>
+      <li><a href="#hero" class="nav-item active">Home</a></li>
+      <li><a href="#about" class="nav-item">About Us</a></li>
+      <li><a href="#team" class="nav-item">Team</a></li>
+      <li><a href="#services" class="nav-item">Services</a></li>
       <li>
         <!-- Custom Celestial Day/Night Switch Button -->
         <button id="theme-toggle" class="sky-switch" aria-label="Toggle Theme">
@@ -34,7 +37,7 @@
           </span>
         </button>
       </li>
-      <li><a href="#contact" class="btn-nav ripple-btn">Contact Us</a></li>
+      <li><a href="#contact" class="btn-nav particle-trigger">Contact Us</a></li>
     </ul>
   </nav>
 
@@ -44,9 +47,28 @@
       <span class="badge rgb-breathing">Freelance Collective</span>
       <h1 class="gradient-text">Four Minds. Infinite Possibilities.</h1>
       <p class="hero-subtext">We are a powerhouse team of designers, developers, and strategists crafting digital experiences that perform.</p>
+      
+      <!-- Interactive Like / Dislike Widget Section -->
+      <div class="feedback-widget">
+        <p class="widget-title">Enjoying the experience?</p>
+        <div class="like-dislike-container">
+          <button id="like-btn" class="interactive-btn like-btn particle-trigger">
+            <span class="btn-icon">👍</span>
+            <span class="btn-label">Like</span>
+            <span id="like-count" class="badge-count">128</span>
+          </button>
+          
+          <button id="dislike-btn" class="interactive-btn dislike-btn">
+            <span class="btn-icon">👎</span>
+            <span class="btn-label">Dislike</span>
+            <!-- Dislike count is intentionally omitted for visitors -->
+          </button>
+        </div>
+      </div>
+
       <div class="hero-buttons">
-        <a href="#team" class="btn btn-primary ripple-btn glow-btn">Meet The Squad</a>
-        <a href="#contact" class="btn btn-secondary ripple-btn">Get In Touch</a>
+        <a href="#team" class="btn btn-primary particle-trigger glow-btn">Meet The Squad</a>
+        <a href="#contact" class="btn btn-secondary particle-trigger">Get In Touch</a>
       </div>
     </div>
   </header>
@@ -141,10 +163,19 @@
   <section id="contact" class="section bg-alt reveal-on-scroll">
     <h2>Let's Work Together</h2>
     <form id="contact-form" class="contact-form">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Tell us about your project..." rows="5" required></textarea>
-      <button type="submit" class="btn btn-primary ripple-btn glow-btn">Send Message</button>
+      <div class="input-group">
+        <input type="text" id="name-input" required placeholder=" ">
+        <label for="name-input">Your Name</label>
+      </div>
+      <div class="input-group">
+        <input type="email" id="email-input" required placeholder=" ">
+        <label for="email-input">Your Email</label>
+      </div>
+      <div class="input-group">
+        <textarea id="msg-input" rows="5" required placeholder=" "></textarea>
+        <label for="msg-input">Tell us about your project...</label>
+      </div>
+      <button type="submit" class="btn btn-primary particle-trigger glow-btn">Send Message</button>
     </form>
   </section>
 

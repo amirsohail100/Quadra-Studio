@@ -3,7 +3,7 @@
   --mouse-y: -1000px;
 }
 
-/* Darker, Stronger Glows */
+/* Theme Color Tokens */
 .dark-theme {
   --bg-primary: #0b0f19;
   --bg-secondary: #111827;
@@ -13,7 +13,6 @@
   --text-muted: #94a3b8;
   --card-bg: #1e293b;
   --border-color: #334155;
-  /* Glow intense kar diya hai */
   --glow-color: rgba(56, 189, 248, 0.28);
 }
 
@@ -46,7 +45,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Enhanced Mouse Glow Effect (Deeper & Broader Intensity) */
+/* Enhanced Mouse Glow Effect */
 body::before {
   content: '';
   position: absolute;
@@ -68,12 +67,12 @@ body::before {
   z-index: 1;
 }
 
-/* Navigation */
+/* Navigation Bar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 8%;
+  padding: 1rem 8%;
   background-color: rgba(11, 15, 25, 0.85);
   backdrop-filter: blur(12px);
   position: sticky;
@@ -121,22 +120,116 @@ body::before {
   font-weight: 600;
 }
 
-.theme-toggle-btn {
-  background: transparent;
-  border: 1px solid var(--border-color);
-  padding: 0.4rem 0.7rem;
-  border-radius: 20px;
+/* ========================================= */
+/* Custom Sky-Inspired Theme Switch Button   */
+/* ========================================= */
+.sky-switch {
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
-  font-size: 1rem;
-  transition: transform 0.2s, border-color 0.2s;
+  outline: none;
+  display: flex;
+  align-items: center;
 }
 
-.theme-toggle-btn:hover {
-  transform: rotate(15deg) scale(1.1);
-  border-color: var(--accent);
+.sky-bg {
+  width: 64px;
+  height: 32px;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  border: 1.5px solid var(--border-color);
 }
 
-/* Hero Section & Animations */
+/* Dark Theme Switch State */
+.dark-theme .sky-bg {
+  background: linear-gradient(135deg, #121033 0%, #221c54 50%, #3f2b96 100%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(63, 43, 150, 0.3);
+}
+
+/* Light Theme Switch State */
+.light-theme .sky-bg {
+  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 60%, #87ceeb 100%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15), 0 0 10px rgba(254, 180, 123, 0.4);
+}
+
+/* Celestial Knob (Sun / Moon) */
+.celestial-body {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  position: absolute;
+  top: 2.5px;
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), background-color 0.4s;
+}
+
+/* Moon State in Dark Mode */
+.dark-theme .celestial-body {
+  transform: translateX(4px);
+  background-color: #f1f5f9;
+  box-shadow: 0 0 10px rgba(241, 245, 249, 0.8), inset -3px -2px 0px #cbd5e1;
+}
+
+/* Sun State in Light Mode */
+.light-theme .celestial-body {
+  transform: translateX(34px);
+  background-color: #fff7ed;
+  box-shadow: 0 0 12px #ffedd5, 0 0 20px #fde047;
+}
+
+/* Sun Glow Ring Layer */
+.sun-glow {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s;
+  background: radial-gradient(circle, rgba(254, 240, 138, 0.6) 0%, transparent 70%);
+}
+
+.light-theme .sun-glow {
+  opacity: 1;
+}
+
+/* Stars in Dark Mode */
+.star {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.dark-theme .star {
+  opacity: 0.9;
+}
+
+.star-1 { width: 2px; height: 2px; top: 7px; right: 12px; }
+.star-2 { width: 3px; height: 3px; top: 18px; right: 22px; }
+.star-3 { width: 2px; height: 2px; top: 21px; right: 8px; }
+
+/* Cloud Puff in Light Mode */
+.cloud-puff {
+  position: absolute;
+  bottom: -4px;
+  left: 6px;
+  width: 20px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.light-theme .cloud-puff {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Hero Section */
 .hero {
   min-height: 80vh;
   display: flex;
@@ -150,7 +243,6 @@ body::before {
   max-width: 750px;
 }
 
-/* Gradient Animated Text */
 .gradient-text {
   font-size: 3.2rem;
   margin: 1.5rem 0 1rem;
@@ -239,7 +331,7 @@ body::before {
   margin-bottom: 3rem;
 }
 
-/* Grids & Interactive Hover Cards */
+/* Grids & Cards */
 .stats-grid, .team-grid, .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

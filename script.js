@@ -182,10 +182,6 @@ if(likeBtn && dislikeBtn) {
   });
 
   dislikeBtn.addEventListener("click", () => {
-    dislikeBtn.classList.remove("shake-anim");
-    void dislikeBtn.offsetWidth;
-    dislikeBtn.classList.add("shake-anim");
-
     if (!isDisliked) {
       isDisliked = true;
       dislikeBtn.classList.add("disliked");

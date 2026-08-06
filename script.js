@@ -1,4 +1,4 @@
-// Team Member Detailed Data
+// Dynamic Team Data
 const teamDetails = {
   "1": {
     name: "You (Lead Dev)",
@@ -26,7 +26,35 @@ const teamDetails = {
   }
 };
 
-// Modal Handling
+// --- Interactive Mouse Cursor Glow Effect ---
+const glow = document.getElementById("cursor-glow");
+
+window.addEventListener("mousemove", (e) => {
+  const x = e.clientX + "px";
+  const y = e.clientY + "px";
+  
+  document.documentElement.style.setProperty("--mouse-x", x);
+  document.documentElement.style.setProperty("--mouse-y", y);
+});
+
+// --- Dark / Light Theme Toggle ---
+const themeToggleBtn = document.getElementById("theme-toggle");
+const themeIcon = themeToggleBtn.querySelector(".theme-icon");
+const body = document.body;
+
+themeToggleBtn.addEventListener("click", () => {
+  if (body.classList.contains("dark-theme")) {
+    body.classList.remove("dark-theme");
+    body.classList.add("light-theme");
+    themeIcon.innerText = "☀️";
+  } else {
+    body.classList.remove("light-theme");
+    body.classList.add("dark-theme");
+    themeIcon.innerText = "🌙";
+  }
+});
+
+// --- Modal Functionality ---
 const modal = document.getElementById("team-modal");
 const closeBtn = document.querySelector(".close-btn");
 const teamCards = document.querySelectorAll(".team-card");
@@ -65,7 +93,7 @@ window.addEventListener("click", (event) => {
   }
 });
 
-// Form Submission Mock
+// --- Form Submission Mock ---
 document.getElementById("contact-form").addEventListener("submit", (e) => {
   e.preventDefault();
   alert("Thank you! Your message has been received. We will get back to you shortly.");

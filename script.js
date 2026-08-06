@@ -1,31 +1,3 @@
-// Team Details Data
-const teamDetails = {
-  "1": {
-    name: "You (Lead Dev)",
-    role: "Full-Stack Architect",
-    bio: "Passionate about building scalable web solutions, orchestrating multi-service architectures, and leading tech strategies.",
-    skills: ["JavaScript", "Python", "Node.js", "System Design", "Git"]
-  },
-  "2": {
-    name: "Alex Rivera",
-    role: "UI/UX Designer",
-    bio: "Transforms complex ideas into visually compelling interfaces with a strong focus on user research and visual harmony.",
-    skills: ["Figma", "Design Systems", "Prototyping", "User Research"]
-  },
-  "3": {
-    name: "Jordan Lee",
-    role: "Frontend Developer",
-    bio: "Obsessed with pixel-perfection, smooth CSS animations, and reactive UI components.",
-    skills: ["React", "CSS3 / Sass", "Tailwind", "JavaScript (ES6+)"]
-  },
-  "4": {
-    name: "Morgan Smith",
-    role: "Backend & DevOps",
-    bio: "Focuses on high-availability server setups, robust REST APIs, and continuous deployment workflows.",
-    skills: ["Docker", "PostgreSQL", "REST APIs", "AWS", "CI/CD"]
-  }
-};
-
 // --- Ambient Background Canvas Engine ---
 const bgCanvas = document.getElementById("bg-canvas");
 const bgCtx = bgCanvas.getContext("2d");
@@ -173,7 +145,6 @@ function renderClickParticles() {
 }
 renderClickParticles();
 
-// Bind particle burst to elements
 document.querySelectorAll(".particle-trigger").forEach(btn => {
   btn.addEventListener("click", (e) => {
     const rect = btn.getBoundingClientRect();
@@ -192,42 +163,44 @@ let isLiked = false;
 let isDisliked = false;
 let currentLikes = 128;
 
-likeBtn.addEventListener("click", () => {
-  if (!isLiked) {
-    isLiked = true;
-    currentLikes++;
-    likeBtn.classList.add("liked");
-    if (isDisliked) {
-      isDisliked = false;
-      dislikeBtn.classList.remove("disliked");
-    }
-  } else {
-    isLiked = false;
-    currentLikes--;
-    likeBtn.classList.remove("liked");
-  }
-  likeCountSpan.innerText = currentLikes;
-});
-
-dislikeBtn.addEventListener("click", () => {
-  dislikeBtn.classList.remove("shake-anim");
-  void dislikeBtn.offsetWidth;
-  dislikeBtn.classList.add("shake-anim");
-
-  if (!isDisliked) {
-    isDisliked = true;
-    dislikeBtn.classList.add("disliked");
-    if (isLiked) {
+if(likeBtn && dislikeBtn) {
+  likeBtn.addEventListener("click", () => {
+    if (!isLiked) {
+      isLiked = true;
+      currentLikes++;
+      likeBtn.classList.add("liked");
+      if (isDisliked) {
+        isDisliked = false;
+        dislikeBtn.classList.remove("disliked");
+      }
+    } else {
       isLiked = false;
       currentLikes--;
       likeBtn.classList.remove("liked");
-      likeCountSpan.innerText = currentLikes;
     }
-  } else {
-    isDisliked = false;
-    dislikeBtn.classList.remove("disliked");
-  }
-});
+    likeCountSpan.innerText = currentLikes;
+  });
+
+  dislikeBtn.addEventListener("click", () => {
+    dislikeBtn.classList.remove("shake-anim");
+    void dislikeBtn.offsetWidth;
+    dislikeBtn.classList.add("shake-anim");
+
+    if (!isDisliked) {
+      isDisliked = true;
+      dislikeBtn.classList.add("disliked");
+      if (isLiked) {
+        isLiked = false;
+        currentLikes--;
+        likeBtn.classList.remove("liked");
+        likeCountSpan.innerText = currentLikes;
+      }
+    } else {
+      isDisliked = false;
+      dislikeBtn.classList.remove("disliked");
+    }
+  });
+}
 
 // --- Mouse Movement Radial Glow Listener ---
 window.addEventListener("mousemove", (e) => {
@@ -237,10 +210,12 @@ window.addEventListener("mousemove", (e) => {
 
 // --- Theme Switcher ---
 const themeToggleBtn = document.getElementById("theme-toggle");
-themeToggleBtn.addEventListener("click", () => {
-  document.body.classList.toggle("dark-theme");
-  document.body.classList.toggle("light-theme");
-});
+if(themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
+    document.body.classList.toggle("light-theme");
+  });
+}
 
 // --- Scroll Reveal ---
 const revealElements = document.querySelectorAll(".reveal-on-scroll");
@@ -283,40 +258,12 @@ const startCounters = () => {
 };
 window.addEventListener('scroll', startCounters);
 
-// --- Modal Popup Logic ---
-const modal = document.getElementById("team-modal");
-const closeBtn = document.querySelector(".close-btn");
-
-document.querySelectorAll(".team-card").forEach(card => {
-  card.addEventListener("click", () => {
-    const memberId = card.getAttribute("data-member");
-    const data = teamDetails[memberId];
-
-    if (data) {
-      document.getElementById("modal-name").innerText = data.name;
-      document.getElementById("modal-role").innerText = data.role;
-      document.getElementById("modal-bio").innerText = data.bio;
-
-      const skillsContainer = document.getElementById("modal-skills");
-      skillsContainer.innerHTML = "";
-      data.skills.forEach(skill => {
-        const tag = document.createElement("span");
-        tag.className = "skill-tag";
-        tag.innerText = skill;
-        skillsContainer.appendChild(tag);
-      });
-
-      modal.style.display = "flex";
-    }
-  });
-});
-
-closeBtn.addEventListener("click", () => modal.style.display = "none");
-window.addEventListener("click", (e) => { if (e.target === modal) modal.style.display = "none"; });
-
 // --- Contact Form Handling ---
-document.getElementById("contact-form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  alert("Message sent successfully!");
-  e.target.reset();
-});
+const contactForm = document.getElementById("contact-form");
+if(contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Message sent successfully!");
+    e.target.reset();
+  });
+}

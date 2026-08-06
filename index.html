@@ -7,16 +7,16 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="dark-theme">
 
-  <!-- Interactive Background Canvas for Floating Bubbles & Glows -->
+  <!-- Background Canvases -->
   <canvas id="bg-canvas"></canvas>
-
-  <!-- Canvas for Button Click Particle Burst -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- Navigation -->
+  <!-- Navbar -->
   <nav class="navbar fade-in-down">
     <div class="logo">Quadra<span class="logo-dot">.</span></div>
     <ul class="nav-links">
@@ -25,7 +25,6 @@
       <li><a href="#team" class="nav-item">Team</a></li>
       <li><a href="#services" class="nav-item">Services</a></li>
       <li>
-        <!-- Custom Celestial Day/Night Switch Button -->
         <button id="theme-toggle" class="sky-switch" aria-label="Toggle Theme">
           <span class="sky-bg">
             <span class="celestial-body">
@@ -47,7 +46,6 @@
     <div class="hero-content fade-in-up">
       <span class="badge rgb-breathing">Freelance Collective</span>
       
-      <!-- Animated Main Header Wrapper with Floating Code Brackets -->
       <div class="header-animation-wrapper">
         <div class="floating-brackets-container">
           <span class="code-bracket bracket-1">{</span>
@@ -63,9 +61,8 @@
         <h1 class="gradient-text animated-main-title">Four Minds. Infinite Possibilities.</h1>
       </div>
 
-      <p class="hero-subtext">We are a powerhouse team of designers, developers, and strategists crafting digital experiences that perform.</p>
+      <p class="hero-subtext">We craft high-performance web applications, UI/UX designs, and cutting-edge Agentic AI solutions.</p>
       
-      <!-- Interactive Like / Dislike Widget Section -->
       <div class="feedback-widget">
         <p class="widget-title">Enjoying the experience?</p>
         <div class="like-dislike-container">
@@ -92,7 +89,7 @@
   <!-- About Section -->
   <section id="about" class="section reveal-on-scroll">
     <h2>Who We Are</h2>
-    <p class="section-desc">We operate as an agile collective—delivering agency-grade quality with the flexibility and speed of individual freelancers.</p>
+    <p class="section-desc">We operate as an agile collective—delivering agency-grade quality with flexibility and speed.</p>
     <div class="stats-grid">
       <div class="stat-card hover-lift">
         <h3 class="counter" data-target="4">0</h3>
@@ -109,60 +106,157 @@
     </div>
   </section>
 
-  <!-- Team Section -->
+  <!-- Team Section: Left-Right Alternating Layout -->
   <section id="team" class="section bg-alt reveal-on-scroll">
     <h2>Meet Our Team</h2>
-    <p class="section-desc">Click on any team member to explore their role and expertise.</p>
-    
-    <div class="team-grid">
-      <div class="team-card hover-lift rgb-border" data-member="1">
-        <div class="avatar bounce-icon">👑</div>
-        <h3>You (Lead Dev)</h3>
-        <span class="role">Full-Stack Architect</span>
-        <p class="short-bio">Building scalable web applications and leading technical strategy.</p>
+    <p class="section-desc">The core strategy and engineering powerhouse behind our digital solutions.</p>
+
+    <div class="team-timeline">
+      
+      <!-- Member 1: Amir Sohail (Core Technical & Design Lead) -->
+      <div class="team-member-row left">
+        <div class="member-image-box">
+          <div class="avatar-wrapper">
+            <img src="assets/profile-avatar.png" alt="Amir Sohail" class="member-avatar">
+          </div>
+          <div class="role-badge core-badge">Lead AI & Full-Stack Dev | UI/UX & System Architect</div>
+        </div>
+        <div class="member-content">
+          <h3 class="member-name">Amir Sohail <span class="core-tag">(Core Specialist)</span></h3>
+          <p class="member-bio">
+            The sole technical and design architect behind Quadra. I handle complete end-to-end development—from UI/UX wireframing and design systems to building Agentic AI, Generative AI applications, fine-tuning LLMs, Vector DB architectures, MLOps, and scalable full-stack web platforms.
+          </p>
+
+          <!-- Categorized Tech Stack -->
+          <div class="skill-category">
+            <strong>Languages & Core:</strong>
+            <div class="tech-tags">
+              <span class="tag">Python</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">C#</span><span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">PowerShell</span><span class="tag">GDScript</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <strong>AI, ML & Data Science:</strong>
+            <div class="tech-tags">
+              <span class="tag">TensorFlow</span><span class="tag">PyTorch</span><span class="tag">Scikit-Learn</span><span class="tag">Keras</span><span class="tag">AI Agents</span><span class="tag">LangChain / LangGraph</span><span class="tag">MLflow</span><span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">Plotly</span><span class="tag">Matplotlib</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <strong>Backend, Cloud & MLOps:</strong>
+            <div class="tech-tags">
+              <span class="tag">FastAPI</span><span class="tag">Flask</span><span class="tag">Node.js</span><span class="tag">.NET</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">Google Cloud</span><span class="tag">GitLab CI</span><span class="tag">Git / GitHub</span><span class="tag">MySQL</span><span class="tag">MongoDB</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <strong>UI/UX, Analytics & Engines:</strong>
+            <div class="tech-tags">
+              <span class="tag">UI/UX Design</span><span class="tag">Streamlit</span><span class="tag">Power BI</span><span class="tag">Unity</span><span class="tag">Godot</span>
+            </div>
+          </div>
+          
+          <!-- Direct Social Buttons -->
+          <div class="member-social-buttons">
+            <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="social-btn github">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://huggingface.co/amirsoahil101" target="_blank" rel="noopener noreferrer" class="social-btn huggingface">
+              <i class="fas fa-robot"></i> Hugging Face
+            </a>
+            <a href="https://www.kaggle.com/amirsohail122" target="_blank" rel="noopener noreferrer" class="social-btn kaggle">
+              <i class="fab fa-kaggle"></i> Kaggle
+            </a>
+            <a href="https://discord.gg/fgDx4yb6E" target="_blank" rel="noopener noreferrer" class="social-btn discord">
+              <i class="fab fa-discord"></i> Discord
+            </a>
+            <a href="https://www.instagram.com/_amir_sohail100_" target="_blank" rel="noopener noreferrer" class="social-btn instagram">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+          </div>
+        </div>
       </div>
 
-      <div class="team-card hover-lift" data-member="2">
-        <div class="avatar bounce-icon">🎨</div>
-        <h3>Alex Rivera</h3>
-        <span class="role">UI/UX Designer</span>
-        <p class="short-bio">Crafting intuitive, accessible, and stunning user interfaces.</p>
+      <!-- Member 2: Website Promotion & Digital Growth -->
+      <div class="team-member-row right">
+        <div class="member-image-box">
+          <div class="avatar-wrapper">
+            <div class="member-avatar-placeholder">
+              <i class="fas fa-bullhorn"></i>
+            </div>
+          </div>
+          <div class="role-badge">Growth & Marketing Specialist</div>
+        </div>
+        <div class="member-content">
+          <h3 class="member-name">Team Member</h3>
+          <p class="member-bio">
+            Drives brand visibility, SEO strategy, and digital outreach for our web and AI platforms. Manages marketing campaigns and audience acquisition.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Website Promotion</span>
+            <span class="tag">Digital Marketing</span>
+            <span class="tag">Brand Strategy</span>
+            <span class="tag">SEO & Outreach</span>
+          </div>
+        </div>
       </div>
 
-      <div class="team-card hover-lift" data-member="3">
-        <div class="avatar bounce-icon">⚡</div>
-        <h3>Jordan Lee</h3>
-        <span class="role">Frontend Developer</span>
-        <p class="short-bio">Specializing in high-performance animations and reactive UI components.</p>
+      <!-- Member 3: Customer Dealing & Client Relations -->
+      <div class="team-member-row left">
+        <div class="member-image-box">
+          <div class="avatar-wrapper">
+            <div class="member-avatar-placeholder">
+              <i class="fas fa-handshake"></i>
+            </div>
+          </div>
+          <div class="role-badge">Client Relations & Operations</div>
+        </div>
+        <div class="member-content">
+          <h3 class="member-name">Team Member</h3>
+          <p class="member-bio">
+            Manages client communication, project requirement gathering, and customer support. Ensures smooth coordination between clients and our development core.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Client Acquisition</span>
+            <span class="tag">Customer Dealing</span>
+            <span class="tag">Requirement Mapping</span>
+            <span class="tag">Operations</span>
+          </div>
+        </div>
       </div>
 
-      <div class="team-card hover-lift" data-member="4">
-        <div class="avatar bounce-icon">🚀</div>
-        <h3>Morgan Smith</h3>
-        <span class="role">Backend & DevOps</span>
-        <p class="short-bio">Ensuring cloud reliability, API security, and database speed.</p>
+      <!-- Member 4: Undecided Role (To be announced) -->
+      <div class="team-member-row right">
+        <div class="member-image-box">
+          <div class="avatar-wrapper">
+            <div class="member-avatar-placeholder">
+              <i class="fas fa-user-clock"></i>
+            </div>
+          </div>
+          <div class="role-badge">Operations Specialist</div>
+        </div>
+        <div class="member-content">
+          <h3 class="member-name">Team Member</h3>
+          <p class="member-bio">
+            Specializing in supporting team workflows and platform scaling. Specific role and portfolio details will be updated soon.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Role Pending</span>
+            <span class="tag">To Be Announced</span>
+          </div>
+        </div>
       </div>
+
     </div>
   </section>
-
-  <!-- Dynamic Team Modal -->
-  <div id="team-modal" class="modal">
-    <div class="modal-content scale-in">
-      <span class="close-btn">&times;</span>
-      <h3 id="modal-name">Member Name</h3>
-      <p id="modal-role" class="modal-role-badge">Role</p>
-      <p id="modal-bio">Detailed bio will load here dynamically...</p>
-      <div class="skills-list" id="modal-skills"></div>
-    </div>
-  </div>
 
   <!-- Services Section -->
   <section id="services" class="section reveal-on-scroll">
     <h2>What We Do</h2>
     <div class="services-grid">
       <div class="service-card hover-lift">
-        <h3>Web Development</h3>
-        <p>Custom, responsive websites built with modern frameworks and robust backend setups.</p>
+        <h3>Web & AI Development</h3>
+        <p>Custom websites and Agentic AI applications integrated with modern frameworks.</p>
       </div>
       <div class="service-card hover-lift">
         <h3>UI/UX Design</h3>
@@ -170,7 +264,7 @@
       </div>
       <div class="service-card hover-lift">
         <h3>API & Cloud Solutions</h3>
-        <p>Secure database architecture, server management, and seamless integration.</p>
+        <p>Secure database architecture, LLM deployment, server management, and MLOps.</p>
       </div>
     </div>
   </section>

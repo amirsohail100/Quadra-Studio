@@ -26,12 +26,59 @@ const teamDetails = {
   }
 };
 
-// --- Accurate Mouse Glow Effect ---
+// --- Darker Mouse Glow Effect ---
 window.addEventListener("mousemove", (e) => {
-  // PageX and PageY accurately capture mouse position relative to entire page document
   document.documentElement.style.setProperty("--mouse-x", `${e.pageX}px`);
   document.documentElement.style.setProperty("--mouse-y", `${e.pageY}px`);
 });
+
+// --- Scroll Reveal Animations ---
+const revealElements = document.querySelectorAll(".reveal-on-scroll");
+
+const revealOnScroll = () => {
+  revealElements.forEach((el) => {
+    const elementTop = el.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+    if (elementTop < windowHeight - 100) {
+      el.classList.add("active");
+    }
+  });
+};
+
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll(); // Trigger initial check
+
+// --- Animated Stats Counters ---
+const counters = document.querySelectorAll('.counter');
+let counted = false;
+
+const startCounters = () => {
+  const statsSection = document.getElementById('about');
+  const sectionPos = statsSection.getBoundingClientRect().top;
+  const screenPos = window.innerHeight;
+
+  if (sectionPos < screenPos && !counted) {
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      let count = 0;
+      const speed = target / 30; // speed control
+
+      const updateCount = () => {
+        count += speed;
+        if (count < target) {
+          counter.innerText = Math.ceil(count);
+          setTimeout(updateCount, 40);
+        } else {
+          counter.innerText = target + (target === 100 ? '%' : '+');
+        }
+      };
+      updateCount();
+    });
+    counted = true;
+  }
+};
+
+window.addEventListener('scroll', startCounters);
 
 // --- Theme Toggle Logic ---
 const themeToggleBtn = document.getElementById("theme-toggle");
@@ -89,9 +136,9 @@ window.addEventListener("click", (event) => {
   }
 });
 
-// --- Form Submission Mock ---
+// --- Form Submission ---
 document.getElementById("contact-form").addEventListener("submit", (e) => {
   e.preventDefault();
-  alert("Thank you! Your message has been received. We will get back to you shortly.");
+  alert("Thank you! Your message has been received.");
   e.target.reset();
 });

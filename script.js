@@ -1,4 +1,4 @@
-// Dynamic Team Data
+// Team Member Data
 const teamDetails = {
   "1": {
     name: "You (Lead Dev)",
@@ -26,18 +26,14 @@ const teamDetails = {
   }
 };
 
-// --- Interactive Mouse Cursor Glow Effect ---
-const glow = document.getElementById("cursor-glow");
-
+// --- Accurate Mouse Glow Effect ---
 window.addEventListener("mousemove", (e) => {
-  const x = e.clientX + "px";
-  const y = e.clientY + "px";
-  
-  document.documentElement.style.setProperty("--mouse-x", x);
-  document.documentElement.style.setProperty("--mouse-y", y);
+  // PageX and PageY accurately capture mouse position relative to entire page document
+  document.documentElement.style.setProperty("--mouse-x", `${e.pageX}px`);
+  document.documentElement.style.setProperty("--mouse-y", `${e.pageY}px`);
 });
 
-// --- Dark / Light Theme Toggle ---
+// --- Theme Toggle Logic ---
 const themeToggleBtn = document.getElementById("theme-toggle");
 const themeIcon = themeToggleBtn.querySelector(".theme-icon");
 const body = document.body;

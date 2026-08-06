@@ -1,7 +1,11 @@
-/* Color CSS Variables for Themes */
+:root {
+  --mouse-x: -1000px;
+  --mouse-y: -1000px;
+}
+
 .dark-theme {
   --bg-primary: #0f172a;
-  --bg-secondary: #111827;
+  --bg-secondary: #1e293b;
   --accent: #38bdf8;
   --accent-hover: #0284c7;
   --text-main: #f8fafc;
@@ -36,24 +40,30 @@ body {
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
   position: relative;
-  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-/* Interactive Cursor Glow */
-.cursor-glow {
-  position: fixed;
+/* Precise Background Mouse Glow */
+body::before {
+  content: '';
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 0;
   background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    600px circle at var(--mouse-x) var(--mouse-y),
     var(--glow-color),
-    transparent 80%
+    transparent 70%
   );
-  transition: background 0.05s ease;
+}
+
+/* Ensure content stays above background glow */
+.navbar, .hero, .section, footer, .modal {
+  position: relative;
+  z-index: 1;
 }
 
 /* Navbar */
@@ -109,7 +119,6 @@ body {
   font-weight: 600;
 }
 
-/* Theme Toggle Button */
 .theme-toggle-btn {
   background: transparent;
   border: 1px solid var(--border-color);

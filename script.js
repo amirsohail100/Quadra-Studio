@@ -1,184 +1,272 @@
-// Team Member Data
+// Team Details Data
 const teamDetails = {
   "1": {
     name: "You (Lead Dev)",
     role: "Full-Stack Architect",
-    bio: "Passionate about building scalable web solutions, orchestrating multi-service architectures, and leading tech strategies for startups and businesses.",
+    bio: "Passionate about building scalable web solutions, orchestrating multi-service architectures, and leading tech strategies.",
     skills: ["JavaScript", "Python", "Node.js", "System Design", "Git"]
   },
   "2": {
     name: "Alex Rivera",
     role: "UI/UX Designer",
-    bio: "Transforms complex ideas into visually compelling interfaces with a strong focus on user research, micro-interactions, and visual harmony.",
+    bio: "Transforms complex ideas into visually compelling interfaces with a strong focus on user research and visual harmony.",
     skills: ["Figma", "Design Systems", "Prototyping", "User Research"]
   },
   "3": {
     name: "Jordan Lee",
     role: "Frontend Developer",
-    bio: "Obsessed with pixel-perfection, smooth CSS animations, and building ultra-fast responsive client-side implementations.",
+    bio: "Obsessed with pixel-perfection, smooth CSS animations, and reactive UI components.",
     skills: ["React", "CSS3 / Sass", "Tailwind", "JavaScript (ES6+)"]
   },
   "4": {
     name: "Morgan Smith",
     role: "Backend & DevOps",
-    bio: "Focuses on high-availability server setups, robust REST/GraphQL APIs, and continuous deployment workflows.",
+    bio: "Focuses on high-availability server setups, robust REST APIs, and continuous deployment workflows.",
     skills: ["Docker", "PostgreSQL", "REST APIs", "AWS", "CI/CD"]
   }
 };
 
-// --- Interactive Background Canvas Animation Engine ---
-const canvas = document.getElementById("bg-canvas");
-const ctx = canvas.getContext("2d");
+// --- Ambient Background Canvas Engine ---
+const bgCanvas = document.getElementById("bg-canvas");
+const bgCtx = bgCanvas.getContext("2d");
+let bgWidth, bgHeight;
+let bgParticles = [];
 
-let width, height;
-let particles = [];
-
-function resizeCanvas() {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
+function resizeBgCanvas() {
+  bgWidth = bgCanvas.width = window.innerWidth;
+  bgHeight = bgCanvas.height = window.innerHeight;
 }
+window.addEventListener("resize", resizeBgCanvas);
+resizeBgCanvas();
 
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
-
-class BubbleParticle {
-  constructor() {
-    this.reset();
-  }
-
+class AmbientBubble {
+  constructor() { this.reset(); }
   reset() {
-    this.x = Math.random() * width;
-    this.y = Math.random() * height + height;
-    this.radius = Math.random() * 18 + 6; // Bubble size
-    this.speedY = Math.random() * 0.8 + 0.3; // Upward floating speed
+    this.x = Math.random() * bgWidth;
+    this.y = Math.random() * bgHeight + bgHeight;
+    this.radius = Math.random() * 18 + 6;
+    this.speedY = Math.random() * 0.8 + 0.3;
     this.speedX = (Math.random() - 0.5) * 0.4;
     this.alpha = Math.random() * 0.4 + 0.1;
     this.pulse = Math.random() * 0.02;
     this.maxAlpha = Math.random() * 0.5 + 0.2;
   }
-
   update() {
     this.y -= this.speedY;
     this.x += this.speedX;
-
-    // Pulse bubble opacity
     this.alpha += this.pulse;
-    if (this.alpha > this.maxAlpha || this.alpha < 0.1) {
-      this.pulse = -this.pulse;
-    }
-
-    // Reset particle when floating out of view
-    if (this.y < -50 || this.x < -20 || this.x > width + 20) {
+    if (this.alpha > this.maxAlpha || this.alpha < 0.1) this.pulse = -this.pulse;
+    if (this.y < -50 || this.x < -20 || this.x > bgWidth + 20) {
       this.reset();
-      this.y = height + 20;
+      this.y = bgHeight + 20;
     }
+  }
+  draw() {
+    const isDark = document.body.classList.contains("dark-theme");
+    bgCtx.save();
+    bgCtx.beginPath();
+    bgCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    const grad = bgCtx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+
+    if (isDark) {
+      grad.addColorStop(0, `rgba(56, 189, 248, ${this.alpha * 1.2})`);
+      grad.addColorStop(0.6, `rgba(14, 165, 233, ${this.alpha * 0.4})`);
+      grad.addColorStop(1, `rgba(2, 132, 199, 0)`);
+    } else {
+      grad.addColorStop(0, `rgba(2, 132, 199, ${this.alpha * 0.8})`);
+      grad.addColorStop(0.6, `rgba(56, 189, 248, ${this.alpha * 0.3})`);
+      grad.addColorStop(1, `rgba(186, 230, 253, 0)`);
+    }
+    bgCtx.fillStyle = grad;
+    bgCtx.fill();
+    bgCtx.restore();
+  }
+}
+
+for (let i = 0; i < 45; i++) {
+  const p = new AmbientBubble();
+  p.y = Math.random() * bgHeight;
+  bgParticles.push(p);
+}
+
+function renderBg() {
+  bgCtx.clearRect(0, 0, bgWidth, bgHeight);
+  bgParticles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(renderBg);
+}
+renderBg();
+
+// --- Click Burst Particle System Canvas ---
+const pCanvas = document.getElementById("particle-canvas");
+const pCtx = pCanvas.getContext("2d");
+let pWidth, pHeight;
+let activeParticles = [];
+
+function resizePCanvas() {
+  pWidth = pCanvas.width = window.innerWidth;
+  pHeight = pCanvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizePCanvas);
+resizePCanvas();
+
+class ClickParticle {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.radius = Math.random() * 6 + 3;
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 7 + 2;
+    this.vx = Math.cos(angle) * speed;
+    this.vy = Math.sin(angle) * speed;
+    this.alpha = 1;
+    this.decay = Math.random() * 0.03 + 0.015;
+    
+    // Multi-color palette adaptable to theme
+    const isDark = document.body.classList.contains("dark-theme");
+    const colors = isDark 
+      ? ["#38bdf8", "#818cf8", "#f43f5e", "#fde047", "#34d399"]
+      : ["#0284c7", "#4f46e5", "#e11d48", "#d97706", "#059669"];
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.isRing = Math.random() > 0.6;
+  }
+
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.vy += 0.15; // Mild gravity effect
+    this.alpha -= this.decay;
   }
 
   draw() {
-    const isDark = document.body.classList.contains("dark-theme");
-    
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-
-    // Glowing Gradient Bubble
-    const gradient = ctx.createRadialGradient(
-      this.x, this.y, 0,
-      this.x, this.y, this.radius
-    );
-
-    if (isDark) {
-      gradient.addColorStop(0, `rgba(56, 189, 248, ${this.alpha * 1.2})`);
-      gradient.addColorStop(0.6, `rgba(14, 165, 233, ${this.alpha * 0.4})`);
-      gradient.addColorStop(1, `rgba(2, 132, 199, 0)`);
+    pCtx.save();
+    pCtx.globalAlpha = Math.max(0, this.alpha);
+    pCtx.beginPath();
+    pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    if (this.isRing) {
+      pCtx.strokeStyle = this.color;
+      pCtx.lineWidth = 2;
+      pCtx.stroke();
     } else {
-      gradient.addColorStop(0, `rgba(2, 132, 199, ${this.alpha * 0.8})`);
-      gradient.addColorStop(0.6, `rgba(56, 189, 248, ${this.alpha * 0.3})`);
-      gradient.addColorStop(1, `rgba(186, 230, 253, 0)`);
+      pCtx.fillStyle = this.color;
+      pCtx.fill();
     }
-
-    ctx.fillStyle = gradient;
-    ctx.fill();
-
-    // Subtle Outer Rim Ring
-    ctx.lineWidth = 0.8;
-    ctx.strokeStyle = isDark 
-      ? `rgba(248, 250, 252, ${this.alpha * 0.3})`
-      : `rgba(2, 132, 199, ${this.alpha * 0.25})`;
-    ctx.stroke();
-    
-    ctx.restore();
+    pCtx.restore();
   }
 }
 
-// Create 50 floating bubble particles
-for (let i = 0; i < 50; i++) {
-  const p = new BubbleParticle();
-  p.y = Math.random() * height; // Spread across screen initially
-  particles.push(p);
+function triggerParticleBurst(x, y, count = 25) {
+  for (let i = 0; i < count; i++) {
+    activeParticles.push(new ClickParticle(x, y));
+  }
 }
 
-function animateCanvas() {
-  ctx.clearRect(0, 0, width, height);
-  
-  particles.forEach(p => {
+function renderClickParticles() {
+  pCtx.clearRect(0, 0, pWidth, pHeight);
+  for (let i = activeParticles.length - 1; i >= 0; i--) {
+    const p = activeParticles[i];
     p.update();
     p.draw();
-  });
-
-  requestAnimationFrame(animateCanvas);
+    if (p.alpha <= 0) {
+      activeParticles.splice(i, 1);
+    }
+  }
+  requestAnimationFrame(renderClickParticles);
 }
+renderClickParticles();
 
-animateCanvas();
+// Bind particle burst to elements with '.particle-trigger'
+document.querySelectorAll(".particle-trigger").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX || (rect.left + rect.width / 2);
+    const y = e.clientY || (rect.top + rect.height / 2);
+    triggerParticleBurst(x, y, 30);
+  });
+});
 
-// --- Mouse Glow Effect Listener ---
+// --- Like / Dislike Functionality ---
+const likeBtn = document.getElementById("like-btn");
+const dislikeBtn = document.getElementById("dislike-btn");
+const likeCountSpan = document.getElementById("like-count");
+
+let isLiked = false;
+let isDisliked = false;
+let currentLikes = 128;
+
+likeBtn.addEventListener("click", () => {
+  if (!isLiked) {
+    isLiked = true;
+    currentLikes++;
+    likeBtn.classList.add("liked");
+    
+    if (isDisliked) {
+      isDisliked = false;
+      dislikeBtn.classList.remove("disliked");
+    }
+  } else {
+    isLiked = false;
+    currentLikes--;
+    likeBtn.classList.remove("liked");
+  }
+  likeCountSpan.innerText = currentLikes;
+});
+
+dislikeBtn.addEventListener("click", (e) => {
+  // Shake animation feedback
+  dislikeBtn.classList.remove("shake-anim");
+  void dislikeBtn.offsetWidth; // Force reflow
+  dislikeBtn.classList.add("shake-anim");
+
+  if (!isDisliked) {
+    isDisliked = true;
+    dislikeBtn.classList.add("disliked");
+    
+    if (isLiked) {
+      isLiked = false;
+      currentLikes--;
+      likeBtn.classList.remove("liked");
+      likeCountSpan.innerText = currentLikes;
+    }
+  } else {
+    isDisliked = false;
+    dislikeBtn.classList.remove("disliked");
+  }
+  // Note: Dislike counter is NOT displayed to the user
+});
+
+// --- Mouse Glow Movement Listener ---
 window.addEventListener("mousemove", (e) => {
   document.documentElement.style.setProperty("--mouse-x", `${e.pageX}px`);
   document.documentElement.style.setProperty("--mouse-y", `${e.pageY}px`);
 });
 
-// --- Celestial Theme Switcher Logic ---
+// --- Celestial Theme Switcher ---
 const themeToggleBtn = document.getElementById("theme-toggle");
-const body = document.body;
-
 themeToggleBtn.addEventListener("click", () => {
-  if (body.classList.contains("dark-theme")) {
-    body.classList.remove("dark-theme");
-    body.classList.add("light-theme");
-  } else {
-    body.classList.remove("light-theme");
-    body.classList.add("dark-theme");
-  }
+  document.body.classList.toggle("dark-theme");
+  document.body.classList.toggle("light-theme");
 });
 
 // --- Scroll Reveal Animations ---
 const revealElements = document.querySelectorAll(".reveal-on-scroll");
-
 const revealOnScroll = () => {
   revealElements.forEach((el) => {
-    const elementTop = el.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-    if (elementTop < windowHeight - 100) {
+    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
       el.classList.add("active");
     }
   });
 };
-
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll();
 
-// --- Animated Stats Counters ---
+// --- Counters Animation ---
 const counters = document.querySelectorAll('.counter');
 let counted = false;
 
 const startCounters = () => {
   const statsSection = document.getElementById('about');
   if (!statsSection) return;
-  
-  const sectionPos = statsSection.getBoundingClientRect().top;
-  const screenPos = window.innerHeight;
-
-  if (sectionPos < screenPos && !counted) {
+  if (statsSection.getBoundingClientRect().top < window.innerHeight && !counted) {
     counters.forEach(counter => {
       const target = +counter.getAttribute('data-target');
       let count = 0;
@@ -198,15 +286,13 @@ const startCounters = () => {
     counted = true;
   }
 };
-
 window.addEventListener('scroll', startCounters);
 
-// --- Modal Functionality ---
+// --- Modal Popup ---
 const modal = document.getElementById("team-modal");
 const closeBtn = document.querySelector(".close-btn");
-const teamCards = document.querySelectorAll(".team-card");
 
-teamCards.forEach(card => {
+document.querySelectorAll(".team-card").forEach(card => {
   card.addEventListener("click", () => {
     const memberId = card.getAttribute("data-member");
     const data = teamDetails[memberId];
@@ -230,19 +316,12 @@ teamCards.forEach(card => {
   });
 });
 
-closeBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
+closeBtn.addEventListener("click", () => modal.style.display = "none");
+window.addEventListener("click", (e) => { if (e.target === modal) modal.style.display = "none"; });
 
-window.addEventListener("click", (event) => {
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
-});
-
-// --- Form Submission ---
+// --- Form Handle ---
 document.getElementById("contact-form").addEventListener("submit", (e) => {
   e.preventDefault();
-  alert("Thank you! Your message has been received.");
+  alert("Message sent successfully!");
   e.target.reset();
 });

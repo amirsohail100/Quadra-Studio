@@ -121,7 +121,6 @@ class ClickParticle {
     this.alpha = 1;
     this.decay = Math.random() * 0.03 + 0.015;
     
-    // Multi-color palette adaptable to theme
     const isDark = document.body.classList.contains("dark-theme");
     const colors = isDark 
       ? ["#38bdf8", "#818cf8", "#f43f5e", "#fde047", "#34d399"]
@@ -133,7 +132,7 @@ class ClickParticle {
   update() {
     this.x += this.vx;
     this.y += this.vy;
-    this.vy += 0.15; // Mild gravity effect
+    this.vy += 0.15;
     this.alpha -= this.decay;
   }
 
@@ -174,7 +173,7 @@ function renderClickParticles() {
 }
 renderClickParticles();
 
-// Bind particle burst to elements with '.particle-trigger'
+// Bind particle burst to elements
 document.querySelectorAll(".particle-trigger").forEach(btn => {
   btn.addEventListener("click", (e) => {
     const rect = btn.getBoundingClientRect();
@@ -184,7 +183,7 @@ document.querySelectorAll(".particle-trigger").forEach(btn => {
   });
 });
 
-// --- Like / Dislike Functionality ---
+// --- Like / Dislike Logic ---
 const likeBtn = document.getElementById("like-btn");
 const dislikeBtn = document.getElementById("dislike-btn");
 const likeCountSpan = document.getElementById("like-count");
@@ -198,7 +197,6 @@ likeBtn.addEventListener("click", () => {
     isLiked = true;
     currentLikes++;
     likeBtn.classList.add("liked");
-    
     if (isDisliked) {
       isDisliked = false;
       dislikeBtn.classList.remove("disliked");
@@ -211,16 +209,14 @@ likeBtn.addEventListener("click", () => {
   likeCountSpan.innerText = currentLikes;
 });
 
-dislikeBtn.addEventListener("click", (e) => {
-  // Shake animation feedback
+dislikeBtn.addEventListener("click", () => {
   dislikeBtn.classList.remove("shake-anim");
-  void dislikeBtn.offsetWidth; // Force reflow
+  void dislikeBtn.offsetWidth;
   dislikeBtn.classList.add("shake-anim");
 
   if (!isDisliked) {
     isDisliked = true;
     dislikeBtn.classList.add("disliked");
-    
     if (isLiked) {
       isLiked = false;
       currentLikes--;
@@ -231,23 +227,22 @@ dislikeBtn.addEventListener("click", (e) => {
     isDisliked = false;
     dislikeBtn.classList.remove("disliked");
   }
-  // Note: Dislike counter is NOT displayed to the user
 });
 
-// --- Mouse Glow Movement Listener ---
+// --- Mouse Movement Radial Glow Listener ---
 window.addEventListener("mousemove", (e) => {
   document.documentElement.style.setProperty("--mouse-x", `${e.pageX}px`);
   document.documentElement.style.setProperty("--mouse-y", `${e.pageY}px`);
 });
 
-// --- Celestial Theme Switcher ---
+// --- Theme Switcher ---
 const themeToggleBtn = document.getElementById("theme-toggle");
 themeToggleBtn.addEventListener("click", () => {
   document.body.classList.toggle("dark-theme");
   document.body.classList.toggle("light-theme");
 });
 
-// --- Scroll Reveal Animations ---
+// --- Scroll Reveal ---
 const revealElements = document.querySelectorAll(".reveal-on-scroll");
 const revealOnScroll = () => {
   revealElements.forEach((el) => {
@@ -288,7 +283,7 @@ const startCounters = () => {
 };
 window.addEventListener('scroll', startCounters);
 
-// --- Modal Popup ---
+// --- Modal Popup Logic ---
 const modal = document.getElementById("team-modal");
 const closeBtn = document.querySelector(".close-btn");
 
@@ -319,7 +314,7 @@ document.querySelectorAll(".team-card").forEach(card => {
 closeBtn.addEventListener("click", () => modal.style.display = "none");
 window.addEventListener("click", (e) => { if (e.target === modal) modal.style.display = "none"; });
 
-// --- Form Handle ---
+// --- Contact Form Handling ---
 document.getElementById("contact-form").addEventListener("submit", (e) => {
   e.preventDefault();
   alert("Message sent successfully!");

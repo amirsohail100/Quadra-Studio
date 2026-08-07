@@ -163,24 +163,14 @@ body::before {
 .nav-item:hover { color: var(--text-main); }
 
 .btn-nav {
-  background: var(--accent-gradient);
+  background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
   color: #ffffff !important;
   padding: 0.6rem 1.4rem;
   border-radius: 12px;
   font-weight: 600;
   text-decoration: none !important;
-  box-shadow: 0 4px 15px var(--glow-color);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
 }
-
-.rgb-hover-btn { position: relative; z-index: 1; transition: transform 0.3s ease; }
-.rgb-hover-btn::before {
-  content: ''; position: absolute; inset: -3px; border-radius: inherit;
-  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bf8, #7a00ff, #ff00c8, #ff0000);
-  background-size: 300% 300%; z-index: -1; opacity: 0; filter: blur(10px); transition: opacity 0.4s ease;
-}
-.rgb-hover-btn:hover { transform: translateY(-2px) scale(1.03); }
-.rgb-hover-btn:hover::before { opacity: 1; animation: rgbGlow 4s linear infinite; }
 
 /* Theme Toggle Switch */
 .sky-switch { background: none; border: none; padding: 0; cursor: pointer; outline: none; }
@@ -195,11 +185,25 @@ body::before {
 .feedback-widget { margin: 1.8rem 0; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
 .widget-title { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; }
 .like-dislike-container { display: flex; gap: 1rem; background: var(--card-bg); padding: 0.5rem; border-radius: 50px; border: 1px solid var(--border-color); }
-.interactive-btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; border-radius: 40px; border: 1px solid transparent; background: transparent; color: var(--text-main); font-weight: 600; cursor: pointer; }
+.interactive-btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; border-radius: 40px; border: 1px solid transparent; background: transparent; color: var(--text-main); font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
 .like-btn:hover { background: rgba(56, 189, 248, 0.12); color: var(--accent); }
 .dislike-btn:hover { background: rgba(244, 63, 94, 0.12); color: #f43f5e; }
 .like-btn.liked { background: var(--accent); color: #fff; }
-.dislike-btn.disliked { background: #f43f5e; color: #fff; }
+
+/* Dislike Shake Animation */
+.dislike-btn.disliked {
+  background: #f43f5e;
+  color: #fff;
+  animation: dislikeShake 0.6s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes dislikeShake {
+  10%, 90% { transform: translate3d(-2px, 0, 0) rotate(-6deg); }
+  20%, 80% { transform: translate3d(4px, 0, 0) rotate(8deg); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0) rotate(-10deg); }
+  40%, 60% { transform: translate3d(6px, 0, 0) rotate(10deg); }
+}
+
 .badge-count { background: rgba(255, 255, 255, 0.2); padding: 0.1rem 0.5rem; border-radius: 12px; font-size: 0.8rem; }
 
 /* Hero Section */
@@ -230,10 +234,62 @@ body::before {
 .project-icon { font-size: 1.8rem; color: var(--accent); }
 .project-type { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent); font-weight: 700; background: var(--tag-bg); padding: 0.3rem 0.6rem; border-radius: 6px; }
 
-/* --- Team Section (Fixed Avatar Aspect Ratio) --- */
+/* --- Team Section --- */
 .team-timeline { display: flex; flex-direction: column; gap: 2.5rem; max-width: 1000px; margin: 0 auto; }
-.team-member-row { display: flex; align-items: center; gap: 2.5rem; padding: 2rem; border-radius: 20px; background: var(--card-bg); border: 1px solid var(--border-color); text-align: left; transition: transform 0.3s ease, border-color 0.3s ease; }
-.team-member-row:hover { transform: translateY(-4px); border-color: var(--accent); }
+
+/* Base Team Card Styling with Neon Hover Setup */
+.team-member-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2.2rem;
+  border-radius: 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  text-align: left;
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Dynamic Neon Gradient Overlay Effect on Hover */
+.team-member-row::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 26px;
+  background: linear-gradient(135deg, #4ade80 0%, #38bdf8 35%, #818cf8 70%, #4ade80 100%);
+  background-size: 300% 300%;
+  z-index: -2;
+  opacity: 0;
+  filter: blur(14px);
+  transition: opacity 0.4s ease;
+  animation: rgbGlow 4s ease infinite;
+}
+
+.team-member-row::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: var(--card-bg);
+  z-index: -1;
+  transition: background 0.4s ease;
+}
+
+/* Neon Glow trigger on Hover/Active Focus */
+.team-member-row:hover,
+.team-member-row:focus-within {
+  transform: translateY(-6px) scale(1.01);
+  border-color: rgba(74, 222, 128, 0.6);
+  box-shadow: 0 0 35px rgba(74, 222, 128, 0.35), 0 0 50px rgba(56, 189, 248, 0.25);
+}
+
+.team-member-row:hover::before,
+.team-member-row:focus-within::before {
+  opacity: 1;
+}
 
 .team-member-row.left { flex-direction: row; }
 .team-member-row.right { flex-direction: row-reverse; }

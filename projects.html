@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects Showcase - Quadra</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Background Canvases -->
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navbar -->
+  <nav class="navbar fade-in-down">
+    <a href="index.html" class="logo">Quadra<span class="logo-dot">.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-item">Home</a></li>
+      <li><a href="index.html#about" class="nav-item">About Us</a></li>
+      <li><a href="index.html#team" class="nav-item">Team</a></li>
+      <li><a href="index.html#services" class="nav-item">Services</a></li>
+      <li><a href="projects.html" class="nav-item active">Projects</a></li>
+    </ul>
+
+    <!-- Celestial Theme Switcher -->
+    <button class="sky-switch" id="theme-toggle" aria-label="Toggle Theme">
+      <span class="sky-bg">
+        <span class="celestial-body">
+          <span class="sun-glow"></span>
+        </span>
+        <span class="star star-1"></span>
+        <span class="star star-2"></span>
+        <span class="star star-3"></span>
+        <span class="cloud-puff"></span>
+      </span>
+    </button>
+
+    <a href="index.html#contact" class="btn-nav particle-trigger rgb-hover-btn">Contact Us</a>
+  </nav>
+
+  <!-- Projects Hero -->
+  <section class="hero">
+    <div class="hero-content fade-in-up">
+      <span class="badge">Innovation Showcase 🚀</span>
+      <h1 class="gradient-text animated-main-title">Our Featured Projects</h1>
+      <p class="hero-subtext">Hover or click on any project image to inspect the technology stack, live links, and repository details.</p>
+    </div>
+  </section>
+
+  <!-- Project Showcase Grid -->
+  <section class="section">
+    <div class="showcase-grid">
+
+      <!-- PROJECT CARD 1 -->
+      <div class="showcase-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project1.png" alt="Project 1 Screenshot" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Project+1+Preview'">
+          
+          <!-- Hover / Click Glassmorphism Overlay -->
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>AI Vision Analytics</h3>
+              <p>Real-time computer vision platform for automated object tracking and image segmentation using Deep Learning models.</p>
+              
+              <div class="tech-tags">
+                <span class="tag">Python</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">OpenCV</span>
+                <span class="tag">FastAPI</span>
+              </div>
+
+              <div class="overlay-buttons">
+                <a href="https://your-live-demo-link.com" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn">
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn">
+                  <i class="fab fa-github"></i> GitHub Repo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>AI Vision Analytics</h4>
+          <span class="project-type">AI / Computer Vision</span>
+        </div>
+      </div>
+
+      <!-- PROJECT CARD 2 -->
+      <div class="showcase-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project2.png" alt="Project 2 Screenshot" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Project+2+Preview'">
+          
+          <!-- Hover / Click Glassmorphism Overlay -->
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>CapsuleHub Platform</h3>
+              <p>Scalable web platform integrated with custom weather APIs, interactive dashboard, and modern UI microservices.</p>
+              
+              <div class="tech-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">Docker</span>
+              </div>
+
+              <div class="overlay-buttons">
+                <a href="https://your-live-demo-link.com" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn">
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn">
+                  <i class="fab fa-github"></i> GitHub Repo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>CapsuleHub Platform</h4>
+          <span class="project-type">Full-Stack Web</span>
+        </div>
+      </div>
+
+      <!-- PROJECT CARD 3 -->
+      <div class="showcase-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project3.png" alt="Project 3 Screenshot" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Project+3+Preview'">
+          
+          <!-- Hover / Click Glassmorphism Overlay -->
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>LLM Code Assistant</h3>
+              <p>Fine-tuned Language Model integrated with custom Studio APIs to streamline daily developer tasks and code analysis.</p>
+              
+              <div class="tech-tags">
+                <span class="tag">Mistral AI</span>
+                <span class="tag">Python</span>
+                <span class="tag">LangChain</span>
+              </div>
+
+              <div class="overlay-buttons">
+                <a href="https://your-live-demo-link.com" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn">
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn">
+                  <i class="fab fa-github"></i> GitHub Repo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>LLM Code Assistant</h4>
+          <span class="project-type">Gen AI / NLP</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Quadra Collective. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

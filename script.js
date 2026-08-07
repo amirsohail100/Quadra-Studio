@@ -1,4 +1,6 @@
-// --- Ambient Background Canvas Engine ---
+// ==========================================================================
+// AMBIENT BACKGROUND CANVAS ENGINE
+// ==========================================================================
 const bgCanvas = document.getElementById("bg-canvas");
 const bgCtx = bgCanvas.getContext("2d");
 let bgWidth, bgHeight;
@@ -68,7 +70,9 @@ function renderBg() {
 }
 renderBg();
 
-// --- Click Burst Particle System Canvas ---
+// ==========================================================================
+// CLICK BURST PARTICLE SYSTEM CANVAS
+// ==========================================================================
 const pCanvas = document.getElementById("particle-canvas");
 const pCtx = pCanvas.getContext("2d");
 let pWidth, pHeight;
@@ -154,7 +158,9 @@ document.querySelectorAll(".particle-trigger").forEach(btn => {
   });
 });
 
-// --- Like / Dislike Logic with Re-triggerable Animation ---
+// ==========================================================================
+// LIKE / DISLIKE INTERACTION LOGIC
+// ==========================================================================
 const likeBtn = document.getElementById("like-btn");
 const dislikeBtn = document.getElementById("dislike-btn");
 const likeCountSpan = document.getElementById("like-count");
@@ -183,7 +189,7 @@ if (likeBtn && dislikeBtn) {
 
   dislikeBtn.addEventListener("click", () => {
     dislikeBtn.classList.remove("disliked");
-    void dislikeBtn.offsetWidth; // Trigger reflow for re-animation
+    void dislikeBtn.offsetWidth;
     
     if (!isDisliked) {
       isDisliked = true;
@@ -200,22 +206,35 @@ if (likeBtn && dislikeBtn) {
   });
 }
 
-// --- Mouse Movement Radial Glow Listener ---
+// ==========================================================================
+// CURSOR LIGHT POSITION TRACKING
+// ==========================================================================
 window.addEventListener("mousemove", (e) => {
   document.documentElement.style.setProperty("--mouse-x", `${e.pageX}px`);
   document.documentElement.style.setProperty("--mouse-y", `${e.pageY}px`);
 });
 
-// --- Theme Switcher ---
+// ==========================================================================
+// DARK / LIGHT THEME TOGGLE LOGIC (Restored)
+// ==========================================================================
 const themeToggleBtn = document.getElementById("theme-toggle");
-if(themeToggleBtn) {
+const themeBtnText = document.getElementById("theme-btn-text");
+
+if (themeToggleBtn) {
   themeToggleBtn.addEventListener("click", () => {
     document.body.classList.toggle("dark-theme");
     document.body.classList.toggle("light-theme");
+
+    const isLight = document.body.classList.contains("light-theme");
+    if (themeBtnText) {
+      themeBtnText.textContent = isLight ? "Light Mode" : "Dark Mode";
+    }
   });
 }
 
-// --- Scroll Reveal ---
+// ==========================================================================
+// SCROLL REVEAL ANIMATION
+// ==========================================================================
 const revealElements = document.querySelectorAll(".reveal-on-scroll");
 const revealOnScroll = () => {
   revealElements.forEach((el) => {
@@ -227,7 +246,9 @@ const revealOnScroll = () => {
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll();
 
-// --- Counters Animation ---
+// ==========================================================================
+// STATS COUNTER ANIMATION
+// ==========================================================================
 const counters = document.querySelectorAll('.counter');
 let counted = false;
 
@@ -256,7 +277,9 @@ const startCounters = () => {
 };
 window.addEventListener('scroll', startCounters);
 
-// --- Contact Form Handling ---
+// ==========================================================================
+// CONTACT FORM SUBMISSION
+// ==========================================================================
 const contactForm = document.getElementById("contact-form");
 if(contactForm) {
   contactForm.addEventListener("submit", (e) => {

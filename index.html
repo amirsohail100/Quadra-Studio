@@ -26,16 +26,9 @@
       <li><a href="#services" class="nav-item">Services</a></li>
       <li><a href="#projects" class="nav-item">Projects</a></li>
       <li>
-        <button id="theme-toggle" class="sky-switch" aria-label="Toggle Theme">
-          <span class="sky-bg">
-            <span class="celestial-body">
-              <span class="sun-glow"></span>
-            </span>
-            <span class="star star-1"></span>
-            <span class="star star-2"></span>
-            <span class="star star-3"></span>
-            <span class="cloud-puff"></span>
-          </span>
+        <!-- Original Restored Theme Toggle Button -->
+        <button id="theme-toggle" class="btn-theme-toggle particle-trigger" aria-label="Toggle Theme">
+          <span id="theme-btn-text">Dark Mode</span>
         </button>
       </li>
       <li><a href="#contact" class="btn-nav particle-trigger">Contact Us</a></li>
@@ -45,7 +38,7 @@
   <!-- Hero Section -->
   <header id="hero" class="hero">
     <div class="hero-content fade-in-up">
-      <span class="badge rgb-breathing">Freelance Collective</span>
+      <span class="badge">Freelance Collective</span>
       
       <div class="header-animation-wrapper">
         <div class="floating-brackets-container">
@@ -107,14 +100,14 @@
     </div>
   </section>
 
-  <!-- Team Section: Left-Right Alternating Layout -->
+  <!-- Team Section -->
   <section id="team" class="section bg-alt reveal-on-scroll">
     <h2>Meet Our Team</h2>
     <p class="section-desc">The core strategy and engineering powerhouse behind our digital solutions.</p>
 
     <div class="team-timeline">
       
-      <!-- Member 1: Amir Sohail (Core Technical & Design Lead) -->
+      <!-- Member 1: Amir Sohail -->
       <div class="team-member-row left" tabindex="0">
         <div class="member-image-box">
           <div class="avatar-wrapper">
@@ -128,7 +121,6 @@
             The sole technical and design architect behind Quadra. I handle complete end-to-end development—from UI/UX wireframing and design systems to building Agentic AI, Generative AI applications, fine-tuning LLMs, Vector DB architectures, MLOps, and scalable full-stack web platforms.
           </p>
 
-          <!-- Categorized Tech Stack -->
           <div class="skill-category">
             <strong>Languages & Core:</strong>
             <div class="tech-tags">
@@ -157,7 +149,6 @@
             </div>
           </div>
           
-          <!-- Direct Social Buttons -->
           <div class="member-social-buttons">
             <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="social-btn github">
               <i class="fab fa-github"></i> GitHub
@@ -178,7 +169,7 @@
         </div>
       </div>
 
-      <!-- Member 2: Website Promotion & Digital Growth -->
+      <!-- Member 2 -->
       <div class="team-member-row right" tabindex="0">
         <div class="member-image-box">
           <div class="avatar-wrapper">
@@ -202,7 +193,7 @@
         </div>
       </div>
 
-      <!-- Member 3: Customer Dealing & Client Relations -->
+      <!-- Member 3 -->
       <div class="team-member-row left" tabindex="0">
         <div class="member-image-box">
           <div class="avatar-wrapper">
@@ -226,7 +217,7 @@
         </div>
       </div>
 
-      <!-- Member 4: Undecided Role -->
+      <!-- Member 4 -->
       <div class="team-member-row right" tabindex="0">
         <div class="member-image-box">
           <div class="avatar-wrapper">
@@ -270,7 +261,7 @@
     </div>
   </section>
 
-  <!-- Projects / Portfolio Section -->
+  <!-- Projects Section -->
   <section id="projects" class="section bg-alt reveal-on-scroll">
     <h2>Featured Work</h2>
     <p class="section-desc">A selection of recent AI agent systems, full-stack web platforms, and design prototypes built by Quadra.</p>

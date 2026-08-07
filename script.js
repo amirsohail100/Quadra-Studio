@@ -1,12 +1,60 @@
 // ==========================================================================
+// DARK / LIGHT THEME TOGGLE & PERSISTENCE (LocalStorage)
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  
+  // Load saved theme or default to dark-theme
+  const savedTheme = localStorage.getItem("quadra-theme");
+  if (savedTheme) {
+    document.body.className = savedTheme;
+  } else {
+    document.body.classList.add("dark-theme");
+  }
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+      if (document.body.classList.contains("dark-theme")) {
+        document.body.classList.remove("dark-theme");
+        document.body.classList.add("light-theme");
+        localStorage.setItem("quadra-theme", "light-theme");
+      } else {
+        document.body.classList.remove("light-theme");
+        document.body.classList.add("dark-theme");
+        localStorage.setItem("quadra-theme", "dark-theme");
+      }
+    });
+  }
+
+  // ==========================================================================
+  // CLICK / TOUCH TO TOGGLE OVERLAY (FOR MOBILE & ACCESSIBILITY)
+  // ==========================================================================
+  const showcaseCards = document.querySelectorAll('.showcase-card');
+  showcaseCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Don't toggle if user clicks directly on GitHub or Live Demo links
+      if (e.target.closest('.btn-overlay')) return;
+
+      const isActive = card.classList.contains('active-touch');
+      showcaseCards.forEach(c => c.classList.remove('active-touch'));
+      
+      if (!isActive) {
+        card.classList.add('active-touch');
+      }
+    });
+  });
+});
+
+// ==========================================================================
 // AMBIENT BACKGROUND CANVAS ENGINE
 // ==========================================================================
 const bgCanvas = document.getElementById("bg-canvas");
-const bgCtx = bgCanvas.getContext("2d");
+const bgCtx = bgCanvas ? bgCanvas.getContext("2d") : null;
 let bgWidth, bgHeight;
 let bgParticles = [];
 
 function resizeBgCanvas() {
+  if (!bgCanvas) return;
   bgWidth = bgCanvas.width = window.innerWidth;
   bgHeight = bgCanvas.height = window.innerHeight;
 }
@@ -36,6 +84,7 @@ class AmbientBubble {
     }
   }
   draw() {
+    if (!bgCtx) return;
     const isDark = document.body.classList.contains("dark-theme");
     bgCtx.save();
     bgCtx.beginPath();
@@ -57,28 +106,31 @@ class AmbientBubble {
   }
 }
 
-for (let i = 0; i < 45; i++) {
-  const p = new AmbientBubble();
-  p.y = Math.random() * bgHeight;
-  bgParticles.push(p);
-}
+if (bgCanvas) {
+  for (let i = 0; i < 45; i++) {
+    const p = new AmbientBubble();
+    p.y = Math.random() * bgHeight;
+    bgParticles.push(p);
+  }
 
-function renderBg() {
-  bgCtx.clearRect(0, 0, bgWidth, bgHeight);
-  bgParticles.forEach(p => { p.update(); p.draw(); });
-  requestAnimationFrame(renderBg);
+  function renderBg() {
+    bgCtx.clearRect(0, 0, bgWidth, bgHeight);
+    bgParticles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(renderBg);
+  }
+  renderBg();
 }
-renderBg();
 
 // ==========================================================================
 // CLICK BURST PARTICLE SYSTEM CANVAS
 // ==========================================================================
 const pCanvas = document.getElementById("particle-canvas");
-const pCtx = pCanvas.getContext("2d");
+const pCtx = pCanvas ? pCanvas.getContext("2d") : null;
 let pWidth, pHeight;
 let activeParticles = [];
 
 function resizePCanvas() {
+  if (!pCanvas) return;
   pWidth = pCanvas.width = window.innerWidth;
   pHeight = pCanvas.height = window.innerHeight;
 }
@@ -113,6 +165,7 @@ class ClickParticle {
   }
 
   draw() {
+    if (!pCtx) return;
     pCtx.save();
     pCtx.globalAlpha = Math.max(0, this.alpha);
     pCtx.beginPath();
@@ -135,19 +188,21 @@ function triggerParticleBurst(x, y, count = 25) {
   }
 }
 
-function renderClickParticles() {
-  pCtx.clearRect(0, 0, pWidth, pHeight);
-  for (let i = activeParticles.length - 1; i >= 0; i--) {
-    const p = activeParticles[i];
-    p.update();
-    p.draw();
-    if (p.alpha <= 0) {
-      activeParticles.splice(i, 1);
+if (pCanvas) {
+  function renderClickParticles() {
+    pCtx.clearRect(0, 0, pWidth, pHeight);
+    for (let i = activeParticles.length - 1; i >= 0; i--) {
+      const p = activeParticles[i];
+      p.update();
+      p.draw();
+      if (p.alpha <= 0) {
+        activeParticles.splice(i, 1);
+      }
     }
+    requestAnimationFrame(renderClickParticles);
   }
-  requestAnimationFrame(renderClickParticles);
+  renderClickParticles();
 }
-renderClickParticles();
 
 document.querySelectorAll(".particle-trigger").forEach(btn => {
   btn.addEventListener("click", (e) => {
@@ -213,24 +268,6 @@ window.addEventListener("mousemove", (e) => {
   document.documentElement.style.setProperty("--mouse-x", `${e.pageX}px`);
   document.documentElement.style.setProperty("--mouse-y", `${e.pageY}px`);
 });
-
-// ==========================================================================
-// DARK / LIGHT THEME TOGGLE LOGIC (Restored)
-// ==========================================================================
-const themeToggleBtn = document.getElementById("theme-toggle");
-const themeBtnText = document.getElementById("theme-btn-text");
-
-if (themeToggleBtn) {
-  themeToggleBtn.addEventListener("click", () => {
-    document.body.classList.toggle("dark-theme");
-    document.body.classList.toggle("light-theme");
-
-    const isLight = document.body.classList.contains("light-theme");
-    if (themeBtnText) {
-      themeBtnText.textContent = isLight ? "Light Mode" : "Dark Mode";
-    }
-  });
-}
 
 // ==========================================================================
 // SCROLL REVEAL ANIMATION

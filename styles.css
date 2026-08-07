@@ -1,9 +1,12 @@
+/* ==========================================================================
+   THEME VARIABLES & COLOR TOKENS
+   ========================================================================== */
 :root {
   --mouse-x: -1000px;
   --mouse-y: -1000px;
 }
 
-/* Theme Color Tokens */
+/* Dark Theme Tokens */
 .dark-theme {
   --bg-primary: #0b0f19;
   --bg-secondary: rgba(17, 24, 39, 0.75);
@@ -15,41 +18,53 @@
   --card-bg: rgba(30, 41, 59, 0.65);
   --nav-bg: rgba(11, 15, 25, 0.75);
   --border-color: rgba(255, 255, 255, 0.12);
-  --border-focus: #38bdf8;
   --glow-color: rgba(56, 189, 248, 0.3);
   --input-bg: rgba(15, 23, 42, 0.6);
   --tag-bg: rgba(255, 255, 255, 0.08);
 
-  /* Bracket Glows */
+  /* Bracket Glow Colors */
   --bracket-color-1: rgba(56, 189, 248, 0.45);
   --bracket-color-2: rgba(236, 72, 153, 0.45);
   --bracket-color-3: rgba(168, 85, 247, 0.45);
   --bracket-glow: rgba(56, 189, 248, 0.25);
+
+  /* Team Member Card Glow - Dark Mode */
+  --member-glow-bg: linear-gradient(135deg, #00f2fe 0%, #4facfe 25%, #6366f1 50%, #ff0844 75%, #ffb199 100%);
+  --member-glow-shadow: 0 0 30px rgba(56, 189, 248, 0.4), 0 0 60px rgba(99, 102, 241, 0.2);
+  --member-glow-border: rgba(56, 189, 248, 0.8);
 }
 
+/* Light Theme Tokens */
 .light-theme {
   --bg-primary: #f8fafc;
-  --bg-secondary: rgba(241, 245, 249, 0.75);
+  --bg-secondary: rgba(241, 245, 249, 0.85);
   --accent: #0284c7;
   --accent-hover: #0369a1;
   --accent-gradient: linear-gradient(135deg, #0284c7 0%, #4f46e5 100%);
   --text-main: #0f172a;
   --text-muted: #475569;
-  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-bg: rgba(255, 255, 255, 0.9);
   --nav-bg: rgba(255, 255, 255, 0.85);
   --border-color: rgba(0, 0, 0, 0.1);
-  --border-focus: #0284c7;
-  --glow-color: rgba(2, 132, 199, 0.2);
-  --input-bg: rgba(255, 255, 255, 0.9);
-  --tag-bg: rgba(0, 0, 0, 0.06);
+  --glow-color: rgba(2, 132, 199, 0.15);
+  --input-bg: rgba(255, 255, 255, 0.95);
+  --tag-bg: rgba(0, 0, 0, 0.05);
 
-  /* Bracket Glows */
-  --bracket-color-1: rgba(2, 132, 199, 0.5);
-  --bracket-color-2: rgba(225, 29, 72, 0.45);
-  --bracket-color-3: rgba(124, 58, 237, 0.45);
+  /* Bracket Glow Colors - Light Mode */
+  --bracket-color-1: rgba(2, 132, 199, 0.6);
+  --bracket-color-2: rgba(225, 29, 72, 0.55);
+  --bracket-color-3: rgba(124, 58, 237, 0.55);
   --bracket-glow: rgba(2, 132, 199, 0.15);
+
+  /* Team Member Card Glow - Light Mode Compatible */
+  --member-glow-bg: linear-gradient(135deg, #38bdf8 0%, #818cf8 40%, #c084fc 70%, #f472b6 100%);
+  --member-glow-shadow: 0 12px 35px rgba(2, 132, 199, 0.22), 0 0 25px rgba(99, 102, 241, 0.18);
+  --member-glow-border: #0284c7;
 }
 
+/* ==========================================================================
+   RESET & GLOBAL BASE STYLES
+   ========================================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -67,7 +82,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Canvases */
+/* Ambient Canvases */
 #bg-canvas, #particle-canvas {
   position: fixed;
   top: 0; left: 0;
@@ -77,6 +92,7 @@ body {
 #bg-canvas { z-index: 0; }
 #particle-canvas { z-index: 9999; }
 
+/* Interactive Cursor Radial Light Overlay */
 body::before {
   content: '';
   position: absolute;
@@ -91,37 +107,78 @@ body::before {
   z-index: 1;
 }
 
-/* Header animation bracket styles */
-.header-animation-wrapper {
-  position: relative;
-  display: inline-block;
-  padding: 1.5rem 3rem;
-  margin: 0.5rem 0;
+/* ==========================================================================
+   NAVBAR & ORIGINAL THEME TOGGLE BUTTON (Restored)
+   ========================================================================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 6%;
+  margin: 1rem 3% 0 3%;
+  border-radius: 20px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-.animated-main-title {
-  position: relative;
-  z-index: 2;
-  font-size: 3.8rem;
-  font-weight: 800;
-  letter-spacing: -1px;
+.logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+.logo-dot { color: var(--accent); display: inline-block; transition: transform 0.3s ease; }
+.logo:hover .logo-dot { transform: scale(1.5); }
+.nav-links { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
+.nav-item { color: var(--text-muted); text-decoration: none; font-weight: 600; padding: 0.4rem 0.8rem; }
+.nav-item:hover { color: var(--text-main); }
+
+/* Original Theme Toggle Button Styling */
+.btn-theme-toggle {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.55rem 1.1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
 }
 
-.floating-brackets-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
+.btn-theme-toggle:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px var(--glow-color);
+  transform: translateY(-1px);
 }
 
-.code-bracket {
-  position: absolute;
-  font-family: 'Fira Code', monospace;
-  font-weight: 700;
-  user-select: none;
-  transition: color 0.4s ease, text-shadow 0.4s ease;
-  animation: floatBracket 7s ease-in-out infinite alternate;
+.btn-nav {
+  background: var(--accent-gradient);
+  color: #ffffff !important;
+  padding: 0.6rem 1.4rem;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none !important;
+  box-shadow: 0 0 15px var(--glow-color);
 }
+
+/* ==========================================================================
+   HERO SECTION & BRACKETS ANIMATION
+   ========================================================================== */
+.hero { min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 5%; }
+.hero-content { max-width: 780px; }
+.gradient-text { background: linear-gradient(135deg, var(--text-main) 30%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.badge { background-color: var(--card-bg); color: var(--accent); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--border-color); display: inline-block; }
+.hero-subtext { color: var(--text-muted); font-size: 1.15rem; margin-bottom: 1.5rem; }
+.hero-buttons { display: flex; gap: 1.2rem; justify-content: center; }
+
+/* Floating Code Brackets Header */
+.header-animation-wrapper { position: relative; display: inline-block; padding: 1.5rem 3rem; margin: 0.5rem 0; }
+.animated-main-title { position: relative; z-index: 2; font-size: 3.8rem; font-weight: 800; letter-spacing: -1px; }
+.floating-brackets-container { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.code-bracket { position: absolute; font-family: 'Fira Code', monospace; font-weight: 700; user-select: none; transition: color 0.4s ease, text-shadow 0.4s ease; animation: floatBracket 7s ease-in-out infinite alternate; }
 
 .bracket-1 { font-size: 3.5rem; color: var(--bracket-color-1); top: -20px; left: -20px; animation-delay: 0s; }
 .bracket-2 { font-size: 3.8rem; color: var(--bracket-color-2); bottom: -25px; right: -25px; animation-delay: -2s; }
@@ -138,49 +195,6 @@ body::before {
   100% { transform: translateY(12px) rotate(-8deg) scale(0.9); text-shadow: 0 0 8px var(--bracket-glow); }
 }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.9rem 6%;
-  margin: 1rem 3% 0 3%;
-  border-radius: 20px;
-  background: var(--nav-bg);
-  backdrop-filter: blur(16px);
-  position: sticky;
-  top: 1rem;
-  z-index: 100;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
-.logo-dot { color: var(--accent); display: inline-block; transition: transform 0.3s ease; }
-.logo:hover .logo-dot { transform: scale(1.5); }
-.nav-links { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
-.nav-item { color: var(--text-muted); text-decoration: none; font-weight: 600; padding: 0.4rem 0.8rem; }
-.nav-item:hover { color: var(--text-main); }
-
-.btn-nav {
-  background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
-  color: #ffffff !important;
-  padding: 0.6rem 1.4rem;
-  border-radius: 12px;
-  font-weight: 600;
-  text-decoration: none !important;
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
-}
-
-/* Theme Toggle Switch */
-.sky-switch { background: none; border: none; padding: 0; cursor: pointer; outline: none; }
-.sky-bg { width: 60px; height: 30px; border-radius: 30px; position: relative; overflow: hidden; display: block; border: 1.5px solid var(--border-color); }
-.dark-theme .sky-bg { background: linear-gradient(135deg, #18143d 0%, #2b2361 100%); }
-.light-theme .sky-bg { background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); }
-.celestial-body { width: 22px; height: 22px; border-radius: 50%; position: absolute; top: 2.5px; left: 2.5px; transition: transform 0.4s; }
-.dark-theme .celestial-body { transform: translateX(31px); background-color: #f8fafc; }
-.light-theme .celestial-body { transform: translateX(0px); background-color: #fde047; }
-
 /* Feedback Widget */
 .feedback-widget { margin: 1.8rem 0; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
 .widget-title { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; }
@@ -189,13 +203,7 @@ body::before {
 .like-btn:hover { background: rgba(56, 189, 248, 0.12); color: var(--accent); }
 .dislike-btn:hover { background: rgba(244, 63, 94, 0.12); color: #f43f5e; }
 .like-btn.liked { background: var(--accent); color: #fff; }
-
-/* Dislike Shake Animation */
-.dislike-btn.disliked {
-  background: #f43f5e;
-  color: #fff;
-  animation: dislikeShake 0.6s cubic-bezier(.36,.07,.19,.97) both;
-}
+.dislike-btn.disliked { background: #f43f5e; color: #fff; animation: dislikeShake 0.6s cubic-bezier(.36,.07,.19,.97) both; }
 
 @keyframes dislikeShake {
   10%, 90% { transform: translate3d(-2px, 0, 0) rotate(-6deg); }
@@ -206,19 +214,24 @@ body::before {
 
 .badge-count { background: rgba(255, 255, 255, 0.2); padding: 0.1rem 0.5rem; border-radius: 12px; font-size: 0.8rem; }
 
-/* Hero Section */
-.hero { min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 5%; }
-.hero-content { max-width: 780px; }
-.gradient-text { background: linear-gradient(135deg, var(--text-main) 30%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.badge { background-color: var(--card-bg); color: var(--accent); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--border-color); display: inline-block; }
-.hero-subtext { color: var(--text-muted); font-size: 1.15rem; margin-bottom: 1.5rem; }
-.hero-buttons { display: flex; gap: 1.2rem; justify-content: center; }
-
-.btn { padding: 0.85rem 2rem; border-radius: 14px; text-decoration: none !important; font-weight: 600; transition: all 0.3s; cursor: pointer; display: inline-block; }
+/* Buttons Base */
+.btn { 
+  position: relative;
+  padding: 0.85rem 2rem; 
+  border-radius: 14px; 
+  text-decoration: none !important; 
+  font-weight: 600; 
+  transition: all 0.3s; 
+  cursor: pointer; 
+  display: inline-block; 
+  z-index: 1;
+}
 .btn-primary { background: var(--accent-gradient); color: #ffffff; box-shadow: 0 8px 25px var(--glow-color); }
 .btn-secondary { border: 1px solid var(--border-color); color: var(--text-main); background: var(--card-bg); }
 
-/* Section Base */
+/* ==========================================================================
+   SECTIONS BASE & CARDS
+   ========================================================================== */
 .section { padding: 5rem 8%; text-align: center; }
 .bg-alt { background-color: var(--bg-secondary); backdrop-filter: blur(8px); }
 .section h2 { font-size: 2.2rem; margin-bottom: 0.5rem; }
@@ -228,16 +241,17 @@ body::before {
 .stat-card, .service-card, .project-card { background-color: var(--card-bg); padding: 2rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.35s; text-align: left; }
 .hover-lift:hover { transform: translateY(-8px) scale(1.02); border-color: var(--accent); box-shadow: 0 12px 30px -5px var(--glow-color); }
 
-/* Projects Section Styling */
 .project-card { display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; }
 .project-header { display: flex; align-items: center; justify-content: space-between; }
 .project-icon { font-size: 1.8rem; color: var(--accent); }
 .project-type { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent); font-weight: 700; background: var(--tag-bg); padding: 0.3rem 0.6rem; border-radius: 6px; }
 
-/* --- Team Section --- */
+/* ==========================================================================
+   TEAM SECTION - NEON PROFILE CARDS (Light Mode Compatible Fix)
+   ========================================================================== */
 .team-timeline { display: flex; flex-direction: column; gap: 2.5rem; max-width: 1000px; margin: 0 auto; }
 
-/* Base Team Card Styling with Neon Hover Setup */
+/* Team Member Row Styling */
 .team-member-row {
   position: relative;
   display: flex;
@@ -250,53 +264,40 @@ body::before {
   text-align: left;
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
   z-index: 1;
-  overflow: hidden;
 }
 
-/* Dynamic Neon Gradient Overlay Effect on Hover */
-.team-member-row::before {
+/* Background Animated Gradient Glow Effect */
+.team-member-row::after {
   content: '';
   position: absolute;
-  inset: -2px;
-  border-radius: 26px;
-  background: linear-gradient(135deg, #4ade80 0%, #38bdf8 35%, #818cf8 70%, #4ade80 100%);
+  inset: -3px;
+  border-radius: 27px;
+  background: var(--member-glow-bg);
   background-size: 300% 300%;
   z-index: -2;
   opacity: 0;
   filter: blur(14px);
-  transition: opacity 0.4s ease;
-  animation: rgbGlow 4s ease infinite;
+  transition: opacity 0.4s ease-in-out;
+  animation: rgbGlow 6s linear infinite;
 }
 
-.team-member-row::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 24px;
-  background: var(--card-bg);
-  z-index: -1;
-  transition: background 0.4s ease;
-}
-
-/* Neon Glow trigger on Hover/Active Focus */
+/* Hover State - Compatible for both Light Mode and Dark Mode */
 .team-member-row:hover,
 .team-member-row:focus-within {
   transform: translateY(-6px) scale(1.01);
-  border-color: rgba(74, 222, 128, 0.6);
-  box-shadow: 0 0 35px rgba(74, 222, 128, 0.35), 0 0 50px rgba(56, 189, 248, 0.25);
+  border-color: var(--member-glow-border);
+  box-shadow: var(--member-glow-shadow);
 }
 
-.team-member-row:hover::before,
-.team-member-row:focus-within::before {
+.team-member-row:hover::after,
+.team-member-row:focus-within::after {
   opacity: 1;
 }
 
 .team-member-row.left { flex-direction: row; }
 .team-member-row.right { flex-direction: row-reverse; }
 
-/* Image Box Fixed Sizing */
-.member-image-box { flex-shrink: 0; width: 180px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-
+.member-image-box { flex-shrink: 0; width: 180px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2; }
 .avatar-wrapper { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 3px solid var(--accent); box-shadow: 0 0 20px var(--glow-color); display: flex; align-items: center; justify-content: center; background: var(--bg-primary); }
 .member-avatar { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 .member-avatar-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--accent); background: var(--bg-primary); }
@@ -304,21 +305,19 @@ body::before {
 .role-badge { display: inline-block; margin-top: 0.8rem; padding: 0.4rem 0.8rem; font-size: 0.75rem; font-weight: 600; border-radius: 20px; background: var(--glow-color); color: var(--accent); border: 1px solid var(--border-color); text-align: center; }
 .core-badge { background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.2)); color: var(--accent); border: 1px solid var(--accent); font-weight: 700; }
 
-.member-content { flex-grow: 1; }
+.member-content { flex-grow: 1; z-index: 2; }
 .member-name { font-size: 1.7rem; margin-bottom: 0.4rem; color: var(--text-main); }
 .core-tag { font-size: 0.9rem; color: var(--accent); font-weight: 600; margin-left: 0.5rem; }
 .member-bio { font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1rem; }
 
-/* Skill Category Tags Formatting */
 .skill-category { margin-bottom: 0.8rem; }
 .skill-category strong { display: block; font-size: 0.82rem; color: var(--accent); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
 .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
 .tag { font-size: 0.8rem; padding: 0.25rem 0.75rem; border-radius: 8px; background: var(--tag-bg); color: var(--text-main); border: 1px solid var(--border-color); }
 
-/* Social Links Buttons */
 .member-social-buttons { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.2rem; }
-.social-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 10px; font-size: 0.85rem; font-weight: 600; text-decoration: none; color: #fff; transition: transform 0.2s ease, opacity 0.2s ease; }
+.social-btn { position: relative; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 10px; font-size: 0.85rem; font-weight: 600; text-decoration: none; color: #fff; transition: transform 0.2s ease, opacity 0.2s ease; z-index: 1; }
 .social-btn:hover { transform: translateY(-2px); opacity: 0.9; }
 
 .social-btn.github { background: #24292e; }
@@ -327,7 +326,9 @@ body::before {
 .social-btn.discord { background: #5865f2; }
 .social-btn.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 
-/* Form Elements */
+/* ==========================================================================
+   CONTACT FORM & FOOTER
+   ========================================================================== */
 .contact-form { max-width: 580px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
 .input-group { position: relative; width: 100%; }
 .input-group input, .input-group textarea { width: 100%; padding: 1.1rem 1.2rem; border-radius: 14px; border: 1.5px solid var(--border-color); background: var(--input-bg); color: var(--text-main); outline: none; }

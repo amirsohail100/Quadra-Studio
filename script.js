@@ -154,7 +154,7 @@ document.querySelectorAll(".particle-trigger").forEach(btn => {
   });
 });
 
-// --- Like / Dislike Logic ---
+// --- Like / Dislike Logic with Re-triggerable Animation ---
 const likeBtn = document.getElementById("like-btn");
 const dislikeBtn = document.getElementById("dislike-btn");
 const likeCountSpan = document.getElementById("like-count");
@@ -163,7 +163,7 @@ let isLiked = false;
 let isDisliked = false;
 let currentLikes = 128;
 
-if(likeBtn && dislikeBtn) {
+if (likeBtn && dislikeBtn) {
   likeBtn.addEventListener("click", () => {
     if (!isLiked) {
       isLiked = true;
@@ -182,6 +182,9 @@ if(likeBtn && dislikeBtn) {
   });
 
   dislikeBtn.addEventListener("click", () => {
+    dislikeBtn.classList.remove("disliked");
+    void dislikeBtn.offsetWidth; // Trigger reflow for re-animation
+    
     if (!isDisliked) {
       isDisliked = true;
       dislikeBtn.classList.add("disliked");
@@ -193,7 +196,6 @@ if(likeBtn && dislikeBtn) {
       }
     } else {
       isDisliked = false;
-      dislikeBtn.classList.remove("disliked");
     }
   });
 }

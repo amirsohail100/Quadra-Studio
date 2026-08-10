@@ -48,108 +48,289 @@
     <div class="hero-content fade-in-up">
       <span class="badge">Innovation Showcase 🚀</span>
       <h1 class="gradient-text animated-main-title">Our Featured Projects</h1>
-      <p class="hero-subtext">Hover or click on any project image to inspect the technology stack, live links, and repository details.</p>
+      <p class="hero-subtext">Explore our Machine Learning, Deep Learning, and Generative AI solutions. Hover/click cards to inspect tech stack and links.</p>
     </div>
   </section>
 
-  <!-- Project Showcase Grid -->
-  <section class="section">
-    <div class="showcase-grid">
+  <!-- ================= SECTION 1: MACHINE LEARNING ================= -->
+  <section class="section category-section">
+    <div class="category-header">
+      <h2 class="category-title">Machine Learning Projects</h2>
+      <div class="carousel-nav-controls">
+        <button class="keycap-btn keycap-prev" aria-label="Previous" onclick="scrollCarousel('ml-carousel', 'left')">
+          <div class="keycap-inner"><i class="fas fa-caret-left"></i></div>
+        </button>
+        <button class="keycap-btn keycap-next" aria-label="Next" onclick="scrollCarousel('ml-carousel', 'right')">
+          <div class="keycap-inner"><i class="fas fa-caret-right"></i></div>
+        </button>
+      </div>
+    </div>
 
-      <!-- PROJECT CARD 1 -->
-      <div class="showcase-card">
+    <div class="carousel-container" id="ml-carousel">
+      <!-- Card 1 -->
+      <div class="showcase-card carousel-card">
         <div class="project-img-wrapper">
-          <img src="assets/project1.png" alt="Project 1 Screenshot" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Project+1+Preview'">
-          
-          <!-- Hover / Click Glassmorphism Overlay -->
+          <img src="assets/project1.png" alt="House Price Prediction" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=ML+Project+1'">
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>House Price Predictor</h3>
+              <p>Predictive regression model built to estimate housing market valuations with high accuracy.</p>
+              <div class="tech-tags">
+                <span class="tag">Python</span><span class="tag">Scikit-Learn</span><span class="tag">Pandas</span>
+              </div>
+              <div class="overlay-buttons">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>House Price Predictor</h4>
+          <span class="project-type">Regression</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="showcase-card carousel-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project2.png" alt="Customer Churn Analysis" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=ML+Project+2'">
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>Customer Churn Analysis</h3>
+              <p>Classification engine identifying high-risk user churn segments for targeted retention.</p>
+              <div class="tech-tags">
+                <span class="tag">XGBoost</span><span class="tag">Python</span><span class="tag">Matplotlib</span>
+              </div>
+              <div class="overlay-buttons">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>Customer Churn Analysis</h4>
+          <span class="project-type">Classification</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="showcase-card carousel-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project3.png" alt="Credit Fraud Detection" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=ML+Project+3'">
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>Credit Fraud Detection</h3>
+              <p>Anomaly detection system built for real-time monitoring of financial transactions.</p>
+              <div class="tech-tags">
+                <span class="tag">Scikit-Learn</span><span class="tag">Python</span><span class="tag">FastAPI</span>
+              </div>
+              <div class="overlay-buttons">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>Credit Fraud Detection</h4>
+          <span class="project-type">Anomaly Detection</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="showcase-card carousel-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project1.png" alt="Sales Forecasting" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=ML+Project+4'">
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>Sales Forecasting</h3>
+              <p>Time-series forecasting model predicting future retail metrics and inventory demand.</p>
+              <div class="tech-tags">
+                <span class="tag">Prophet</span><span class="tag">Pandas</span><span class="tag">Python</span>
+              </div>
+              <div class="overlay-buttons">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>Sales Forecasting</h4>
+          <span class="project-type">Time Series</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2: DEEP LEARNING ================= -->
+  <section class="section category-section">
+    <div class="category-header">
+      <h2 class="category-title">Deep Learning Projects</h2>
+      <div class="carousel-nav-controls">
+        <button class="keycap-btn keycap-prev" aria-label="Previous" onclick="scrollCarousel('dl-carousel', 'left')">
+          <div class="keycap-inner"><i class="fas fa-caret-left"></i></div>
+        </button>
+        <button class="keycap-btn keycap-next" aria-label="Next" onclick="scrollCarousel('dl-carousel', 'right')">
+          <div class="keycap-inner"><i class="fas fa-caret-right"></i></div>
+        </button>
+      </div>
+    </div>
+
+    <div class="carousel-container" id="dl-carousel">
+      <!-- Card 1 -->
+      <div class="showcase-card carousel-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project1.png" alt="AI Vision Analytics" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=AI+Vision+Analytics'">
           <div class="project-overlay">
             <div class="overlay-content">
               <h3>AI Vision Analytics</h3>
-              <p>Real-time computer vision platform for automated object tracking and image segmentation using Deep Learning models.</p>
-              
+              <p>Real-time computer vision platform for automated object tracking and image segmentation.</p>
               <div class="tech-tags">
-                <span class="tag">Python</span>
-                <span class="tag">PyTorch</span>
-                <span class="tag">OpenCV</span>
-                <span class="tag">FastAPI</span>
+                <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">OpenCV</span><span class="tag">FastAPI</span>
               </div>
-
               <div class="overlay-buttons">
-                <a href="https://your-live-demo-link.com" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn">
-                  <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
-                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn">
-                  <i class="fab fa-github"></i> GitHub Repo
-                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
               </div>
             </div>
           </div>
         </div>
         <div class="card-footer-info">
           <h4>AI Vision Analytics</h4>
-          <span class="project-type">AI / Computer Vision</span>
+          <span class="project-type">Computer Vision</span>
         </div>
       </div>
 
-      <!-- PROJECT CARD 2 -->
-      <div class="showcase-card">
+      <!-- Card 2 -->
+      <div class="showcase-card carousel-card">
         <div class="project-img-wrapper">
-          <img src="assets/project2.png" alt="Project 2 Screenshot" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Project+2+Preview'">
-          
-          <!-- Hover / Click Glassmorphism Overlay -->
+          <img src="assets/project2.png" alt="Medical Image Segmentation" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Medical+Imaging'">
           <div class="project-overlay">
             <div class="overlay-content">
-              <h3>CapsuleHub Platform</h3>
-              <p>Scalable web platform integrated with custom weather APIs, interactive dashboard, and modern UI microservices.</p>
-              
+              <h3>Medical Image Segmentation</h3>
+              <p>U-Net neural network architecture for precise segmentation in biomedical diagnostics.</p>
               <div class="tech-tags">
-                <span class="tag">JavaScript</span>
-                <span class="tag">Node.js</span>
-                <span class="tag">CSS3</span>
-                <span class="tag">Docker</span>
+                <span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">CNN</span>
               </div>
-
               <div class="overlay-buttons">
-                <a href="https://your-live-demo-link.com" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn">
-                  <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
-                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn">
-                  <i class="fab fa-github"></i> GitHub Repo
-                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
               </div>
             </div>
           </div>
         </div>
         <div class="card-footer-info">
-          <h4>CapsuleHub Platform</h4>
-          <span class="project-type">Full-Stack Web</span>
+          <h4>Medical Image Segmentation</h4>
+          <span class="project-type">CNN / U-Net</span>
         </div>
       </div>
 
-      <!-- PROJECT CARD 3 -->
-      <div class="showcase-card">
+      <!-- Card 3 -->
+      <div class="showcase-card carousel-card">
         <div class="project-img-wrapper">
-          <img src="assets/project3.png" alt="Project 3 Screenshot" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Project+3+Preview'">
-          
-          <!-- Hover / Click Glassmorphism Overlay -->
+          <img src="assets/project3.png" alt="Mental Health Signal" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Mental+Health+Signal'">
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>Mental Health Signal</h3>
+              <p>Predictive neural framework modeling screen time, daily habits, and wellness indicators.</p>
+              <div class="tech-tags">
+                <span class="tag">PyTorch</span><span class="tag">Deep Learning</span><span class="tag">Python</span>
+              </div>
+              <div class="overlay-buttons">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>Mental Health Signal</h4>
+          <span class="project-type">Neural Networks</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="showcase-card carousel-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project1.png" alt="YOLO Object Tracking" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Object+Tracking'">
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>Object Tracking System</h3>
+              <p>High-FPS video object detection and tracking pipeline built on YOLO v8.</p>
+              <div class="tech-tags">
+                <span class="tag">YOLOv8</span><span class="tag">OpenCV</span><span class="tag">PyTorch</span>
+              </div>
+              <div class="overlay-buttons">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>Object Tracking System</h4>
+          <span class="project-type">YOLO v8</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 3: GENERATIVE AI ================= -->
+  <section class="section category-section">
+    <div class="category-header">
+      <h2 class="category-title">Generative AI Projects</h2>
+      <div class="carousel-nav-controls">
+        <button class="keycap-btn keycap-prev" aria-label="Previous" onclick="scrollCarousel('genai-carousel', 'left')">
+          <div class="keycap-inner"><i class="fas fa-caret-left"></i></div>
+        </button>
+        <button class="keycap-btn keycap-next" aria-label="Next" onclick="scrollCarousel('genai-carousel', 'right')">
+          <div class="keycap-inner"><i class="fas fa-caret-right"></i></div>
+        </button>
+      </div>
+    </div>
+
+    <div class="carousel-container" id="genai-carousel">
+      <!-- Card 1 -->
+      <div class="showcase-card carousel-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project1.png" alt="AI Quiz Studio" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=AI+Quiz+Studio'">
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>AI Quiz Studio</h3>
+              <p>Generative quiz application dynamically parsing source materials to formulate adaptive MCQs.</p>
+              <div class="tech-tags">
+                <span class="tag">LangChain</span><span class="tag">LLMs</span><span class="tag">Streamlit</span>
+              </div>
+              <div class="overlay-buttons">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>AI Quiz Studio</h4>
+          <span class="project-type">Gen AI / RAG</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="showcase-card carousel-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project3.png" alt="LLM Code Assistant" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=LLM+Code+Assistant'">
           <div class="project-overlay">
             <div class="overlay-content">
               <h3>LLM Code Assistant</h3>
-              <p>Fine-tuned Language Model integrated with custom Studio APIs to streamline daily developer tasks and code analysis.</p>
-              
+              <p>Fine-tuned Language Model integrated with custom Studio APIs for rapid code generation and refactoring.</p>
               <div class="tech-tags">
-                <span class="tag">Mistral AI</span>
-                <span class="tag">Python</span>
-                <span class="tag">LangChain</span>
+                <span class="tag">Mistral AI</span><span class="tag">Python</span><span class="tag">LangChain</span>
               </div>
-
               <div class="overlay-buttons">
-                <a href="https://your-live-demo-link.com" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn">
-                  <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
-                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn">
-                  <i class="fab fa-github"></i> GitHub Repo
-                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
               </div>
             </div>
           </div>
@@ -160,6 +341,53 @@
         </div>
       </div>
 
+      <!-- Card 3 -->
+      <div class="showcase-card carousel-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project2.png" alt="CapsuleHub Platform" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=CapsuleHub+Platform'">
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>CapsuleHub Platform</h3>
+              <p>Autonomous LLM Agent hub orchestrating multiple API integrations and backend tasks.</p>
+              <div class="tech-tags">
+                <span class="tag">LangGraph</span><span class="tag">FastAPI</span><span class="tag">Docker</span>
+              </div>
+              <div class="overlay-buttons">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>CapsuleHub Platform</h4>
+          <span class="project-type">LLM Agents</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="showcase-card carousel-card">
+        <div class="project-img-wrapper">
+          <img src="assets/project1.png" alt="Multi-Modal Voice Agent" class="project-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Voice+Agent'">
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <h3>Multi-Modal Voice Agent</h3>
+              <p>Real-time speech-to-speech conversational assistant powered by multi-modal AI models.</p>
+              <div class="tech-tags">
+                <span class="tag">Whisper</span><span class="tag">GPT-4o</span><span class="tag">Python</span>
+              </div>
+              <div class="overlay-buttons">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-overlay live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/amirsohail100" target="_blank" rel="noopener noreferrer" class="btn-overlay github-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <h4>Multi-Modal Voice Agent</h4>
+          <span class="project-type">Speech AI</span>
+        </div>
+      </div>
     </div>
   </section>
 

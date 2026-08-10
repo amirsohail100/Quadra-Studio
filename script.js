@@ -46,6 +46,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================================================
+// CAROUSEL HORIZONTAL SCROLL FUNCTION
+// ==========================================================================
+function scrollCarousel(containerId, direction) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  // Scroll distance equal to container width (scrolls 3 cards at a time)
+  const scrollAmount = container.clientWidth;
+  if (direction === 'left') {
+    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  } else {
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  }
+}
+
+// ==========================================================================
 // AMBIENT BACKGROUND CANVAS ENGINE
 // ==========================================================================
 const bgCanvas = document.getElementById("bg-canvas");

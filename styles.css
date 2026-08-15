@@ -282,6 +282,37 @@ footer {
     rgbBreathing 2.5s ease-in-out infinite alternate;
 }
 
+/* Mobile Hamburger Nav Toggle (hidden on desktop) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 19px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 101;
+}
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
 /* Celestial Day/Night Theme Switcher Elements */
 .sky-switch {
   background: none;
@@ -463,6 +494,7 @@ footer {
   display: flex;
   gap: 1.2rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* Floating Code Brackets Header */
@@ -475,7 +507,7 @@ footer {
 .animated-main-title {
   position: relative;
   z-index: 2;
-  font-size: 3.8rem;
+  font-size: clamp(2rem, 5.5vw + 1rem, 3.8rem);
   font-weight: 800;
   letter-spacing: -1px;
 }
@@ -574,6 +606,8 @@ footer {
   padding: 0.5rem;
   border-radius: 50px;
   border: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .interactive-btn {
   display: flex;
@@ -1234,7 +1268,69 @@ footer {
 /* ==========================================================================
    MEDIA QUERIES
    ========================================================================== */
-@media (max-width: 768px) {
+
+/* ---- Prevent body scroll while the mobile nav panel is open ---- */
+body.nav-lock {
+  overflow: hidden;
+}
+
+/* ---- Laptop / small desktop ---- */
+@media (max-width: 1200px) {
+  .animated-main-title {
+    letter-spacing: -0.5px;
+  }
+  .showcase-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+/* ---- Tablet ---- */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0.8rem 5%;
+    margin: 0.8rem 3% 0 3%;
+  }
+
+  /* Hamburger becomes visible, inline nav collapses into an off-canvas panel */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(300px, 80vw);
+    margin: 0;
+    padding: 6rem 2rem 2rem;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid var(--border-color);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.25);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.4rem;
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
+    z-index: 100;
+  }
+
+  .nav-links.nav-open {
+    transform: translateX(0);
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links .btn-nav {
+    width: 100%;
+    text-align: center;
+  }
+
   .team-member-row,
   .team-member-row.left,
   .team-member-row.right {
@@ -1248,13 +1344,99 @@ footer {
   .member-social-buttons {
     justify-content: center;
   }
-  .navbar {
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    justify-content: center;
+
+  .stats-grid,
+  .services-grid,
+  .projects-grid,
+  .showcase-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
-  .nav-links {
-    gap: 0.8rem;
-    font-size: 0.9rem;
+
+  .section {
+    padding: 3rem 6%;
+  }
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0.7rem 5%;
+  }
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .hero {
+    min-height: 60vh;
+    padding: 1.5rem 6%;
+  }
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.35rem 1rem;
+  }
+  .hero-subtext {
+    font-size: 1rem;
+  }
+  .header-animation-wrapper {
+    padding: 1rem 1rem;
+  }
+  .code-bracket {
+    font-size: 1.6rem !important;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    width: 100%;
+    text-align: center;
+  }
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .section {
+    padding: 2.5rem 6%;
+  }
+  .section h2 {
+    font-size: 1.7rem;
+  }
+
+  .stats-grid,
+  .services-grid,
+  .projects-grid,
+  .showcase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-member-row {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+  .avatar-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+  .member-name {
+    font-size: 1.4rem;
+  }
+
+  .project-img-wrapper {
+    min-height: 220px;
+  }
+}
+
+/* ---- Small phones ---- */
+@media (max-width: 380px) {
+  .animated-main-title {
+    font-size: clamp(1.7rem, 9vw, 2.4rem);
+  }
+  .avatar-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+  .member-image-box {
+    width: 100%;
   }
 }

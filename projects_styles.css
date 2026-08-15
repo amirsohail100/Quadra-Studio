@@ -282,6 +282,45 @@ footer {
     rgbBreathing 2.5s ease-in-out infinite alternate;
 }
 
+/* Mobile Hamburger Nav Toggle (hidden on desktop) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 19px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 101;
+}
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* On desktop the wrapper is transparent to layout so nav-links, the theme
+   switcher, and the contact button behave exactly as direct .navbar
+   children (unchanged visual design). On mobile it becomes a real
+   off-canvas panel (see media queries below). */
+.nav-menu {
+  display: contents;
+}
+
 /* Celestial Day/Night Theme Switcher Elements */
 .sky-switch {
   background: none;
@@ -463,6 +502,7 @@ footer {
   display: flex;
   gap: 1.2rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* Floating Code Brackets Header */
@@ -475,7 +515,7 @@ footer {
 .animated-main-title {
   position: relative;
   z-index: 2;
-  font-size: 3.5rem;
+  font-size: clamp(1.9rem, 5.5vw + 1rem, 3.5rem);
   font-weight: 800;
   letter-spacing: -1px;
 }
@@ -501,6 +541,8 @@ footer {
   padding: 0.5rem;
   border-radius: 50px;
   border: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .interactive-btn {
   display: flex;
@@ -872,6 +914,13 @@ footer {
 /* ==========================================================================
    RESPONSIVE MEDIA QUERIES
    ========================================================================== */
+
+/* ---- Prevent body scroll while the mobile nav panel is open ---- */
+body.nav-lock {
+  overflow: hidden;
+}
+
+/* ---- Laptop / small desktop ---- */
 @media (max-width: 1024px) {
   .carousel-card {
     flex: 0 0 calc((100% - 1.8rem) / 2);
@@ -879,14 +928,119 @@ footer {
   }
 }
 
+/* ---- Tablet ---- */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0.8rem 5%;
+    margin: 0.8rem 3% 0 3%;
+  }
+
+  /* Hamburger becomes visible; nav-menu switches from display:contents
+     to a real off-canvas flex panel holding the links, theme switcher,
+     and contact button together. */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(300px, 80vw);
+    margin: 0;
+    padding: 6rem 2rem 2rem;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid var(--border-color);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.25);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.4rem;
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
+    z-index: 100;
+  }
+
+  .nav-menu.nav-open {
+    transform: translateX(0);
+  }
+
+  .nav-menu .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .nav-menu .nav-links li {
+    width: 100%;
+  }
+
+  .nav-menu .btn-nav {
+    width: 100%;
+    text-align: center;
+  }
+
+  .category-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* ---- Mobile ---- */
 @media (max-width: 640px) {
   .carousel-card {
     flex: 0 0 100%;
     min-width: 100%;
   }
+
   .navbar {
+    padding: 0.7rem 5%;
+  }
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .hero {
+    min-height: 40vh;
+    padding: 1.5rem 6%;
+  }
+  .hero-subtext {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    width: 100%;
+    text-align: center;
+  }
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .section {
+    padding: 1.8rem 6%;
+  }
+
+  .category-header {
     flex-wrap: wrap;
     gap: 0.8rem;
-    justify-content: center;
+  }
+  .category-title {
+    font-size: 1.3rem;
+  }
+  .keycap-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .project-img-wrapper {
+    height: 220px;
   }
 }

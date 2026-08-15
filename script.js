@@ -27,6 +27,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
+  // MOBILE HAMBURGER NAVIGATION TOGGLE
+  // ==========================================================================
+  const navToggleBtn = document.getElementById("nav-toggle");
+  const navCollapsible = document.querySelector(".nav-collapsible");
+
+  if (navToggleBtn && navCollapsible) {
+    const closeNavMenu = () => {
+      navToggleBtn.classList.remove("active");
+      navToggleBtn.setAttribute("aria-expanded", "false");
+      navCollapsible.classList.remove("nav-open");
+      document.body.classList.remove("nav-lock");
+    };
+
+    navToggleBtn.addEventListener("click", () => {
+      const isOpen = navCollapsible.classList.toggle("nav-open");
+      navToggleBtn.classList.toggle("active", isOpen);
+      navToggleBtn.setAttribute("aria-expanded", String(isOpen));
+      document.body.classList.toggle("nav-lock", isOpen);
+    });
+
+    // Close the mobile menu whenever a nav link is tapped
+    navCollapsible.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeNavMenu);
+    });
+
+    // Close the mobile menu if the viewport is resized back to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) {
+        closeNavMenu();
+      }
+    });
+  }
+
+  // ==========================================================================
   // CLICK / TOUCH TO TOGGLE OVERLAY (FOR MOBILE & ACCESSIBILITY)
   // ==========================================================================
   const showcaseCards = document.querySelectorAll('.showcase-card');

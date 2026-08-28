@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Services - Quadra</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Background Canvases -->
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navbar -->
+  <nav class="navbar fade-in-down">
+    <div class="logo">Quadra<span class="logo-dot">.</span></div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links nav-collapsible" id="nav-links">
+      <li><a href="#hero" class="nav-item">Home</a></li>
+      <li><a href="#about" class="nav-item">About Us</a></li>
+      <li><a href="#team" class="nav-item">Team</a></li>
+      <li><a href="#services" class="nav-item">Services</a></li>
+      <!-- Navigation links ke andar is line ko add karo -->
+      <li><a href="projects.html" class="nav-item">Projects</a></li>
+      <li><a href="order.html" class="nav-item active">Order</a></li> <!-- NAYA LINK -->
+      <li>
+        <button id="theme-toggle" class="sky-switch" aria-label="Toggle Theme">
+          <span class="sky-bg">
+            <span class="celestial-body">
+              <span class="sun-glow"></span>
+            </span>
+            <span class="star star-1"></span>
+            <span class="star star-2"></span>
+            <span class="star star-3"></span>
+            <span class="cloud-puff"></span>
+          </span>
+        </button>
+      </li>
+      <li><a href="#contact" class="btn-nav particle-trigger rgb-hover-btn">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- Pricing Hero -->
+  <section class="hero">
+    <div class="hero-content fade-in-up">
+      <span class="badge">Freelance Services 💼</span>
+      <h1 class="gradient-text animated-main-title">Select Your Plan</h1>
+      <p class="hero-subtext">Transparent pricing for premium Machine Learning, Deep Learning, Gen AI, and RAG architectures.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Grid Section -->
+  <section class="section">
+    <div class="services-grid">
+      
+      <!-- ML Card -->
+      <div class="service-card hover-lift pricing-card">
+        <h3>Machine Learning</h3>
+        <p>Custom predictive models, regression, classification, and data analysis pipelines.</p>
+        <div class="price-tag">Starting at <span>$150</span></div>
+        <button class="btn btn-primary particle-trigger glow-btn open-modal-btn" data-service="Machine Learning Pipeline">Order Now</button>
+      </div>
+
+      <!-- DL Card -->
+      <div class="service-card hover-lift pricing-card">
+        <h3>Deep Learning</h3>
+        <p>Neural networks, Computer Vision (YOLO, OpenCV), and NLP models.</p>
+        <div class="price-tag">Starting at <span>$250</span></div>
+        <button class="btn btn-primary particle-trigger glow-btn open-modal-btn" data-service="Deep Learning Architecture">Order Now</button>
+      </div>
+
+      <!-- Gen AI Card -->
+      <div class="service-card hover-lift pricing-card">
+        <h3>Gen AI Agents</h3>
+        <p>Autonomous LLM Agents (LangChain/LangGraph) tailored to your workflow.</p>
+        <div class="price-tag">Starting at <span>$350</span></div>
+        <button class="btn btn-primary particle-trigger glow-btn open-modal-btn" data-service="Generative AI Agent">Order Now</button>
+      </div>
+
+      <!-- RAG Card -->
+      <div class="service-card hover-lift pricing-card">
+        <h3>RAG Applications</h3>
+        <p>Retrieval-Augmented Generation systems connecting LLMs to your custom private data.</p>
+        <div class="price-tag">Starting at <span>$400</span></div>
+        <button class="btn btn-primary particle-trigger glow-btn open-modal-btn" data-service="RAG Application">Order Now</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Order Modal (Mailbox Pop-up) -->
+  <div id="orderModal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 style="margin-bottom: 20px;">Project Requirements</h2>
+      <p id="selected-service-text" style="color: var(--accent); margin-bottom: 20px; font-weight: 600;"></p>
+      
+      <!-- Tumhara Contact form jaisa structure -->
+      <form id="order-form" class="contact-form">
+        <div class="input-group">
+          <input type="text" id="order-name" required placeholder=" ">
+          <label for="order-name">Your Name</label>
+        </div>
+        <div class="input-group">
+          <input type="email" id="order-email" required placeholder=" ">
+          <label for="order-email">Your Email / Gmail</label>
+        </div>
+        <div class="input-group">
+          <textarea id="order-req" rows="6" required placeholder=" "></textarea>
+          <label for="order-req">Detailed Requirement Description...</label>
+        </div>
+        <button type="submit" class="btn btn-primary glow-btn">Submit Request</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Quadra Collective. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <!-- Modal functionality script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('orderModal');
+      const btns = document.querySelectorAll('.open-modal-btn');
+      const closeBtn = document.querySelector('.close-modal');
+      const serviceText = document.getElementById('selected-service-text');
+
+      // Open Modal
+      btns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const serviceName = e.target.getAttribute('data-service');
+          serviceText.innerText = `Selected Service: ${serviceName}`;
+          modal.classList.remove('hidden');
+          // Disable body scroll when modal is open
+          document.body.style.overflow = 'hidden'; 
+        });
+      });
+
+      // Close Modal
+      closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      });
+
+      // Close on clicking outside the modal
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

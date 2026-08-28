@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Portal - Quadra</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Dynamic Background Canvases -->
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navbar -->
+  <nav class="navbar fade-in-down">
+    <a href="index.html" class="logo">Quadra<span class="logo-dot">.</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-menu nav-collapsible" id="nav-menu">
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-item">Home</a></li>
+        <li><a href="projects.html" class="nav-item">Projects</a></li>
+        <li><a href="order.html" class="nav-item">Order</a></li>
+        <li><a href="payment.html" class="nav-item active">Payment</a></li>
+      </ul>
+
+      <!-- Celestial Theme Switcher -->
+      <button class="sky-switch" id="theme-toggle" aria-label="Toggle Theme">
+        <span class="sky-bg">
+          <span class="celestial-body"><span class="sun-glow"></span></span>
+          <span class="star star-1"></span>
+          <span class="star star-2"></span>
+          <span class="star star-3"></span>
+          <span class="cloud-puff"></span>
+        </span>
+      </button>
+
+      <a href="index.html#contact" class="btn-nav particle-trigger rgb-hover-btn">Contact Us</a>
+    </div>
+  </nav>
+
+  <!-- Payment Hero Section -->
+  <section class="hero">
+    <div class="hero-content fade-in-up">
+      <span class="badge">Secure Payment Gateway 💳</span>
+      <h1 class="gradient-text animated-main-title">Complete Your Payment</h1>
+      <p class="hero-subtext">Enter your Order ID below to view bank details and scan the UPI QR code.</p>
+    </div>
+  </section>
+
+  <!-- Order ID Search Section -->
+  <section class="section" style="padding-top: 0;">
+    <div class="payment-search-container service-card" style="max-width: 600px; margin: 0 auto;">
+      <h3 style="margin-bottom: 1rem; text-align: center;">Verify Your Order</h3>
+      <form id="verify-order-form" class="contact-form">
+        <div class="input-group">
+          <input type="text" id="order-id-input" required placeholder=" ">
+          <label for="order-id-input">Enter Order ID (e.g. QDR-1024)</label>
+        </div>
+        <button type="submit" class="btn btn-primary glow-btn particle-trigger" style="width: 100%;">
+          Fetch Payment Details <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
+        </button>
+      </form>
+    </div>
+
+    <!-- Hidden Payment Info Box (Appears on clicking button) -->
+    <div id="payment-details-card" class="service-card payment-display-box hidden" style="max-width: 750px; margin: 2rem auto 0 auto;">
+      <div class="order-status-header">
+        <span class="status-badge"><i class="fa-solid fa-circle-check"></i> Order Verified</span>
+        <h2 id="display-order-id" style="margin-top: 10px; color: var(--accent);">Order ID: #QDR-1024</h2>
+      </div>
+
+      <div class="payment-grid">
+        <!-- QR Code Column -->
+        <div class="qr-section">
+          <h4>Scan UPI QR Code</h4>
+          <div class="qr-frame">
+            <!-- Badme aap apni QR Image 'qr-code.png' naam se daal sakte ho -->
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=QuadraPaymentSample" id="qr-image" alt="UPI Payment QR Code" class="qr-img">
+          </div>
+          <p class="qr-subtext">Scan using GPay, PhonePe, Paytm, or BHIM</p>
+        </div>
+
+        <!-- Bank Details Column -->
+        <div class="bank-section">
+          <h4>Bank Transfer Details</h4>
+          <div class="bank-details-list">
+            
+            <div class="detail-row">
+              <span class="detail-label"><i class="fa-solid fa-building-columns"></i> Bank Name:</span>
+              <span class="detail-value">Punjab National Bank (PNB)</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-label"><i class="fa-solid fa-user"></i> Account Name:</span>
+              <span class="detail-value">Quadra Collective</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-label"><i class="fa-solid fa-credit-card"></i> Account Number:</span>
+              <span class="detail-value highlight-value">9876 5432 1012 3456</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-label"><i class="fa-solid fa-code"></i> PNB IFSC Code:</span>
+              <span class="detail-value highlight-value">PUNB0123400</span>
+            </div>
+
+          </div>
+
+          <div class="payment-note">
+            <p><i class="fa-solid fa-circle-info"></i> Payment karne ke baad transaction reference / screenshot humare contact form ya email par zaroor bhej dein.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Quadra Collective. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  
+  <!-- Order Search Logic JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('verify-order-form');
+      const orderInput = document.getElementById('order-id-input');
+      const detailsCard = document.getElementById('payment-details-card');
+      const displayOrderId = document.getElementById('display-order-id');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const orderVal = orderInput.value.trim();
+
+        if (orderVal !== "") {
+          displayOrderId.innerText = `Order ID: #${orderVal.toUpperCase()}`;
+          detailsCard.classList.remove('hidden');
+          
+          // Smooth scroll down to details
+          detailsCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

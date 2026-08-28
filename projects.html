@@ -18,34 +18,33 @@
 
   <!-- Navbar -->
   <nav class="navbar fade-in-down">
-    <a href="index.html" class="logo">Quadra<span class="logo-dot">.</span></a>
+    <div class="logo">Quadra<span class="logo-dot">.</span></div>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <div class="nav-menu nav-collapsible" id="nav-menu">
-      <ul class="nav-links">
-        <li><a href="index.html" class="nav-item">Home</a></li>
-        <li><a href="index.html#about" class="nav-item">About Us</a></li>
-        <li><a href="index.html#team" class="nav-item">Team</a></li>
-        <li><a href="index.html#services" class="nav-item">Services</a></li>
-        <li><a href="projects.html" class="nav-item active">Projects</a></li>
-      </ul>
-
-      <!-- Celestial Theme Switcher -->
-      <button class="sky-switch" id="theme-toggle" aria-label="Toggle Theme">
-        <span class="sky-bg">
-          <span class="celestial-body">
-            <span class="sun-glow"></span>
+    <ul class="nav-links nav-collapsible" id="nav-links">
+      <li><a href="#hero" class="nav-item">Home</a></li>
+      <li><a href="#about" class="nav-item">About Us</a></li>
+      <li><a href="#team" class="nav-item">Team</a></li>
+      <li><a href="#services" class="nav-item">Services</a></li>
+      <!-- Navigation links ke andar is line ko add karo -->
+      <li><a href="projects.html" class="nav-item active">Projects</a></li>
+      <li><a href="order.html" class="nav-item">Order</a></li> <!-- NAYA LINK -->
+      <li>
+        <button id="theme-toggle" class="sky-switch" aria-label="Toggle Theme">
+          <span class="sky-bg">
+            <span class="celestial-body">
+              <span class="sun-glow"></span>
+            </span>
+            <span class="star star-1"></span>
+            <span class="star star-2"></span>
+            <span class="star star-3"></span>
+            <span class="cloud-puff"></span>
           </span>
-          <span class="star star-1"></span>
-          <span class="star star-2"></span>
-          <span class="star star-3"></span>
-          <span class="cloud-puff"></span>
-        </span>
-      </button>
-
-      <a href="index.html#contact" class="btn-nav particle-trigger rgb-hover-btn">Contact Us</a>
-    </div>
+        </button>
+      </li>
+      <li><a href="#contact" class="btn-nav particle-trigger rgb-hover-btn">Contact Us</a></li>
+    </ul>
   </nav>
 
   <!-- Projects Hero -->

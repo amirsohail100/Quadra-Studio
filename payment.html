@@ -48,7 +48,7 @@
     <div class="hero-content fade-in-up">
       <span class="badge">Secure Payment Gateway 💳</span>
       <h1 class="gradient-text animated-main-title">Complete Your Payment</h1>
-      <p class="hero-subtext">Enter your Order ID below to view bank details and scan the UPI QR code.</p>
+      <p class="hero-subtext">Enter your Order ID below to verify and complete payment via UPI QR code or PNB Bank Transfer.</p>
     </div>
   </section>
 
@@ -59,19 +59,23 @@
       <form id="verify-order-form" class="contact-form">
         <div class="input-group">
           <input type="text" id="order-id-input" required placeholder=" ">
-          <label for="order-id-input">Enter Order ID (e.g. QDR-1024)</label>
+          <label for="order-id-input">Enter Order ID (e.g. 123)</label>
         </div>
         <button type="submit" class="btn btn-primary glow-btn particle-trigger" style="width: 100%;">
-          Fetch Payment Details <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
+          Verify Order ID <i class="fa-solid fa-magnifying-glass" style="margin-left: 8px;"></i>
         </button>
       </form>
     </div>
 
-    <!-- Hidden Payment Info Box (Appears on clicking button) -->
-    <div id="payment-details-card" class="service-card payment-display-box hidden" style="max-width: 750px; margin: 2rem auto 0 auto;">
+    <!-- Payment Info Card (Always Visible by Default) -->
+    <div id="payment-details-card" class="service-card payment-display-box" style="max-width: 750px; margin: 2rem auto 0 auto;">
       <div class="order-status-header">
-        <span class="status-badge"><i class="fa-solid fa-circle-check"></i> Order Verified</span>
-        <h2 id="display-order-id" style="margin-top: 10px; color: var(--accent);">Order ID: #QDR-1024</h2>
+        <!-- Badge dynamic status change ke liye -->
+        <span id="status-badge" class="status-badge status-pending">
+          <i id="status-icon" class="fa-solid fa-clock"></i> 
+          <span id="status-text">Verification Pending</span>
+        </span>
+        <h2 id="display-order-id" style="margin-top: 10px; color: var(--accent);">Order ID: #---</h2>
       </div>
 
       <div class="payment-grid">
@@ -79,7 +83,6 @@
         <div class="qr-section">
           <h4>Scan UPI QR Code</h4>
           <div class="qr-frame">
-            <!-- Badme aap apni QR Image 'qr-code.png' naam se daal sakte ho -->
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=QuadraPaymentSample" id="qr-image" alt="UPI Payment QR Code" class="qr-img">
           </div>
           <p class="qr-subtext">Scan using GPay, PhonePe, Paytm, or BHIM</p>
@@ -113,12 +116,25 @@
           </div>
 
           <div class="payment-note">
-            <p><i class="fa-solid fa-circle-info"></i> Payment karne ke baad transaction reference / screenshot humare contact form ya email par zaroor bhej dein.</p>
+            <p><i class="fa-solid fa-circle-info"></i> Payment karne ke baad transaction screenshot contact form par zaroor bhej dein.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Blurred Overlay Pop-up Modal -->
+  <div id="payment-modal" class="payment-modal-overlay">
+    <div class="payment-modal-card">
+      <button id="modal-x-btn" class="modal-close-x" aria-label="Close">&times;</button>
+      <div id="modal-icon-container" class="modal-icon-circle">
+        <i id="modal-icon" class="fa-solid"></i>
+      </div>
+      <h3 id="modal-title">Verification Status</h3>
+      <p id="modal-message">Order status update</p>
+      <button id="modal-close-btn" class="btn btn-primary glow-btn" style="margin-top: 1.5rem; width: 100%;">OK, Got It</button>
+    </div>
+  </div>
 
   <footer>
     <p>&copy; 2026 Quadra Collective. All rights reserved.</p>
@@ -126,27 +142,78 @@
 
   <script src="script.js"></script>
   
-  <!-- Order Search Logic JS -->
+  <!-- Order Verification Modal Logic JS -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('verify-order-form');
       const orderInput = document.getElementById('order-id-input');
-      const detailsCard = document.getElementById('payment-details-card');
       const displayOrderId = document.getElementById('display-order-id');
+
+      // Badges
+      const statusBadge = document.getElementById('status-badge');
+      const statusIcon = document.getElementById('status-icon');
+      const statusText = document.getElementById('status-text');
+
+      // Modal Elements
+      const modal = document.getElementById('payment-modal');
+      const modalIconContainer = document.getElementById('modal-icon-container');
+      const modalIcon = document.getElementById('modal-icon');
+      const modalTitle = document.getElementById('modal-title');
+      const modalMsg = document.getElementById('modal-message');
+      const modalCloseBtn = document.getElementById('modal-close-btn');
+      const modalXBtn = document.getElementById('modal-x-btn');
+
+      // Valid Order IDs List (Default test: 123, 1, 2, 3)
+      const validOrderIds = ['123', '1', '2', '3'];
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         const orderVal = orderInput.value.trim();
 
-        if (orderVal !== "") {
-          displayOrderId.innerText = `Order ID: #${orderVal.toUpperCase()}`;
-          detailsCard.classList.remove('hidden');
-          
-          // Smooth scroll down to details
-          detailsCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (orderVal === "") return;
+
+        if (validOrderIds.includes(orderVal)) {
+          // --- MATCH SUCCESS ---
+          displayOrderId.innerText = `Order ID: #${orderVal}`;
+
+          // Update Green Badge
+          statusBadge.className = 'status-badge status-verified';
+          statusIcon.className = 'fa-solid fa-circle-check';
+          statusText.innerText = 'Order Verified';
+
+          // Modal Success Config
+          modalIconContainer.className = 'modal-icon-circle modal-success';
+          modalIcon.className = 'fa-solid fa-check';
+          modalTitle.innerText = 'Order ID Matched!';
+          modalMsg.innerText = `Order ID #${orderVal} has been successfully verified. You can now proceed with the payment using the details below.`;
+
+        } else {
+          // --- MISMATCH ERROR ---
+          displayOrderId.innerText = `Order ID: #${orderVal} (Invalid)`;
+
+          // Update Red Badge
+          statusBadge.className = 'status-badge status-invalid';
+          statusIcon.className = 'fa-solid fa-circle-xmark';
+          statusText.innerText = 'ID Do Not Match';
+
+          // Modal Error Config
+          modalIconContainer.className = 'modal-icon-circle modal-error';
+          modalIcon.className = 'fa-solid fa-xmark';
+          modalTitle.innerText = 'Verification Failed!';
+          modalMsg.innerText = `The Order ID #${orderVal} you entered does not match our records. Please check your ID and try again.`;
         }
+
+        // Trigger Popup Modal with Background Blur
+        modal.classList.add('active');
+      });
+
+      // Function to Close Modal
+      const closeModal = () => modal.classList.remove('active');
+
+      modalCloseBtn.addEventListener('click', closeModal);
+      modalXBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
       });
     });
   </script>
-</body>
-</html>

@@ -1572,3 +1572,122 @@ body.nav-lock {
   padding: 0 0.4rem;
   color: var(--accent);
 }
+
+/* ==========================================================================
+   PAYMENT PAGE STYLES
+   ========================================================================== */
+.payment-display-box {
+  animation: fadeInUp 0.5s ease forwards;
+  transition: all 0.3s ease;
+}
+
+.order-status-header {
+  text-align: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+.status-badge {
+  display: inline-block;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .payment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.qr-section {
+  text-align: center;
+  background: var(--input-bg);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+}
+
+.qr-frame {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 12px;
+  display: inline-block;
+  margin: 1rem 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.qr-img {
+  width: 180px;
+  height: 180px;
+  display: block;
+}
+
+.qr-subtext {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.bank-section h4, .qr-section h4 {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+.bank-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--input-bg);
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.detail-label {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-value {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.highlight-value {
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+.payment-note {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 193, 7, 0.1);
+  border-left: 3px solid #ffc107;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--text-main);
+}

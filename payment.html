@@ -48,34 +48,54 @@
     <div class="hero-content fade-in-up">
       <span class="badge">Secure Payment Gateway 💳</span>
       <h1 class="gradient-text animated-main-title">Complete Your Payment</h1>
-      <p class="hero-subtext">Enter your Order ID below to verify and complete payment via UPI QR code or PNB Bank Transfer.</p>
+      <p class="hero-subtext">Enter your registered Email Address and Order ID below to verify details and complete payment.</p>
     </div>
   </section>
 
-  <!-- Order ID Search Section -->
+  <!-- Verification Input Section -->
   <section class="section" style="padding-top: 0;">
     <div class="payment-search-container service-card" style="max-width: 600px; margin: 0 auto;">
-      <h3 style="margin-bottom: 1rem; text-align: center;">Verify Your Order</h3>
+      <h3 style="margin-bottom: 1.2rem; text-align: center;">Verify Your Order</h3>
       <form id="verify-order-form" class="contact-form">
-        <div class="input-group">
+        
+        <!-- Email Input -->
+        <div class="input-group" style="margin-bottom: 1.2rem;">
+          <input type="email" id="user-email-input" required placeholder=" ">
+          <label for="user-email-input">Enter Registered Email ID</label>
+        </div>
+
+        <!-- Order ID Input -->
+        <div class="input-group" style="margin-bottom: 1.5rem;">
           <input type="text" id="order-id-input" required placeholder=" ">
           <label for="order-id-input">Enter Order ID (e.g. 123)</label>
         </div>
+
         <button type="submit" class="btn btn-primary glow-btn particle-trigger" style="width: 100%;">
-          Verify Order ID <i class="fa-solid fa-magnifying-glass" style="margin-left: 8px;"></i>
+          Verify & Fetch Order <i class="fa-solid fa-magnifying-glass" style="margin-left: 8px;"></i>
         </button>
       </form>
     </div>
 
-    <!-- Payment Info Card (Always Visible by Default) -->
+    <!-- Payment Info Card (Always Visible) -->
     <div id="payment-details-card" class="service-card payment-display-box" style="max-width: 750px; margin: 2rem auto 0 auto;">
       <div class="order-status-header">
-        <!-- Badge dynamic status change ke liye -->
         <span id="status-badge" class="status-badge status-pending">
           <i id="status-icon" class="fa-solid fa-clock"></i> 
           <span id="status-text">Verification Pending</span>
         </span>
         <h2 id="display-order-id" style="margin-top: 10px; color: var(--accent);">Order ID: #---</h2>
+
+        <!-- Order Meta Grid (Client Name & Amount) -->
+        <div id="order-meta-info" class="order-meta-grid hidden">
+          <div class="meta-item">
+            <span class="meta-label"><i class="fa-solid fa-user"></i> Client Name</span>
+            <span id="display-client-name" class="meta-value">Amir Sohail</span>
+          </div>
+          <div class="meta-item amount-box">
+            <span class="meta-label"><i class="fa-solid fa-circle-dollar-to-slot"></i> Total Amount</span>
+            <span id="display-order-amount" class="meta-value amount-highlight">$500.00</span>
+          </div>
+        </div>
       </div>
 
       <div class="payment-grid">
@@ -142,12 +162,18 @@
 
   <script src="script.js"></script>
   
-  <!-- Order Verification Modal Logic JS -->
+  <!-- Email & Order ID Verification Logic JS -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('verify-order-form');
+      const emailInput = document.getElementById('user-email-input');
       const orderInput = document.getElementById('order-id-input');
       const displayOrderId = document.getElementById('display-order-id');
+
+      // Meta Elements
+      const orderMetaInfo = document.getElementById('order-meta-info');
+      const clientNameEl = document.getElementById('display-client-name');
+      const orderAmountEl = document.getElementById('display-order-amount');
 
       // Badges
       const statusBadge = document.getElementById('status-badge');
@@ -163,51 +189,58 @@
       const modalCloseBtn = document.getElementById('modal-close-btn');
       const modalXBtn = document.getElementById('modal-x-btn');
 
-      // Valid Order IDs List (Default test: 123, 1, 2, 3)
-      const validOrderIds = ['123', '1', '2', '3'];
+      // Simulated JSON Database
+      const dummyDatabase = {
+        "amirsohail@gmail.com": { orderId: "123", name: "Amir Sohail", price: "$500.00" },
+        "test@gmail.com": { orderId: "456", name: "Test User", price: "$250.00" }
+      };
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
+        const emailVal = emailInput.value.trim().toLowerCase();
         const orderVal = orderInput.value.trim();
 
-        if (orderVal === "") return;
+        if (!emailVal || !orderVal) return;
 
-        if (validOrderIds.includes(orderVal)) {
+        // Fetch user record using Email as Unique Key
+        const userRecord = dummyDatabase[emailVal];
+
+        // STRICT CHECK: Both Email must exist AND Order ID must match that Email
+        if (userRecord && userRecord.orderId === orderVal) {
           // --- MATCH SUCCESS ---
           displayOrderId.innerText = `Order ID: #${orderVal}`;
+          clientNameEl.innerText = userRecord.name;
+          orderAmountEl.innerText = userRecord.price;
+          orderMetaInfo.classList.remove('hidden');
 
-          // Update Green Badge
           statusBadge.className = 'status-badge status-verified';
           statusIcon.className = 'fa-solid fa-circle-check';
           statusText.innerText = 'Order Verified';
 
-          // Modal Success Config
           modalIconContainer.className = 'modal-icon-circle modal-success';
           modalIcon.className = 'fa-solid fa-check';
-          modalTitle.innerText = 'Order ID Matched!';
-          modalMsg.innerText = `Order ID #${orderVal} has been successfully verified. You can now proceed with the payment using the details below.`;
+          modalTitle.innerText = 'Order Verified!';
+          modalMsg.innerHTML = `Email <strong>${emailVal}</strong> & Order <strong>#${orderVal}</strong> matched.<br><br>Client Name: <strong>${userRecord.name}</strong><br>Total Amount: <strong style="color:#10b981; font-size:1.1rem;">${userRecord.price}</strong>`;
 
         } else {
-          // --- MISMATCH ERROR ---
+          // --- MISMATCH / STRICT FAILURE ---
           displayOrderId.innerText = `Order ID: #${orderVal} (Invalid)`;
+          orderMetaInfo.classList.add('hidden');
 
-          // Update Red Badge
           statusBadge.className = 'status-badge status-invalid';
           statusIcon.className = 'fa-solid fa-circle-xmark';
           statusText.innerText = 'ID Do Not Match';
 
-          // Modal Error Config
           modalIconContainer.className = 'modal-icon-circle modal-error';
           modalIcon.className = 'fa-solid fa-xmark';
           modalTitle.innerText = 'Verification Failed!';
-          modalMsg.innerText = `The Order ID #${orderVal} you entered does not match our records. Please check your ID and try again.`;
+          modalMsg.innerText = `The Email or Order ID you entered does not match our records. Please verify your registered email and Order ID.`;
         }
 
-        // Trigger Popup Modal with Background Blur
         modal.classList.add('active');
       });
 
-      // Function to Close Modal
+      // Close Modal Functions
       const closeModal = () => modal.classList.remove('active');
 
       modalCloseBtn.addEventListener('click', closeModal);
@@ -217,3 +250,5 @@
       });
     });
   </script>
+</body>
+</html>

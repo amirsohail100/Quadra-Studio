@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Walkthrough & Help - Quadra</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Dynamic Background Canvases -->
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navbar -->
+  <nav class="navbar fade-in-down">
+    <a href="index.html" class="logo">Quadra<span class="logo-dot">.</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-menu nav-collapsible" id="nav-menu">
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-item">Home</a></li>
+        <li><a href="index.html#about" class="nav-item">About Us</a></li>
+        <li><a href="index.html#team" class="nav-item">Team</a></li>
+        <li><a href="index.html#services" class="nav-item">Services</a></li>
+        <li><a href="projects.html" class="nav-item">Projects</a></li>
+        <li><a href="order.html" class="nav-item">Order</a></li>
+        <li><a href="payment.html" class="nav-item">Payment</a></li>
+        <li><a href="help.html" class="nav-item active">Help</a></li>
+      </ul>
+
+      <!-- Celestial Theme Switcher -->
+      <button class="sky-switch" id="theme-toggle" aria-label="Toggle Theme">
+        <span class="sky-bg">
+          <span class="celestial-body"><span class="sun-glow"></span></span>
+          <span class="star star-1"></span>
+          <span class="star star-2"></span>
+          <span class="star star-3"></span>
+          <span class="cloud-puff"></span>
+        </span>
+      </button>
+
+      <a href="index.html#contact" class="btn-nav particle-trigger rgb-hover-btn">Contact Us</a>
+    </div>
+  </nav>
+
+  <!-- Help Hero Section -->
+  <section class="hero">
+    <div class="hero-content fade-in-up">
+      <span class="badge">Visual Walkthrough & Guide 📖</span>
+      <h1 class="gradient-text animated-main-title">How To Use Quadra Portal</h1>
+      <p class="hero-subtext">New to Quadra? Follow this simple step-by-step visual walkthrough to explore services, place orders, verify payments, and watch our video guide.</p>
+    </div>
+  </section>
+
+  <!-- Main Walkthrough Section -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+
+      <!-- Fast Jump Navigation Links -->
+      <div class="guide-jump-nav">
+        <a href="#step-services" class="jump-link"><i class="fa-solid fa-list-check"></i> 1. Services</a>
+        <a href="#step-projects" class="jump-link"><i class="fa-solid fa-laptop-code"></i> 2. Projects</a>
+        <a href="#step-order" class="jump-link"><i class="fa-solid fa-cart-shopping"></i> 3. Order</a>
+        <a href="#step-payment" class="jump-link"><i class="fa-solid fa-credit-card"></i> 4. Payment</a>
+        <a href="#video-guide" class="jump-link"><i class="fa-solid fa-circle-play"></i> Video Tutorial</a>
+        <a href="#feedback-section" class="jump-link"><i class="fa-solid fa-comment-dots"></i> Feedback</a>
+      </div>
+
+      <!-- 4-Step Visual Guide Container -->
+      <div class="guide-steps-container">
+
+        <!-- STEP 1: SERVICES (Image Left, Content Right) -->
+        <div id="step-services" class="guide-step-row">
+          <div class="browser-mockup zoomable-image">
+            <div class="browser-header">
+              <span class="browser-dot dot-red"></span>
+              <span class="browser-dot dot-yellow"></span>
+              <span class="browser-dot dot-green"></span>
+              <span class="browser-address-bar">https://quadra.com/services</span>
+            </div>
+            <div class="browser-image-container">
+              <img src="https://api.microlink.io/?url=https%3A%2F%2Fquadra-studio.onrender.com&screenshot=true&embed=screenshot.url" alt="Explore Quadra Services" loading="lazy">
+            </div>
+          </div>
+
+          <div class="step-content-box">
+            <span class="step-badge"><i class="fa-solid fa-compass"></i> Step 01</span>
+            <h2 class="step-title">Explore Services & Stack</h2>
+            <p class="hero-subtext">Browse our complete spectrum of engineering solutions tailored for startups and businesses.</p>
+            <ul class="step-checklist">
+              <li><i class="fa-solid fa-circle-check"></i> <strong>AI & Machine Learning:</strong> Custom models, LLM agents, RAG, and NLP solutions.</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Full-Stack Web Apps:</strong> Responsive React, Next.js, and FastAPI architectures.</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Python Automations:</strong> CLI tools, web scrapers, and bot pipelines.</li>
+            </ul>
+            <div>
+              <a href="index.html#services" class="btn btn-primary glow-btn particle-trigger" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">View All Services <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: PROJECTS (Content Left, Image Right) -->
+        <div id="step-projects" class="guide-step-row reverse">
+          <div class="browser-mockup zoomable-image">
+            <div class="browser-header">
+              <span class="browser-dot dot-red"></span>
+              <span class="browser-dot dot-yellow"></span>
+              <span class="browser-dot dot-green"></span>
+              <span class="browser-address-bar">https://quadra.com/projects.html</span>
+            </div>
+            <div class="browser-image-container">
+              <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop" alt="Projects Showcase Preview" loading="lazy">
+            </div>
+          </div>
+
+          <div class="step-content-box">
+            <span class="step-badge"><i class="fa-solid fa-folder-open"></i> Step 02</span>
+            <h2 class="step-title">Inspect Live Projects</h2>
+            <p class="hero-subtext">Check out our live deployed work, source code links, and technical documentation.</p>
+            <ul class="step-checklist">
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Live Demos:</strong> Click on any project card to open real live applications.</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>GitHub Access:</strong> Review code repositories on GitHub and Hugging Face.</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Category Filter:</strong> Filter projects by ML, Web Apps, or Bots instantly.</li>
+            </ul>
+            <div>
+              <a href="projects.html" class="btn btn-primary glow-btn particle-trigger" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">Explore Portfolio <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: ORDER (Image Left, Content Right) -->
+        <div id="step-order" class="guide-step-row">
+          <div class="browser-mockup zoomable-image">
+            <div class="browser-header">
+              <span class="browser-dot dot-red"></span>
+              <span class="browser-dot dot-yellow"></span>
+              <span class="browser-dot dot-green"></span>
+              <span class="browser-address-bar">https://quadra.com/order.html</span>
+            </div>
+            <div class="browser-image-container">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop" alt="Place Order Form Preview" loading="lazy">
+            </div>
+          </div>
+
+          <div class="step-content-box">
+            <span class="step-badge"><i class="fa-solid fa-cart-shopping"></i> Step 03</span>
+            <h2 class="step-title">Place Your Custom Order</h2>
+            <p class="hero-subtext">Select your preferred service tier or submit custom requirements directly.</p>
+            <ul class="step-checklist">
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Select Package:</strong> Choose Machine Learning ($150), Web App ($300), or Gen AI.</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Fill Requirements:</strong> Provide project specifications and your registered Email ID.</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Get Order ID:</strong> After submitting, save your unique <strong>Order ID</strong> for payment.</li>
+            </ul>
+            <div>
+              <a href="order.html" class="btn btn-primary glow-btn particle-trigger" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">Go To Order Page <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: PAYMENT (Content Left, Image Right) -->
+        <div id="step-payment" class="guide-step-row reverse">
+          <div class="browser-mockup zoomable-image">
+            <div class="browser-header">
+              <span class="browser-dot dot-red"></span>
+              <span class="browser-dot dot-yellow"></span>
+              <span class="browser-dot dot-green"></span>
+              <span class="browser-address-bar">https://quadra.com/payment.html</span>
+            </div>
+            <div class="browser-image-container">
+              <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1000&auto=format&fit=crop" alt="Payment Portal Verification Preview" loading="lazy">
+            </div>
+          </div>
+
+          <div class="step-content-box">
+            <span class="step-badge"><i class="fa-solid fa-shield-halved"></i> Step 04</span>
+            <h2 class="step-title">Verify & Pay Securely</h2>
+            <p class="hero-subtext">Use our secure payment portal to verify your order details and complete payment.</p>
+            <ul class="step-checklist">
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Strict Verification:</strong> Enter registered Email ID and Order ID to fetch client name & amount.</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Scan UPI QR:</strong> Pay instantly using GPay, PhonePe, Paytm, or BHIM.</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>PNB Bank Transfer:</strong> Direct bank details available for NEFT / IMPS transfers.</li>
+            </ul>
+            <div>
+              <a href="payment.html" class="btn btn-primary glow-btn particle-trigger" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">Open Payment Portal <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FULL USER VIDEO GUIDE SECTION -->
+      <div id="video-guide" class="video-guide-section">
+        <span class="badge"><i class="fa-solid fa-film"></i> Full Video Tutorial</span>
+        <h2 class="gradient-text" style="font-size: 2.2rem; margin-top: 0.5rem;">Watch Complete Website Walkthrough</h2>
+        <p class="hero-subtext" style="max-width: 650px; margin: 0.5rem auto 1.5rem auto;">Prefer a video demonstration? Watch this step-by-step video explaining how to place orders, track progress, and communicate with the team.</p>
+
+        <div class="video-player-card service-card">
+          <div class="video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0" title="Quadra Portal Full User Guide Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEEDBACK FORM SECTION (Added as requested) -->
+      <div id="feedback-section" class="feedback-card">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <span class="badge"><i class="fa-solid fa-comment-dots"></i> Feedback</span>
+          <h2 class="gradient-text" style="font-size: 2rem; margin-top: 0.5rem;">Share Your Experience</h2>
+          <p class="hero-subtext">Aapko hamari website aur guide kaisa laga? Apne sujhav yahan share karein.</p>
+        </div>
+
+        <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)">
+          <!-- Star Rating -->
+          <div class="rating-container">
+            <div class="rating-title">Rate your experience:</div>
+            <div class="star-rating">
+              <input type="radio" id="star5" name="rating" value="5" required/><label for="star5" title="5 stars"><i class="fa-solid fa-star"></i></label>
+              <input type="radio" id="star4" name="rating" value="4"/><label for="star4" title="4 stars"><i class="fa-solid fa-star"></i></label>
+              <input type="radio" id="star3" name="rating" value="3"/><label for="star3" title="3 stars"><i class="fa-solid fa-star"></i></label>
+              <input type="radio" id="star2" name="rating" value="2"/><label for="star2" title="2 stars"><i class="fa-solid fa-star"></i></label>
+              <input type="radio" id="star1" name="rating" value="1"/><label for="star1" title="1 star"><i class="fa-solid fa-star"></i></label>
+            </div>
+          </div>
+
+          <div class="fb-grid">
+            <div class="fb-field">
+              <label for="fb-name">Your Name</label>
+              <input type="text" id="fb-name" placeholder="Enter your name" required>
+            </div>
+            <div class="fb-field">
+              <label for="fb-email">Your Email</label>
+              <input type="email" id="fb-email" placeholder="name@example.com" required>
+            </div>
+          </div>
+
+          <div class="fb-field" style="margin-bottom: 1.2rem;">
+            <label for="fb-category">Feedback Topic</label>
+            <select id="fb-category">
+              <option value="general">General Website Feedback</option>
+              <option value="guide">User Guide & Walkthrough</option>
+              <option value="ui">UI & Visual Design</option>
+              <option value="bug">Report a Bug / Issue</option>
+            </select>
+          </div>
+
+          <div class="fb-field" style="margin-bottom: 1.5rem;">
+            <label for="fb-message">Your Feedback / Suggestion</label>
+            <textarea id="fb-message" rows="4" placeholder="Apna feedback ya suggestions likhein..." required></textarea>
+          </div>
+
+          <div style="text-align: center;">
+            <button type="submit" class="btn btn-primary glow-btn particle-trigger" style="width: 100%; max-width: 300px;">
+              Submit Feedback <i class="fa-solid fa-paper-plane" style="margin-left: 8px;"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Image Enlarge Lightbox Modal -->
+  <div id="image-modal" class="image-modal-overlay">
+    <button class="modal-close-x" id="close-img-modal" style="position: absolute; top: 20px; right: 30px; font-size: 2.5rem; color: #ffffff; background: none; border: none; cursor: pointer;">&times;</button>
+    <img id="enlarged-img" class="image-modal-content" src="" alt="Enlarged Preview">
+  </div>
+
+  <!-- Updated Footer with Developer Credit -->
+  <footer>
+    <p>&copy; 2026 Quadra Collective. All rights reserved. | Developed with ❤️ by <a href="https://github.com/amirsohail100" target="_blank" class="dev-credit">Aamir Suhail</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Lightbox Modal for Screenshots
+      const imageModal = document.getElementById('image-modal');
+      const enlargedImg = document.getElementById('enlarged-img');
+      const closeImgModal = document.getElementById('close-img-modal');
+      const zoomableCards = document.querySelectorAll('.zoomable-image');
+
+      zoomableCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const img = card.querySelector('img');
+          if (img) {
+            enlargedImg.src = img.src;
+            imageModal.classList.add('active');
+          }
+        });
+      });
+
+      const closeModal = () => imageModal.classList.remove('active');
+      closeImgModal?.addEventListener('click', closeModal);
+      imageModal?.addEventListener('click', (e) => {
+        if (e.target === imageModal) closeModal();
+      });
+
+      // Highlight active Jump Link on scroll
+      const jumpLinks = document.querySelectorAll('.jump-link');
+      const sections = document.querySelectorAll('.guide-step-row, .video-guide-section, #feedback-section');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 150;
+          if (pageYOffset >= sectionTop) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        jumpLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+    });
+
+    // Feedback Submit Handler
+    function handleFeedbackSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('fb-name').value;
+      alert(`Shukriya ${name}! Aapka feedback successfully submit ho gaya hai.`);
+      document.getElementById('feedbackForm').reset();
+    }
+  </script>
+</body>
+</html>

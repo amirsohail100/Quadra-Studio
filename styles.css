@@ -2284,3 +2284,113 @@ footer .dev-credit {
   text-decoration: none;
 }
 
+/* ==========================================================================
+   LIGHT THEME COMPLETE COMPATIBILITY FIXES
+   ========================================================================== */
+
+/* Navbar Fix for Light Mode */
+body:not(.dark-theme) .navbar,
+.light-theme .navbar {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+body:not(.dark-theme) .nav-item,
+.light-theme .nav-item {
+  color: #334155 !important;
+}
+
+body:not(.dark-theme) .logo,
+.light-theme .logo {
+  color: #0f172a !important;
+}
+
+/* Feedback Card & Form Light Mode Fix */
+body:not(.dark-theme) .feedback-card,
+.light-theme .feedback-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
+}
+
+body:not(.dark-theme) .feedback-card h2,
+.light-theme .feedback-card h2,
+body:not(.dark-theme) .step-title,
+.light-theme .step-title {
+  color: #0f172a !important;
+}
+
+body:not(.dark-theme) .fb-field label,
+body:not(.dark-theme) .rating-title,
+.light-theme .fb-field label,
+.light-theme .rating-title {
+  color: #475569 !important;
+}
+
+body:not(.dark-theme) .fb-field input,
+body:not(.dark-theme) .fb-field select,
+body:not(.dark-theme) .fb-field textarea,
+.light-theme .fb-field input,
+.light-theme .fb-field select,
+.light-theme .fb-field textarea {
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+body:not(.dark-theme) .fb-field input::placeholder,
+body:not(.dark-theme) .fb-field textarea::placeholder,
+.light-theme .fb-field input::placeholder,
+.light-theme .fb-field textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+body:not(.dark-theme) .fb-field select option,
+.light-theme .fb-field select option {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Quick Jump Nav Light Theme */
+body:not(.dark-theme) .guide-jump-nav,
+.light-theme .guide-jump-nav {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+body:not(.dark-theme) .jump-link,
+.light-theme .jump-link {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body:not(.dark-theme) .jump-link:hover,
+body:not(.dark-theme) .jump-link.active,
+.light-theme .jump-link:hover,
+.light-theme .jump-link.active {
+  background: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+/* Browser Mockup Light Theme */
+body:not(.dark-theme) .browser-mockup,
+.light-theme .browser-mockup {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+body:not(.dark-theme) .browser-header,
+.light-theme .browser-header {
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+body:not(.dark-theme) .browser-address-bar,
+.light-theme .browser-address-bar {
+  background: #e2e8f0 !important;
+  color: #64748b !important;
+}

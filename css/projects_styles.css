@@ -1044,3 +1044,19 @@ body.nav-lock {
     height: 220px;
   }
 }
+
+
+/* Logo Icon aur Text ko ek line mein align karne ke liye */
+.logo.brand-logo {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px; /* Icon aur text ke beech ka distance */
+}
+
+.logo-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0; /* Icon ka size flex box me shrink hone se rokne ke liye */
+  display: block;
+}

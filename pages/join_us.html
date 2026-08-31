@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Careers | Quadra Collective</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../assets/avatars/favicon.svg"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/careers.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="dark-theme">
+    <!-- Background Canvases -->
+    <canvas id="bg-canvas"></canvas>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar fade-in-down">
+      <a href="../index.html#hero" class="logo brand-logo">
+        <svg
+          class="logo-icon"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="fTopNav" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#38BDF8" />
+              <stop offset="100%" stop-color="#0284C7" />
+            </linearGradient>
+            <linearGradient id="fRightNav" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#00F2FE" />
+              <stop offset="100%" stop-color="#0072FF" />
+            </linearGradient>
+            <linearGradient id="fLeftNav" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6366F1" />
+              <stop offset="100%" stop-color="#4338CA" />
+            </linearGradient>
+            <linearGradient id="fBottomNav" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#A855F7" />
+              <stop offset="100%" stop-color="#6366F1" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M 256 60 L 420 154 L 340 200 L 256 150 Z"
+            fill="url(#fTopNav)"
+          />
+          <path
+            d="M 420 154 L 420 346 L 340 300 L 340 200 Z"
+            fill="url(#fRightNav)"
+          />
+          <path
+            d="M 420 346 L 256 440 L 256 348 L 340 300 Z"
+            fill="url(#fBottomNav)"
+          />
+          <path
+            d="M 256 440 L 92 346 L 172 300 L 256 348 Z"
+            fill="url(#fLeftNav)"
+          />
+          <path
+            d="M 92 346 L 92 154 L 172 200 L 172 300 Z"
+            fill="url(#fBottomNav)"
+            opacity="0.9"
+          />
+          <path
+            d="M 92 154 L 256 60 L 256 150 L 172 200 Z"
+            fill="url(#fTopNav)"
+          />
+        </svg>
+        <span>Quadra<span class="logo-dot">.</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#hero" class="nav-item">Home</a></li>
+        <li><a href="../index.html#about" class="nav-item">About Us</a></li>
+        <li><a href="projects.html" class="nav-item">Projects</a></li>
+        <li><a href="careers.html" class="nav-item active">Careers</a></li>
+        <li><a href="../index.html#contact" class="btn-nav">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <!-- Careers Hero Section -->
+    <header class="careers-hero reveal-on-scroll">
+      <span class="badge">Open Opportunities</span>
+      <h1 class="gradient-text">Build The Future With Us</h1>
+      <p class="hero-subtext">
+        We are looking for creative minds, problem solvers, and AI enthusiasts
+        to help build next-generation applications.
+      </p>
+    </header>
+
+    <!-- Job Openings Grid Section -->
+    <section class="careers-container">
+      <div class="job-grid">
+        <!-- Job Card 1 -->
+        <div class="job-card hover-lift">
+          <div class="job-header">
+            <div>
+              <h3 class="job-title">AI & ML Engineer</h3>
+              <span class="job-type"
+                ><i class="fas fa-globe"></i> Remote / Hybrid</span
+              >
+            </div>
+            <span class="openings-badge">2 Openings</span>
+          </div>
+          <p class="job-desc">
+            Design, train, and deploy AI Agents, LLM pipelines, and computer
+            vision models into scalable web services.
+          </p>
+
+          <div class="qualifications-box">
+            <h4><i class="fas fa-check-circle"></i> Key Qualifications</h4>
+            <ul>
+              <li>
+                Proficiency in Python, TensorFlow / PyTorch, and Scikit-Learn
+              </li>
+              <li>
+                Experience with LangChain, Agentic AI architectures, and Vector
+                DBs
+              </li>
+              <li>
+                Hands-on experience deploying REST APIs using FastAPI or Flask
+              </li>
+              <li>
+                Understanding of Git, Docker, and MLOps deployment pipelines
+              </li>
+            </ul>
+          </div>
+
+          <div class="job-footer">
+            <span class="exp-tag"
+              ><i class="fas fa-briefcase"></i> 0-2 Years / Freelance</span
+            >
+            <a href="../index.html#contact" class="btn btn-primary glow-btn"
+              >Apply Now</a
+            >
+          </div>
+        </div>
+
+        <!-- Job Card 2 -->
+        <div class="job-card hover-lift">
+          <div class="job-header">
+            <div>
+              <h3 class="job-title">Frontend & UI/UX Developer</h3>
+              <span class="job-type"><i class="fas fa-globe"></i> Remote</span>
+            </div>
+            <span class="openings-badge">1 Opening</span>
+          </div>
+          <p class="job-desc">
+            Create sleek, animated, and responsive user interfaces using modern
+            CSS frameworks and 3D web technologies.
+          </p>
+
+          <div class="qualifications-box">
+            <h4><i class="fas fa-check-circle"></i> Key Qualifications</h4>
+            <ul>
+              <li>Strong foundation in HTML5, CSS3, JavaScript (ES6+)</li>
+              <li>
+                Experience with React, Next.js, Tailwind CSS, or GSAP animations
+              </li>
+              <li>Familiarity with Three.js / React Three Fiber is a plus</li>
+              <li>
+                Eye for high-fidelity UI wireframing and interactive design
+              </li>
+            </ul>
+          </div>
+
+          <div class="job-footer">
+            <span class="exp-tag"
+              ><i class="fas fa-briefcase"></i> Entry Level / Open to All</span
+            >
+            <a href="../index.html#contact" class="btn btn-primary glow-btn"
+              >Apply Now</a
+            >
+          </div>
+        </div>
+
+        <!-- Job Card 3 -->
+        <div class="job-card hover-lift">
+          <div class="job-header">
+            <div>
+              <h3 class="job-title">Discord & Automation Specialist</h3>
+              <span class="job-type"><i class="fas fa-globe"></i> Remote</span>
+            </div>
+            <span class="openings-badge">1 Opening</span>
+          </div>
+          <p class="job-desc">
+            Manage community engagement, build custom Discord bots, and maintain
+            server infrastructure and automated pingers.
+          </p>
+
+          <div class="qualifications-box">
+            <h4><i class="fas fa-check-circle"></i> Key Qualifications</h4>
+            <ul>
+              <li>
+                Experience building custom Discord bots (`discord.py` or
+                `discord.js`)
+              </li>
+              <li>
+                Understanding of server uptime, webhooks, and cloud ping
+                management
+              </li>
+              <li>
+                Good communication skills for Discord community moderation
+              </li>
+              <li>Basic knowledge of Python or JavaScript scripting</li>
+            </ul>
+          </div>
+
+          <div class="job-footer">
+            <span class="exp-tag"
+              ><i class="fas fa-briefcase"></i> Beginner Friendly</span
+            >
+            <a href="../index.html#contact" class="btn btn-primary glow-btn"
+              >Apply Now</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 Quadra Collective. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>

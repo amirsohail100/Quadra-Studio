@@ -257,7 +257,7 @@ const projectsData = {
       placeholderText: "TIC+TAC+TOE",
       tags: ["HTML5", "CSS3", "JavaScript"],
       demoUrl: "https://tweetify-ai-6hwn6nowricg3fahq9gnhq.streamlit.app/",
-      githubUrl: "https://github.com/amirsohail100/Tweetify-AI"
+      githubUrl: "https://github.com/amirsohail100/Tic-Tac-Toe"
     },
     {
       title: "LLM Code Assistant",

@@ -4,13 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Careers & Opportunities | Quadra Collective</title>
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="../assets/avatars/favicon.svg"
-    />
+    <link rel="icon" type="image/svg+xml" href="../assets/avatars/favicon.svg" />
     <link rel="stylesheet" href="../css/styles.css" />
-    <link rel="stylesheet" href="../css/careers.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
       rel="stylesheet"
@@ -21,239 +16,375 @@
     />
   </head>
   <body class="dark-theme">
-    <!-- Background Canvases (Animation Setup) -->
+    <!-- Background Canvas Animation -->
     <canvas id="bg-canvas"></canvas>
     <canvas id="particle-canvas"></canvas>
 
-    <!-- Navbar -->
-    <nav class="navbar fade-in-down">
-      <a href="../index.html#hero" class="logo brand-logo">
-        <svg
-          class="logo-icon"
-          viewBox="0 0 512 512"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="fTopNav" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#38BDF8" />
-              <stop offset="100%" stop-color="#0284C7" />
-            </linearGradient>
-            <linearGradient id="fRightNav" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#00F2FE" />
-              <stop offset="100%" stop-color="#0072FF" />
-            </linearGradient>
-            <linearGradient id="fLeftNav" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#6366F1" />
-              <stop offset="100%" stop-color="#4338CA" />
-            </linearGradient>
-            <linearGradient id="fBottomNav" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#A855F7" />
-              <stop offset="100%" stop-color="#6366F1" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M 256 60 L 420 154 L 340 200 L 256 150 Z"
-            fill="url(#fTopNav)"
-          />
-          <path
-            d="M 420 154 L 420 346 L 340 300 L 340 200 Z"
-            fill="url(#fRightNav)"
-          />
-          <path
-            d="M 420 346 L 256 440 L 256 348 L 340 300 Z"
-            fill="url(#fBottomNav)"
-          />
-          <path
-            d="M 256 440 L 92 346 L 172 300 L 256 348 Z"
-            fill="url(#fLeftNav)"
-          />
-          <path
-            d="M 92 346 L 92 154 L 172 200 L 172 300 Z"
-            fill="url(#fBottomNav)"
-            opacity="0.9"
-          />
-          <path
-            d="M 92 154 L 256 60 L 256 150 L 172 200 Z"
-            fill="url(#fTopNav)"
-          />
-        </svg>
-        <span>Quadra<span class="logo-dot">.</span></span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="../index.html#hero" class="nav-item">Home</a></li>
-        <li><a href="../index.html#about" class="nav-item">About Us</a></li>
-        <li><a href="projects.html" class="nav-item">Projects</a></li>
-        <li><a href="careers.html" class="nav-item active">Careers</a></li>
-        <li><a href="../index.html#contact" class="btn-nav">Contact Us</a></li>
-      </ul>
-    </nav>
+  <!-- Navbar -->
+  <nav class="navbar fade-in-down">
+    <a href="#hero" class="logo brand-logo">
+      <svg class="logo-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="navGlowFilter" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="15" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+          <linearGradient id="fTopNav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#38BDF8"/><stop offset="100%" stop-color="#0284C7"/></linearGradient>
+          <linearGradient id="fRightNav" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#00F2FE"/><stop offset="100%" stop-color="#0072FF"/></linearGradient>
+          <linearGradient id="fLeftNav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366F1"/><stop offset="100%" stop-color="#4338CA"/></linearGradient>
+          <linearGradient id="fBottomNav" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#6366F1"/></linearGradient>
+          <linearGradient id="fGlossNav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/><stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.1"/></linearGradient>
+        </defs>
+        <g opacity="0.3" filter="url(#navGlowFilter)"><polygon points="256,40 440,146 440,358 256,464 72,358 72,146" fill="#00F2FE"/></g>
+        <path d="M 256 60 L 420 154 L 340 200 L 256 150 Z" fill="url(#fTopNav)"/>
+        <path d="M 420 154 L 420 346 L 340 300 L 340 200 Z" fill="url(#fRightNav)"/>
+        <path d="M 420 154 L 340 200 L 256 150 Z" fill="url(#fGlossNav)"/>
+        <path d="M 420 346 L 256 440 L 256 348 L 340 300 Z" fill="url(#fBottomNav)"/>
+        <path d="M 420 346 L 340 300 L 256 348 Z" fill="url(#fGlossNav)" opacity="0.4"/>
+        <path d="M 256 440 L 92 346 L 172 300 L 256 348 Z" fill="url(#fLeftNav)"/>
+        <path d="M 92 346 L 92 154 L 172 200 L 172 300 Z" fill="url(#fBottomNav)" opacity="0.9"/>
+        <path d="M 92 154 L 256 60 L 256 150 L 172 200 Z" fill="url(#fTopNav)"/>
+        <path d="M 92 154 L 172 200 L 256 150 Z" fill="url(#fGlossNav)" opacity="0.7"/>
+        <polygon points="256,150 340,200 340,300 256,348 172,300 172,200" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+      </svg>
+      <span>Quadra<span class="logo-dot">.</span></span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links nav-collapsible" id="nav-links">
+      <li><a href="/index.html" class="nav-item">Home</a></li>
+      <li><a href="/index.html#about" class="nav-item">About Us</a></li>
+      <li><a href="/index.html#team" class="nav-item">Team</a></li>
+      <li><a href="/index.html#services" class="nav-item">Services</a></li>
+      <li><a href="projects.html" class="nav-item">Projects</a></li>
+      <li><a href="pricing.html" class="nav-item active">Pricing</a></li>
+      <li><a href="payment.html" class="nav-item">Payment</a></li>
+      <li><a href="help.html" class="nav-item">Help</a></li> 
+      <li>
+        <button id="theme-toggle" class="sky-switch" aria-label="Toggle Theme">
+          <span class="sky-bg">
+            <span class="celestial-body">
+              <span class="sun-glow"></span>
+            </span>
+            <span class="star star-1"></span>
+            <span class="star star-2"></span>
+            <span class="star star-3"></span>
+            <span class="cloud-puff"></span>
+          </span>
+        </button>
+      </li>
+      <li><a href="#contact" class="btn-nav particle-trigger rgb-hover-btn">Contact Us</a></li>
+    </ul>
+  </nav>
 
-    <!-- Careers Hero Header -->
+    <!-- Header Section -->
     <header class="careers-hero reveal-on-scroll">
-      <span class="badge">Join Quadra Collective</span>
-      <h1 class="gradient-text">Open Roles & Revenue Share</h1>
-      <p class="hero-subtext">
-        Explore our structured career tracks. Pay is contribution-based (Order Percentage Share) for project team members.
-      </p>
+      <span class="badge"><i class="fas fa-briefcase"></i> Explore Careers</span>
+      <h1 class="gradient-text">Find Your Role at Quadra</h1>
+      <p class="hero-subtext" id="step-subtext">Choose a domain category below to explore active opportunities.</p>
     </header>
 
-    <!-- Main Content Container with Hierarchy -->
+    <!-- Main Dynamic Navigation Container -->
     <main class="careers-container">
 
-      <!-- ================= TRACK 1 ================= -->
-      <section class="career-category">
-        <div class="category-header">
-          <div class="category-title">
-            <i class="fas fa-code text-gradient"></i>
-            <h2>1. Software & AI Engineering Track</h2>
-          </div>
-          <p class="category-desc">For developers who build models, AI pipelines, and web interfaces for client orders.</p>
-        </div>
+      <!-- Breadcrumb Navigation Bar -->
+      <div class="breadcrumb-bar" id="breadcrumb">
+        <span class="crumb active" onclick="showLevel(1)"><i class="fas fa-layer-group"></i> Categories</span>
+        <span class="crumb-separator" id="sep-1" style="display: none;">/</span>
+        <span class="crumb" id="crumb-cat" style="display: none;" onclick="showLevel(2)">Category Name</span>
+        <span class="crumb-separator" id="sep-2" style="display: none;">/</span>
+        <span class="crumb" id="crumb-role" style="display: none;">Role Details</span>
+      </div>
 
-        <div class="job-grid">
+      <!-- ================= LEVEL 1: MAIN CATEGORIES ================= -->
+      <div id="level-1" class="interactive-step active">
+        <div class="category-cards-grid">
 
-          <!-- Sub Role 1: ML Developer -->
-          <div class="job-card hover-lift">
-            <div class="job-header">
-              <div>
-                <h3 class="job-title"><i class="fas fa-brain text-accent"></i> ML Developer</h3>
-                <span class="job-type"><i class="fas fa-laptop-code"></i> Project-Based</span>
+          <!-- Category 1: Developers -->
+          <div class="interactive-card category-card hover-lift" onclick="selectCategory('dev')">
+            <div class="card-icon-wrapper">
+              <i class="fas fa-code"></i>
+            </div>
+            <div class="card-body-content">
+              <span class="openings-count"><i class="fas fa-fire"></i> 4 Active Openings</span>
+              <h3>Software & AI Engineering</h3>
+              <p>Build AI Agents, Machine Learning models, and Web applications for client orders.</p>
+              <div class="sub-roles-preview">
+                <span><i class="fas fa-check"></i> ML Engineer (2)</span>
+                <span><i class="fas fa-check"></i> GenAI Dev (1)</span>
+                <span><i class="fas fa-check"></i> Web Dev (1)</span>
               </div>
-              <span class="share-badge">15% - 35% Order Share</span>
             </div>
-            <p class="job-desc">Build machine learning pipelines, predictive analytics models, and deploy APIs.</p>
-
-            <div class="qualifications-box">
-              <h4><i class="fas fa-check-circle"></i> Basic Qualifications Needed</h4>
-              <ul>
-                <li>Basic Python, NumPy, Pandas, and Scikit-Learn</li>
-                <li>Data preprocessing, regression, classification & model testing</li>
-                <li>Basic API creation using FastAPI or Streamlit</li>
-                <li>Basic Git & GitHub usage</li>
-              </ul>
-            </div>
-
-            <div class="pay-note">
-              <i class="fas fa-coins"></i> <strong>Pay Structure:</strong> Percentage share per client order depending on model complexity & contribution.
-            </div>
-
-            <div class="job-footer">
-              <span class="exp-tag"><i class="fas fa-seedling"></i> Beginner / Intermediate</span>
-              <a href="../index.html#contact" class="btn btn-primary glow-btn">Apply Now</a>
+            <div class="card-arrow">
+              <i class="fas fa-arrow-right"></i>
             </div>
           </div>
 
-          <!-- Sub Role 2: GenAI Developer -->
-          <div class="job-card hover-lift">
-            <div class="job-header">
-              <div>
-                <h3 class="job-title"><i class="fas fa-robot text-accent"></i> GenAI Developer</h3>
-                <span class="job-type"><i class="fas fa-laptop-code"></i> Project-Based</span>
+          <!-- Category 2: Outreach / Communication -->
+          <div class="interactive-card category-card hover-lift" onclick="selectCategory('outreach')">
+            <div class="card-icon-wrapper outreach-gradient">
+              <i class="fas fa-comments"></i>
+            </div>
+            <div class="card-body-content">
+              <span class="openings-count highlight"><i class="fas fa-star"></i> 1 Active Opening</span>
+              <h3>Client Outreach & Community Growth</h3>
+              <p>Bring client deals, manage customer relations, and scale community reach.</p>
+              <div class="sub-roles-preview">
+                <span><i class="fas fa-check"></i> Growth & Client Lead (1)</span>
               </div>
-              <span class="share-badge">20% - 40% Order Share</span>
             </div>
-            <p class="job-desc">Build AI Agents, LLM chains, and prompt automation workflows for modern web products.</p>
-
-            <div class="qualifications-box">
-              <h4><i class="fas fa-check-circle"></i> Basic Qualifications Needed</h4>
-              <ul>
-                <li>Python scripting & OpenAI / HuggingFace API integration</li>
-                <li>Basic LangChain or LlamaIndex workflow setup</li>
-                <li>Prompt design, vector embeddings & JSON parsing</li>
-                <li>Connecting AI backends with simple web frontends</li>
-              </ul>
-            </div>
-
-            <div class="pay-note">
-              <i class="fas fa-coins"></i> <strong>Pay Structure:</strong> Direct percentage earnings from every AI agent / LLM project completed.
-            </div>
-
-            <div class="job-footer">
-              <span class="exp-tag"><i class="fas fa-seedling"></i> Beginner / Intermediate</span>
-              <a href="../index.html#contact" class="btn btn-primary glow-btn">Apply Now</a>
-            </div>
-          </div>
-
-          <!-- Sub Role 3: Web Developer -->
-          <div class="job-card hover-lift">
-            <div class="job-header">
-              <div>
-                <h3 class="job-title"><i class="fas fa-layer-group text-accent"></i> Web Developer</h3>
-                <span class="job-type"><i class="fas fa-laptop-code"></i> Project-Based</span>
-              </div>
-              <span class="share-badge">15% - 30% Order Share</span>
-            </div>
-            <p class="job-desc">Design responsive landing pages, interactive web tools, and modern user interfaces.</p>
-
-            <div class="qualifications-box">
-              <h4><i class="fas fa-check-circle"></i> Basic Qualifications Needed</h4>
-              <ul>
-                <li>HTML5, CSS3, JavaScript (ES6+), and layout responsiveness</li>
-                <li>Basic React, Next.js, or Tailwind CSS setup</li>
-                <li>Connecting frontend UI with backend REST APIs</li>
-                <li>Basic animation skills (CSS keyframes or GSAP)</li>
-              </ul>
-            </div>
-
-            <div class="pay-note">
-              <i class="fas fa-coins"></i> <strong>Pay Structure:</strong> Fixed percentage per layout or web module delivered.
-            </div>
-
-            <div class="job-footer">
-              <span class="exp-tag"><i class="fas fa-seedling"></i> Beginner / Intermediate</span>
-              <a href="../index.html#contact" class="btn btn-primary glow-btn">Apply Now</a>
+            <div class="card-arrow">
+              <i class="fas fa-arrow-right"></i>
             </div>
           </div>
 
         </div>
-      </section>
+      </div>
 
 
-      <!-- ================= TRACK 2 ================= -->
-      <section class="career-category">
-        <div class="category-header">
-          <div class="category-title">
-            <i class="fas fa-users text-gradient"></i>
-            <h2>2. Client Outreach & Community Track</h2>
+      <!-- ================= LEVEL 2: SUB-ROLES LIST ================= -->
+      <div id="level-2" class="interactive-step">
+        <button class="btn-back" onclick="showLevel(1)"><i class="fas fa-chevron-left"></i> Back to Categories</button>
+        
+        <!-- Category: Software & AI Roles -->
+        <div id="roles-dev" class="role-list-group" style="display: none;">
+          <h2 class="step-title"><i class="fas fa-laptop-code text-accent"></i> Engineering Roles</h2>
+          
+          <div class="roles-grid">
+            <!-- ML Engineer -->
+            <div class="interactive-card role-card hover-lift" onclick="selectRole('ml')">
+              <div class="role-card-header">
+                <h3><i class="fas fa-brain text-accent"></i> AI & ML Engineer</h3>
+                <span class="job-badge">2 Openings</span>
+              </div>
+              <p class="role-mini-desc">Build predictive models, machine learning pipelines & FastAPI integrations.</p>
+              <div class="card-footer-info">
+                <span><i class="fas fa-chart-line"></i> 15% - 35% Order Share</span>
+                <span class="action-link">View Details <i class="fas fa-chevron-right"></i></span>
+              </div>
+            </div>
+
+            <!-- GenAI Developer -->
+            <div class="interactive-card role-card hover-lift" onclick="selectRole('genai')">
+              <div class="role-card-header">
+                <h3><i class="fas fa-robot text-accent"></i> GenAI & Agentic Dev</h3>
+                <span class="job-badge">1 Opening</span>
+              </div>
+              <p class="role-mini-desc">Develop AI agents, LLM chains, prompt workflows & RAG pipelines.</p>
+              <div class="card-footer-info">
+                <span><i class="fas fa-chart-line"></i> 20% - 40% Order Share</span>
+                <span class="action-link">View Details <i class="fas fa-chevron-right"></i></span>
+              </div>
+            </div>
+
+            <!-- Frontend/Web Dev -->
+            <div class="interactive-card role-card hover-lift" onclick="selectRole('web')">
+              <div class="role-card-header">
+                <h3><i class="fas fa-layer-group text-accent"></i> UI / Web Developer</h3>
+                <span class="job-badge">1 Opening</span>
+              </div>
+              <p class="role-mini-desc">Craft modern web UI layouts, interactive web apps & smooth animations.</p>
+              <div class="card-footer-info">
+                <span><i class="fas fa-chart-line"></i> 15% - 30% Order Share</span>
+                <span class="action-link">View Details <i class="fas fa-chevron-right"></i></span>
+              </div>
+            </div>
           </div>
-          <p class="category-desc">For communicators and networkers who bring freelance deals and expand our community presence.</p>
         </div>
 
-        <div class="job-grid single-column">
-
-          <!-- Outreach Role -->
-          <div class="job-card hover-lift">
-            <div class="job-header">
-              <div>
-                <h3 class="job-title"><i class="fas fa-bullhorn text-accent"></i> Client & Community Growth Lead</h3>
-                <span class="job-type"><i class="fas fa-comments"></i> Outreach & Management</span>
+        <!-- Category: Outreach & Community Roles -->
+        <div id="roles-outreach" class="role-list-group" style="display: none;">
+          <h2 class="step-title"><i class="fas fa-users text-accent"></i> Growth & Communication Roles</h2>
+          
+          <div class="roles-grid">
+            <!-- Growth Lead -->
+            <div class="interactive-card role-card hover-lift" onclick="selectRole('growth')">
+              <div class="role-card-header">
+                <h3><i class="fas fa-bullhorn text-accent"></i> Client & Community Lead</h3>
+                <span class="job-badge highlight">1 Opening</span>
               </div>
-              <span class="share-badge highlight">20% - 50% Deal Share</span>
+              <p class="role-mini-desc">Pitch client projects, close freelance deals & manage community platforms.</p>
+              <div class="card-footer-info">
+                <span><i class="fas fa-coins"></i> 20% - 50% Deal Revenue Share</span>
+                <span class="action-link">View Details <i class="fas fa-chevron-right"></i></span>
+              </div>
             </div>
-            <p class="job-desc">Bring new client orders, negotiate project requirements, manage client relations, and build our developer community.</p>
+          </div>
+        </div>
 
-            <div class="qualifications-box">
-              <h4><i class="fas fa-tasks"></i> Assessment & Skill Criteria</h4>
+      </div>
+
+
+      <!-- ================= LEVEL 3: DEEP-DIVE ROLE DETAILS ================= -->
+      <div id="level-3" class="interactive-step">
+        <button class="btn-back" onclick="showLevel(2)"><i class="fas fa-chevron-left"></i> Back to Roles</button>
+
+        <!-- Detail: ML Engineer -->
+        <div id="detail-ml" class="role-detail-view" style="display: none;">
+          <div class="detail-header-card">
+            <div>
+              <span class="job-badge"><i class="fas fa-users"></i> 2 Openings Available</span>
+              <h2>AI & ML Engineer</h2>
+              <p class="detail-subtitle"><i class="fas fa-laptop-code"></i> Software & AI Engineering Track</p>
+            </div>
+            <div class="pay-tag-box">
+              <span class="pay-label">Order Revenue Share</span>
+              <span class="pay-value">15% - 35%</span>
+            </div>
+          </div>
+
+          <div class="detail-content-body">
+            <div class="info-block">
+              <h4><i class="fas fa-info-circle"></i> Role Overview</h4>
+              <p>You will be responsible for creating machine learning models, cleaning datasets, writing deployment scripts using FastAPI or Streamlit, and delivering end-to-end ML modules for freelance clients.</p>
+            </div>
+
+            <div class="info-block">
+              <h4><i class="fas fa-check-circle"></i> Basic Qualifications Needed</h4>
               <ul>
-                <li><strong>Client Acquisition:</strong> Ability to identify, approach, and pitch project services to prospective clients.</li>
-                <li><strong>Social Reach:</strong> Instagram Followers & YouTube Subscribers count (helps in wider reach).</li>
-                <li><strong>Community Presence:</strong> Active Discord server / developer group member count.</li>
-                <li><strong>AI Tools Proficiency:</strong> Everyday use of ChatGPT, Midjourney, Canva AI, Notion AI for proposal building & communication.</li>
+                <li>Basic Python programming, NumPy, Pandas & Scikit-Learn.</li>
+                <li>Data preprocessing, model evaluation, and regression/classification knowledge.</li>
+                <li>Basic REST API development (FastAPI or Flask or Streamlit).</li>
+                <li>Understanding of Git and GitHub for team code collaboration.</li>
               </ul>
             </div>
 
-            <div class="pay-note">
-              <i class="fas fa-coins"></i> <strong>Pay Structure:</strong> Highest percentage cut (20% to 50%) for every successful client order brought and converted by you.
+            <div class="info-block pay-highlight">
+              <h4><i class="fas fa-coins"></i> Compensation & Pay Share</h4>
+              <p>You earn a direct percentage share (15% to 35%) of every client order based on your code contribution and model implementation complexity.</p>
             </div>
 
-            <div class="job-footer">
-              <span class="exp-tag"><i class="fas fa-headset"></i> Communication & Growth</span>
+            <div class="detail-action-footer">
+              <a href="../index.html#contact" class="btn btn-primary glow-btn">Apply For AI/ML Role</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail: GenAI Dev -->
+        <div id="detail-genai" class="role-detail-view" style="display: none;">
+          <div class="detail-header-card">
+            <div>
+              <span class="job-badge"><i class="fas fa-user"></i> 1 Opening Available</span>
+              <h2>GenAI & Agentic Developer</h2>
+              <p class="detail-subtitle"><i class="fas fa-robot"></i> Software & AI Engineering Track</p>
+            </div>
+            <div class="pay-tag-box">
+              <span class="pay-label">Order Revenue Share</span>
+              <span class="pay-value">20% - 40%</span>
+            </div>
+          </div>
+
+          <div class="detail-content-body">
+            <div class="info-block">
+              <h4><i class="fas fa-info-circle"></i> Role Overview</h4>
+              <p>Build LLM prompt templates, custom AI agents, vector database indexing, and interactive conversational interfaces for AI client applications.</p>
+            </div>
+
+            <div class="info-block">
+              <h4><i class="fas fa-check-circle"></i> Basic Qualifications Needed</h4>
+              <ul>
+                <li>Python scripting and OpenAI / Hugging Face API integration.</li>
+                <li>Basic experience with LangChain or LlamaIndex frameworks.</li>
+                <li>Prompt design, vector storage (FAISS/ChromaDB), and JSON parsing.</li>
+                <li>Ability to package AI scripts into simple web UI wrappers.</li>
+              </ul>
+            </div>
+
+            <div class="info-block pay-highlight">
+              <h4><i class="fas fa-coins"></i> Compensation & Pay Share</h4>
+              <p>Direct percentage share (20% to 40%) paid out upon delivery of AI workflows for client projects.</p>
+            </div>
+
+            <div class="detail-action-footer">
+              <a href="../index.html#contact" class="btn btn-primary glow-btn">Apply For GenAI Role</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail: Web Dev -->
+        <div id="detail-web" class="role-detail-view" style="display: none;">
+          <div class="detail-header-card">
+            <div>
+              <span class="job-badge"><i class="fas fa-user"></i> 1 Opening Available</span>
+              <h2>UI / Web Developer</h2>
+              <p class="detail-subtitle"><i class="fas fa-layer-group"></i> Software & AI Engineering Track</p>
+            </div>
+            <div class="pay-tag-box">
+              <span class="pay-label">Order Revenue Share</span>
+              <span class="pay-value">15% - 30%</span>
+            </div>
+          </div>
+
+          <div class="detail-content-body">
+            <div class="info-block">
+              <h4><i class="fas fa-info-circle"></i> Role Overview</h4>
+              <p>Design modern landing pages, build sleek frontend components, and connect web interfaces with backend APIs.</p>
+            </div>
+
+            <div class="info-block">
+              <h4><i class="fas fa-check-circle"></i> Basic Qualifications Needed</h4>
+              <ul>
+                <li>Solid HTML5, CSS3, JavaScript (ES6+) and responsive web design.</li>
+                <li>Basic React, Next.js or Tailwind CSS layout setup.</li>
+                <li>Connecting frontend UI with backend REST APIs.</li>
+                <li>Basic CSS animation or GSAP skills.</li>
+              </ul>
+            </div>
+
+            <div class="info-block pay-highlight">
+              <h4><i class="fas fa-coins"></i> Compensation & Pay Share</h4>
+              <p>Earn 15% to 30% revenue share per client project according to frontend/backend workload delivered.</p>
+            </div>
+
+            <div class="detail-action-footer">
+              <a href="../index.html#contact" class="btn btn-primary glow-btn">Apply For Web Role</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail: Growth Lead -->
+        <div id="detail-growth" class="role-detail-view" style="display: none;">
+          <div class="detail-header-card">
+            <div>
+              <span class="job-badge highlight"><i class="fas fa-star"></i> 1 Opening Available</span>
+              <h2>Client Outreach & Community Growth Lead</h2>
+              <p class="detail-subtitle"><i class="fas fa-comments"></i> Communication Track</p>
+            </div>
+            <div class="pay-tag-box highlight">
+              <span class="pay-label">Client Deal Share</span>
+              <span class="pay-value">20% - 50%</span>
+            </div>
+          </div>
+
+          <div class="detail-content-body">
+            <div class="info-block">
+              <h4><i class="fas fa-info-circle"></i> Role Overview</h4>
+              <p>Identify potential freelance clients, pitch project proposals, convert leads, manage client communications, and expand our developer community across social platforms.</p>
+            </div>
+
+            <div class="info-block">
+              <h4><i class="fas fa-tasks"></i> Assessment & Requirement Criteria</h4>
+              <ul>
+                <li><strong>Client Deal Acquisition:</strong> Good communication skills to approach and pitch software services to clients.</li>
+                <li><strong>Social Reach:</strong> Instagram Followers & YouTube Subscribers count (helps reach wider client network).</li>
+                <li><strong>Community Reach:</strong> Active Discord server / developer group member reach.</li>
+                <li><strong>AI Tools Usage:</strong> Daily use of ChatGPT, Midjourney, Canva AI, Notion AI for proposals and outreach.</li>
+              </ul>
+            </div>
+
+            <div class="info-block pay-highlight">
+              <h4><i class="fas fa-coins"></i> Compensation & High Commission</h4>
+              <p>Earn a massive 20% to 50% cut of total project value for every client order successfully brought in & closed by you.</p>
+            </div>
+
+            <div class="detail-action-footer">
               <a href="../index.html#contact" class="btn btn-primary glow-btn">Apply For Growth Role</a>
             </div>
           </div>
-
         </div>
-      </section>
+
+      </div>
 
     </main>
 
@@ -262,7 +393,82 @@
       <p>&copy; 2026 Quadra Collective. All rights reserved.</p>
     </footer>
 
-    <!-- Main JavaScript File -->
-    <script src="/js/script.js"></script>
+    <!-- Script for Background Animation & Navigation Logic -->
+    <script src="../js/script.js"></script>
+
+    <!-- Interactive Step-by-Step Logic -->
+    <script>
+      let currentCategory = '';
+      let currentRole = '';
+
+      function showLevel(level) {
+        document.getElementById('level-1').classList.remove('active');
+        document.getElementById('level-2').classList.remove('active');
+        document.getElementById('level-3').classList.remove('active');
+
+        const breadcrumbCat = document.getElementById('crumb-cat');
+        const breadcrumbRole = document.getElementById('crumb-role');
+        const sep1 = document.getElementById('sep-1');
+        const sep2 = document.getElementById('sep-2');
+
+        if (level === 1) {
+          document.getElementById('level-1').classList.add('active');
+          document.getElementById('step-subtext').innerText = "Choose a domain category below to explore active opportunities.";
+          sep1.style.display = 'none';
+          sep2.style.display = 'none';
+          breadcrumbCat.style.display = 'none';
+          breadcrumbRole.style.display = 'none';
+        } else if (level === 2) {
+          document.getElementById('level-2').classList.add('active');
+          document.getElementById('step-subtext').innerText = "Select a specific role to view qualifications and pay share details.";
+          sep1.style.display = 'inline';
+          sep2.style.display = 'none';
+          breadcrumbCat.style.display = 'inline';
+          breadcrumbRole.style.display = 'none';
+        } else if (level === 3) {
+          document.getElementById('level-3').classList.add('active');
+          document.getElementById('step-subtext').innerText = "Review the requirements and submit your application.";
+          sep1.style.display = 'inline';
+          sep2.style.display = 'inline';
+          breadcrumbCat.style.display = 'inline';
+          breadcrumbRole.style.display = 'inline';
+        }
+      }
+
+      function selectCategory(cat) {
+        currentCategory = cat;
+        document.getElementById('roles-dev').style.display = 'none';
+        document.getElementById('roles-outreach').style.display = 'none';
+
+        if (cat === 'dev') {
+          document.getElementById('roles-dev').style.display = 'block';
+          document.getElementById('crumb-cat').innerText = 'Software & AI Engineering';
+        } else {
+          document.getElementById('roles-outreach').style.display = 'block';
+          document.getElementById('crumb-cat').innerText = 'Client Outreach & Community';
+        }
+        showLevel(2);
+      }
+
+      function selectRole(role) {
+        currentRole = role;
+        document.querySelectorAll('.role-detail-view').forEach(el => el.style.display = 'none');
+
+        if (role === 'ml') {
+          document.getElementById('detail-ml').style.display = 'block';
+          document.getElementById('crumb-role').innerText = 'AI & ML Engineer';
+        } else if (role === 'genai') {
+          document.getElementById('detail-genai').style.display = 'block';
+          document.getElementById('crumb-role').innerText = 'GenAI Developer';
+        } else if (role === 'web') {
+          document.getElementById('detail-web').style.display = 'block';
+          document.getElementById('crumb-role').innerText = 'UI / Web Developer';
+        } else if (role === 'growth') {
+          document.getElementById('detail-growth').style.display = 'block';
+          document.getElementById('crumb-role').innerText = 'Client Outreach Lead';
+        }
+        showLevel(3);
+      }
+    </script>
   </body>
 </html>

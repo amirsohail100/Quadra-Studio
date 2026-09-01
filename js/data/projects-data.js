@@ -290,7 +290,7 @@ const projectsData = {
       placeholderText: "Game+App",
       tags: ["JavaScript", "DOM Manipulation"],
       demoUrl: "https://devsphere-ai-dual-mode-custom-llm-studio-swunqi7fl82zvhcw5ecuw.streamlit.app/",
-      githubUrl: "https://github.com/amirsohail100/DevSphere-AI-Dual-Mode-Custom-LLM-Studio"
+      githubUrl: "https://github.com/amirsohail100/Rock-Paper-Scissors-Game"
     },
     {
       title: "Multi-Modal Voice Agent",
@@ -301,7 +301,7 @@ const projectsData = {
       placeholderText: "TaskFlow",
       tags: ["JavaScript", "CSS3"],
       demoUrl: "https://quizgenie-ai-nuyyru4xasm8qlxn2m82zr.streamlit.app/",
-      githubUrl: "https://github.com/amirsohail100/QuizGenie-AI"
+      githubUrl: "https://github.com/amirsohail100/MY_TODO_List-in-use-agy-CLI-tool"
     },
     {
       title: "Multi-Modal Voice Agent",

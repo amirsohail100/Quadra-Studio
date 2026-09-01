@@ -3282,3 +3282,379 @@ body {
   color: var(--text-main);
   border: 1px solid var(--border-color);
 }
+
+/* ====================================================
+   JOIN_US LIGHT THEME FIX (LEVEL 2 & LEVEL 3 ONLY)
+   ==================================================== */
+
+/* --- Level 2 & 3: Back Link & Breadcrumbs --- */
+body.light-theme [class*="back"],
+body.light-theme .crumb.active {
+  color: #0284c7 !important;
+  font-weight: 600 !important;
+}
+
+/* --- Level 2: Role Cards Text & Badges --- */
+body.light-theme .role-card {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06) !important;
+}
+
+body.light-theme .role-card h3 {
+  color: #0f172a !important;
+}
+
+body.light-theme .role-card p {
+  color: #475569 !important;
+}
+
+/* Fix Cyan "Openings" Badge inside Role Cards */
+body.light-theme .role-card [class*="open"] {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1px solid #bae6fd !important;
+  font-weight: 700 !important;
+}
+
+/* Fix Cyan Footer Text ("15%-35% Order Share" & "View Details") */
+body.light-theme .role-card a,
+body.light-theme .role-card span,
+body.light-theme .role-card [class*="detail"] {
+  color: #0284c7 !important;
+  font-weight: 600 !important;
+}
+
+/* --- Level 3: Role Detail View --- */
+body.light-theme .role-detail-view,
+body.light-theme .detail-header-card {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07) !important;
+}
+
+/* Header Top-Left Openings Badge */
+body.light-theme .detail-header-card [class*="open"] {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1px solid #bae6fd !important;
+  font-weight: 700 !important;
+}
+
+/* Header Top-Right Revenue Share Box */
+body.light-theme .detail-header-card [class*="revenue"],
+body.light-theme .detail-header-card [class*="pay"] {
+  background-color: #f0f9ff !important;
+  border: 1px solid #bae6fd !important;
+}
+
+body.light-theme .detail-header-card [class*="revenue"] *,
+body.light-theme .detail-header-card [class*="pay"] * {
+  color: #0369a1 !important;
+}
+
+/* Inner Info Blocks (Overview, Qualifications, Compensation) */
+/* Gives blocks a distinct soft bg so they don't blend into the main card */
+body.light-theme .info-block {
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+}
+
+body.light-theme .info-block h3,
+body.light-theme .info-block h4 {
+  color: #0f172a !important;
+}
+
+body.light-theme .info-block p,
+body.light-theme .info-block li {
+  color: #334155 !important;
+}
+
+/* ====================================================
+   JOIN_US.HTML CAREERS PAGE - LIGHT / DARK MODE FIX
+   ==================================================== */
+
+/* ----------------------------------------------------
+   1. LIGHT MODE STYLES (When body does NOT have .dark-theme)
+   ---------------------------------------------------- */
+body:not(.dark-theme) .interactive-card,
+body:not(.dark-theme) .category-card,
+body:not(.dark-theme) .role-card,
+body:not(.dark-theme) .role-detail-view,
+body:not(.dark-theme) .detail-header-card,
+body:not(.dark-theme) .info-block {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06) !important;
+  color: #0f172a !important;
+}
+
+/* Light Mode Text Colors */
+body:not(.dark-theme) .interactive-card h3,
+body:not(.dark-theme) .role-card-header h3,
+body:not(.dark-theme) .detail-header-card h2,
+body:not(.dark-theme) .info-block h4,
+body:not(.dark-theme) .step-title,
+body:not(.dark-theme) .careers-hero h1 {
+  color: #0f172a !important;
+}
+
+body:not(.dark-theme) .interactive-card p,
+body:not(.dark-theme) .role-mini-desc,
+body:not(.dark-theme) .info-block p,
+body:not(.dark-theme) .info-block li,
+body:not(.dark-theme) .hero-subtext {
+  color: #475569 !important;
+}
+
+/* Light Mode Breadcrumb & Category Chips */
+body:not(.dark-theme) .sub-roles-preview span,
+body:not(.dark-theme) .breadcrumb-bar {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+body:not(.dark-theme) .crumb {
+  color: #475569 !important;
+}
+
+body:not(.dark-theme) .crumb.active {
+  color: #0284c7 !important;
+}
+
+/* ----------------------------------------------------
+   2. DARK MODE STYLES (When body has .dark-theme)
+   ---------------------------------------------------- */
+body.dark-theme .interactive-card,
+body.dark-theme .category-card,
+body.dark-theme .role-card,
+body.dark-theme .role-detail-view,
+body.dark-theme .detail-header-card,
+body.dark-theme .info-block {
+  background: #1e293b !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  color: #f8fafc !important;
+}
+
+/* Dark Mode Text Colors */
+body.dark-theme .interactive-card h3,
+body.dark-theme .role-card-header h3,
+body.dark-theme .detail-header-card h2,
+body.dark-theme .info-block h4,
+body.dark-theme .step-title {
+  color: #f8fafc !important;
+}
+
+body.dark-theme .interactive-card p,
+body.dark-theme .role-mini-desc,
+body.dark-theme .info-block p,
+body.dark-theme .info-block li,
+body.dark-theme .hero-subtext {
+  color: #94a3b8 !important;
+}
+
+/* Dark Mode Breadcrumb & Category Chips */
+body.dark-theme .sub-roles-preview span,
+body.dark-theme .breadcrumb-bar {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #cbd5e1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+body.dark-theme .crumb {
+  color: #94a3b8 !important;
+}
+
+body.dark-theme .crumb.active {
+  color: #38bdf8 !important;
+}
+
+/* ====================================================
+   JOIN_US LIGHT THEME FIX (LEVEL 2 & LEVEL 3 ONLY)
+   ==================================================== */
+
+/* --- Level 2 & 3: Back Link & Breadcrumbs --- */
+body.light-theme [class*="back"],
+body.light-theme .crumb.active {
+  color: #0284c7 !important;
+  font-weight: 600 !important;
+}
+
+/* --- Level 2: Role Cards Text & Badges --- */
+body.light-theme .role-card {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06) !important;
+}
+
+body.light-theme .role-card h3 {
+  color: #0f172a !important;
+}
+
+body.light-theme .role-card p {
+  color: #475569 !important;
+}
+
+/* Fix Cyan "Openings" Badge inside Role Cards */
+body.light-theme .role-card [class*="open"] {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1px solid #bae6fd !important;
+  font-weight: 700 !important;
+}
+
+/* Fix Cyan Footer Text ("15%-35% Order Share" & "View Details") */
+body.light-theme .role-card a,
+body.light-theme .role-card span,
+body.light-theme .role-card [class*="detail"] {
+  color: #0284c7 !important;
+  font-weight: 600 !important;
+}
+
+/* --- Level 3: Role Detail View --- */
+body.light-theme .role-detail-view,
+body.light-theme .detail-header-card {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07) !important;
+}
+
+/* Header Top-Left Openings Badge */
+body.light-theme .detail-header-card [class*="open"] {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1px solid #bae6fd !important;
+  font-weight: 700 !important;
+}
+
+/* Header Top-Right Revenue Share Box */
+body.light-theme .detail-header-card [class*="revenue"],
+body.light-theme .detail-header-card [class*="pay"] {
+  background-color: #f0f9ff !important;
+  border: 1px solid #bae6fd !important;
+}
+
+body.light-theme .detail-header-card [class*="revenue"] *,
+body.light-theme .detail-header-card [class*="pay"] * {
+  color: #0369a1 !important;
+}
+
+/* Inner Info Blocks (Overview, Qualifications, Compensation) */
+/* Gives blocks a distinct soft bg so they don't blend into the main card */
+body.light-theme .info-block {
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+}
+
+body.light-theme .info-block h3,
+body.light-theme .info-block h4 {
+  color: #0f172a !important;
+}
+
+body.light-theme .info-block p,
+body.light-theme .info-block li {
+  color: #334155 !important;
+}
+
+/* ====================================================
+   JOIN_US LEVEL 3 (ROLE DETAIL VIEW) LIGHT MODE FIX
+   ==================================================== */
+
+/* 1. Back Link ("< Back to Roles") Contrast */
+body.light-theme [class*="back"],
+body:not(.dark-theme) [class*="back"] {
+  color: #0284c7 !important;
+  font-weight: 600 !important;
+}
+
+/* 2. Top-Left Badge ("2 Openings Available") */
+body.light-theme .detail-header-card > div:first-child span,
+body.light-theme [class*="openings-badge"],
+body:not(.dark-theme) .detail-header-card > div:first-child span {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1px solid #bae6fd !important;
+  font-weight: 700 !important;
+}
+
+/* 3. Subtitle Text ("Software & AI Engineering Track") */
+body.light-theme .detail-header-card p,
+body.light-theme .detail-header-card span,
+body:not(.dark-theme) .detail-header-card p {
+  color: #475569 !important;
+}
+
+/* 4. Top-Right "ORDER REVENUE SHARE" Box */
+body.light-theme .detail-header-card > div:last-child,
+body.light-theme [class*="revenue-share"],
+body:not(.dark-theme) .detail-header-card > div:last-child {
+  background-color: #f0f9ff !important;
+  border: 1px solid #bae6fd !important;
+  border-radius: 8px !important;
+}
+
+body.light-theme .detail-header-card > div:last-child *,
+body:not(.dark-theme) .detail-header-card > div:last-child * {
+  color: #0369a1 !important;
+  font-weight: 700 !important;
+}
+
+/* 5. Inner Info Blocks (Overview, Qualifications, Compensation) */
+body.light-theme .info-block,
+body.light-theme .role-detail-view > div,
+body:not(.dark-theme) .info-block {
+  background-color: #f8fafc !important; /* Soft neutral background to separate from main white card */
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+}
+
+/* Inner Block Titles (Role Overview, Basic Qualifications, etc.) */
+body.light-theme .info-block h3,
+body.light-theme .info-block h4,
+body.light-theme .info-block strong,
+body:not(.dark-theme) .info-block h3,
+body:not(.dark-theme) .info-block h4 {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+/* Inner Block Text & Bullets */
+body.light-theme .info-block p,
+body.light-theme .info-block li,
+body:not(.dark-theme) .info-block p,
+body:not(.dark-theme) .info-block li {
+  color: #334155 !important;
+  font-weight: 500 !important;
+}
+
+/* ====================================================
+   FIX: REMOVE INNER BORDERS FROM REVENUE SHARE BOX
+   ==================================================== */
+
+/* 1. Strip inner borders and backgrounds from text elements inside the Revenue Share box */
+body.light-theme .detail-header-card > div:last-child *,
+body.light-theme [class*="revenue-share"] *,
+body:not(.dark-theme) .detail-header-card > div:last-child *,
+body:not(.dark-theme) [class*="revenue-share"] * {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0 !important;
+}
+
+/* 2. Unified main outer container for Revenue Share */
+body.light-theme .detail-header-card > div:last-child,
+body.light-theme [class*="revenue-share"],
+body:not(.dark-theme) .detail-header-card > div:last-child,
+body:not(.dark-theme) [class*="revenue-share"] {
+  background-color: #f0f9ff !important;
+  border: 1px solid #bae6fd !important;
+  border-radius: 8px !important;
+  padding: 10px 16px !important;
+}

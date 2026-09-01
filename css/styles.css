@@ -2551,3 +2551,271 @@ body:not(.dark-theme) .twitter-card .social-icon,
   flex-shrink: 0; /* Icon ka size flex box me shrink hone se rokne ke liye */
   display: block;
 }
+
+/* Careers Hero Section */
+.careers-hero {
+  text-align: center;
+  padding: 140px 20px 40px;
+}
+
+.careers-hero h1 {
+  font-size: 2.8rem;
+  margin-top: 15px;
+}
+
+.careers-hero .hero-subtext {
+  max-width: 600px;
+  margin: 15px auto 0;
+  color: #a0aec0;
+  font-size: 1.1rem;
+}
+
+/* Container & Grid Layout */
+.careers-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 100px;
+}
+
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 25px;
+}
+
+/* Glassmorphism Job Card */
+.job-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 28px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 242, 254, 0.15);
+}
+
+/* Card Header */
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.job-title {
+  font-size: 1.35rem;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.job-type {
+  font-size: 0.85rem;
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.openings-badge {
+  background: rgba(0, 242, 254, 0.1);
+  color: #00f2fe;
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.job-desc {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Qualifications Section */
+.qualifications-box {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 25px;
+}
+
+.qualifications-box h4 {
+  font-size: 0.9rem;
+  color: #38bdf8;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qualifications-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.qualifications-box li {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.qualifications-box li:last-child {
+  margin-bottom: 0;
+}
+
+.qualifications-box li::before {
+  content: "•";
+  color: #00f2fe;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Card Footer */
+.job-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.exp-tag {
+  font-size: 0.8rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .job-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .job-footer {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .job-footer .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ========================================== */
+/*     CAREERS PAGE HIERARCHY STYLING         */
+/* ========================================== */
+
+.careers-hero {
+  text-align: center;
+  padding: 130px 20px 20px;
+}
+
+.careers-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px; /* Hierarchy separation between tracks */
+}
+
+/* Category Headers */
+.career-category {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.category-header {
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 15px;
+}
+
+.category-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.category-title h2 {
+  font-size: 1.6rem;
+  color: #fff;
+}
+
+.category-desc {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin-top: 5px;
+}
+
+/* Grid Layouts */
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.job-grid.single-column {
+  grid-template-columns: 1fr;
+}
+
+/* Share Badges & Pay Notes */
+.text-accent {
+  color: #38bdf8;
+  margin-right: 6px;
+}
+
+.share-badge {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.share-badge.highlight {
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+.pay-note {
+  background: rgba(0, 242, 254, 0.05);
+  border-left: 3px solid #00f2fe;
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 18px;
+  font-size: 0.86rem;
+  color: #e2e8f0;
+}
+
+.pay-note strong {
+  color: #00f2fe;
+}
+

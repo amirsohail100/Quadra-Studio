@@ -268,7 +268,7 @@ const projectsData = {
       placeholderText: "Todo+App",
       tags: ["JavaScript", "CSS3", "HTML5"],
       demoUrl: "https://personachat-vip-studio-invsoekvfg6vdmpwhf3eb8.streamlit.app/",
-      githubUrl: "https://github.com/amirsohail100/PersonaChat-VIP-Studio"
+      githubUrl: "https://github.com/amirsohail100/Todo-List-Application"
     },
     {
       title: "CapsuleHub Platform",

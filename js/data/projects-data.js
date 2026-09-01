@@ -279,7 +279,7 @@ const projectsData = {
       placeholderText: "Weather+App",
       tags: ["JavaScript", "REST API", "CSS3"],
       demoUrl: "https://lexilearn-ai-rxak3rngf9pynappytfnc9f.streamlit.app/",
-      githubUrl: "https://github.com/amirsohail100/LexiLearn-AI"
+      githubUrl: "https://github.com/amirsohail100/HTML_CSS_JS_Weather_App"
     },
     {
       title: "Multi-Modal Voice Agent",

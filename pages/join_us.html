@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Careers | Quadra Collective</title>
+    <title>Careers & Opportunities | Quadra Collective</title>
     <link
       rel="icon"
       type="image/svg+xml"
@@ -21,7 +21,7 @@
     />
   </head>
   <body class="dark-theme">
-    <!-- Background Canvases -->
+    <!-- Background Canvases (Animation Setup) -->
     <canvas id="bg-canvas"></canvas>
     <canvas id="particle-canvas"></canvas>
 
@@ -88,151 +88,181 @@
       </ul>
     </nav>
 
-    <!-- Careers Hero Section -->
+    <!-- Careers Hero Header -->
     <header class="careers-hero reveal-on-scroll">
-      <span class="badge">Open Opportunities</span>
-      <h1 class="gradient-text">Build The Future With Us</h1>
+      <span class="badge">Join Quadra Collective</span>
+      <h1 class="gradient-text">Open Roles & Revenue Share</h1>
       <p class="hero-subtext">
-        We are looking for creative minds, problem solvers, and AI enthusiasts
-        to help build next-generation applications.
+        Explore our structured career tracks. Pay is contribution-based (Order Percentage Share) for project team members.
       </p>
     </header>
 
-    <!-- Job Openings Grid Section -->
-    <section class="careers-container">
-      <div class="job-grid">
-        <!-- Job Card 1 -->
-        <div class="job-card hover-lift">
-          <div class="job-header">
-            <div>
-              <h3 class="job-title">AI & ML Engineer</h3>
-              <span class="job-type"
-                ><i class="fas fa-globe"></i> Remote / Hybrid</span
-              >
-            </div>
-            <span class="openings-badge">2 Openings</span>
-          </div>
-          <p class="job-desc">
-            Design, train, and deploy AI Agents, LLM pipelines, and computer
-            vision models into scalable web services.
-          </p>
+    <!-- Main Content Container with Hierarchy -->
+    <main class="careers-container">
 
-          <div class="qualifications-box">
-            <h4><i class="fas fa-check-circle"></i> Key Qualifications</h4>
-            <ul>
-              <li>
-                Proficiency in Python, TensorFlow / PyTorch, and Scikit-Learn
-              </li>
-              <li>
-                Experience with LangChain, Agentic AI architectures, and Vector
-                DBs
-              </li>
-              <li>
-                Hands-on experience deploying REST APIs using FastAPI or Flask
-              </li>
-              <li>
-                Understanding of Git, Docker, and MLOps deployment pipelines
-              </li>
-            </ul>
+      <!-- ================= TRACK 1 ================= -->
+      <section class="career-category">
+        <div class="category-header">
+          <div class="category-title">
+            <i class="fas fa-code text-gradient"></i>
+            <h2>1. Software & AI Engineering Track</h2>
           </div>
-
-          <div class="job-footer">
-            <span class="exp-tag"
-              ><i class="fas fa-briefcase"></i> 0-2 Years / Freelance</span
-            >
-            <a href="../index.html#contact" class="btn btn-primary glow-btn"
-              >Apply Now</a
-            >
-          </div>
+          <p class="category-desc">For developers who build models, AI pipelines, and web interfaces for client orders.</p>
         </div>
 
-        <!-- Job Card 2 -->
-        <div class="job-card hover-lift">
-          <div class="job-header">
-            <div>
-              <h3 class="job-title">Frontend & UI/UX Developer</h3>
-              <span class="job-type"><i class="fas fa-globe"></i> Remote</span>
+        <div class="job-grid">
+
+          <!-- Sub Role 1: ML Developer -->
+          <div class="job-card hover-lift">
+            <div class="job-header">
+              <div>
+                <h3 class="job-title"><i class="fas fa-brain text-accent"></i> ML Developer</h3>
+                <span class="job-type"><i class="fas fa-laptop-code"></i> Project-Based</span>
+              </div>
+              <span class="share-badge">15% - 35% Order Share</span>
             </div>
-            <span class="openings-badge">1 Opening</span>
-          </div>
-          <p class="job-desc">
-            Create sleek, animated, and responsive user interfaces using modern
-            CSS frameworks and 3D web technologies.
-          </p>
+            <p class="job-desc">Build machine learning pipelines, predictive analytics models, and deploy APIs.</p>
 
-          <div class="qualifications-box">
-            <h4><i class="fas fa-check-circle"></i> Key Qualifications</h4>
-            <ul>
-              <li>Strong foundation in HTML5, CSS3, JavaScript (ES6+)</li>
-              <li>
-                Experience with React, Next.js, Tailwind CSS, or GSAP animations
-              </li>
-              <li>Familiarity with Three.js / React Three Fiber is a plus</li>
-              <li>
-                Eye for high-fidelity UI wireframing and interactive design
-              </li>
-            </ul>
+            <div class="qualifications-box">
+              <h4><i class="fas fa-check-circle"></i> Basic Qualifications Needed</h4>
+              <ul>
+                <li>Basic Python, NumPy, Pandas, and Scikit-Learn</li>
+                <li>Data preprocessing, regression, classification & model testing</li>
+                <li>Basic API creation using FastAPI or Streamlit</li>
+                <li>Basic Git & GitHub usage</li>
+              </ul>
+            </div>
+
+            <div class="pay-note">
+              <i class="fas fa-coins"></i> <strong>Pay Structure:</strong> Percentage share per client order depending on model complexity & contribution.
+            </div>
+
+            <div class="job-footer">
+              <span class="exp-tag"><i class="fas fa-seedling"></i> Beginner / Intermediate</span>
+              <a href="../index.html#contact" class="btn btn-primary glow-btn">Apply Now</a>
+            </div>
           </div>
 
-          <div class="job-footer">
-            <span class="exp-tag"
-              ><i class="fas fa-briefcase"></i> Entry Level / Open to All</span
-            >
-            <a href="../index.html#contact" class="btn btn-primary glow-btn"
-              >Apply Now</a
-            >
+          <!-- Sub Role 2: GenAI Developer -->
+          <div class="job-card hover-lift">
+            <div class="job-header">
+              <div>
+                <h3 class="job-title"><i class="fas fa-robot text-accent"></i> GenAI Developer</h3>
+                <span class="job-type"><i class="fas fa-laptop-code"></i> Project-Based</span>
+              </div>
+              <span class="share-badge">20% - 40% Order Share</span>
+            </div>
+            <p class="job-desc">Build AI Agents, LLM chains, and prompt automation workflows for modern web products.</p>
+
+            <div class="qualifications-box">
+              <h4><i class="fas fa-check-circle"></i> Basic Qualifications Needed</h4>
+              <ul>
+                <li>Python scripting & OpenAI / HuggingFace API integration</li>
+                <li>Basic LangChain or LlamaIndex workflow setup</li>
+                <li>Prompt design, vector embeddings & JSON parsing</li>
+                <li>Connecting AI backends with simple web frontends</li>
+              </ul>
+            </div>
+
+            <div class="pay-note">
+              <i class="fas fa-coins"></i> <strong>Pay Structure:</strong> Direct percentage earnings from every AI agent / LLM project completed.
+            </div>
+
+            <div class="job-footer">
+              <span class="exp-tag"><i class="fas fa-seedling"></i> Beginner / Intermediate</span>
+              <a href="../index.html#contact" class="btn btn-primary glow-btn">Apply Now</a>
+            </div>
           </div>
+
+          <!-- Sub Role 3: Web Developer -->
+          <div class="job-card hover-lift">
+            <div class="job-header">
+              <div>
+                <h3 class="job-title"><i class="fas fa-layer-group text-accent"></i> Web Developer</h3>
+                <span class="job-type"><i class="fas fa-laptop-code"></i> Project-Based</span>
+              </div>
+              <span class="share-badge">15% - 30% Order Share</span>
+            </div>
+            <p class="job-desc">Design responsive landing pages, interactive web tools, and modern user interfaces.</p>
+
+            <div class="qualifications-box">
+              <h4><i class="fas fa-check-circle"></i> Basic Qualifications Needed</h4>
+              <ul>
+                <li>HTML5, CSS3, JavaScript (ES6+), and layout responsiveness</li>
+                <li>Basic React, Next.js, or Tailwind CSS setup</li>
+                <li>Connecting frontend UI with backend REST APIs</li>
+                <li>Basic animation skills (CSS keyframes or GSAP)</li>
+              </ul>
+            </div>
+
+            <div class="pay-note">
+              <i class="fas fa-coins"></i> <strong>Pay Structure:</strong> Fixed percentage per layout or web module delivered.
+            </div>
+
+            <div class="job-footer">
+              <span class="exp-tag"><i class="fas fa-seedling"></i> Beginner / Intermediate</span>
+              <a href="../index.html#contact" class="btn btn-primary glow-btn">Apply Now</a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ================= TRACK 2 ================= -->
+      <section class="career-category">
+        <div class="category-header">
+          <div class="category-title">
+            <i class="fas fa-users text-gradient"></i>
+            <h2>2. Client Outreach & Community Track</h2>
+          </div>
+          <p class="category-desc">For communicators and networkers who bring freelance deals and expand our community presence.</p>
         </div>
 
-        <!-- Job Card 3 -->
-        <div class="job-card hover-lift">
-          <div class="job-header">
-            <div>
-              <h3 class="job-title">Discord & Automation Specialist</h3>
-              <span class="job-type"><i class="fas fa-globe"></i> Remote</span>
+        <div class="job-grid single-column">
+
+          <!-- Outreach Role -->
+          <div class="job-card hover-lift">
+            <div class="job-header">
+              <div>
+                <h3 class="job-title"><i class="fas fa-bullhorn text-accent"></i> Client & Community Growth Lead</h3>
+                <span class="job-type"><i class="fas fa-comments"></i> Outreach & Management</span>
+              </div>
+              <span class="share-badge highlight">20% - 50% Deal Share</span>
             </div>
-            <span class="openings-badge">1 Opening</span>
-          </div>
-          <p class="job-desc">
-            Manage community engagement, build custom Discord bots, and maintain
-            server infrastructure and automated pingers.
-          </p>
+            <p class="job-desc">Bring new client orders, negotiate project requirements, manage client relations, and build our developer community.</p>
 
-          <div class="qualifications-box">
-            <h4><i class="fas fa-check-circle"></i> Key Qualifications</h4>
-            <ul>
-              <li>
-                Experience building custom Discord bots (`discord.py` or
-                `discord.js`)
-              </li>
-              <li>
-                Understanding of server uptime, webhooks, and cloud ping
-                management
-              </li>
-              <li>
-                Good communication skills for Discord community moderation
-              </li>
-              <li>Basic knowledge of Python or JavaScript scripting</li>
-            </ul>
+            <div class="qualifications-box">
+              <h4><i class="fas fa-tasks"></i> Assessment & Skill Criteria</h4>
+              <ul>
+                <li><strong>Client Acquisition:</strong> Ability to identify, approach, and pitch project services to prospective clients.</li>
+                <li><strong>Social Reach:</strong> Instagram Followers & YouTube Subscribers count (helps in wider reach).</li>
+                <li><strong>Community Presence:</strong> Active Discord server / developer group member count.</li>
+                <li><strong>AI Tools Proficiency:</strong> Everyday use of ChatGPT, Midjourney, Canva AI, Notion AI for proposal building & communication.</li>
+              </ul>
+            </div>
+
+            <div class="pay-note">
+              <i class="fas fa-coins"></i> <strong>Pay Structure:</strong> Highest percentage cut (20% to 50%) for every successful client order brought and converted by you.
+            </div>
+
+            <div class="job-footer">
+              <span class="exp-tag"><i class="fas fa-headset"></i> Communication & Growth</span>
+              <a href="../index.html#contact" class="btn btn-primary glow-btn">Apply For Growth Role</a>
+            </div>
           </div>
 
-          <div class="job-footer">
-            <span class="exp-tag"
-              ><i class="fas fa-briefcase"></i> Beginner Friendly</span
-            >
-            <a href="../index.html#contact" class="btn btn-primary glow-btn"
-              >Apply Now</a
-            >
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+    </main>
 
     <!-- Footer -->
     <footer>
       <p>&copy; 2026 Quadra Collective. All rights reserved.</p>
     </footer>
 
+    <!-- Main JavaScript File -->
     <script src="../js/script.js"></script>
   </body>
 </html>

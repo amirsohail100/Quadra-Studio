@@ -375,3 +375,98 @@ if(contactForm) {
     e.target.reset();
   });
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('project-search-input');
+  const clearBtn = document.getElementById('clear-search-btn');
+  const filterChips = document.querySelectorAll('.filter-chip');
+  const noResultsMsg = document.getElementById('no-results-msg');
+
+  let activeCategory = 'all';
+
+  // Section Mapping
+  const sectionMap = {
+    'ml': document.getElementById('ml-section'),
+    'dl': document.getElementById('dl-section'),
+    'genai': document.getElementById('genai-section'),
+    'web': document.getElementById('web-section')
+  };
+
+  function filterProjects() {
+    const query = searchInput.value.toLowerCase().trim();
+    let totalVisibleProjects = 0;
+
+    // Toggle clear search button
+    clearBtn.style.display = query.length > 0 ? 'block' : 'none';
+
+    Object.keys(sectionMap).forEach(cat => {
+      const section = sectionMap[cat];
+      if (!section) return;
+
+      // Rule 1: Category Check
+      const isCategoryMatching = (activeCategory === 'all' || activeCategory === cat);
+
+      if (!isCategoryMatching) {
+        section.style.display = 'none';
+        return;
+      }
+
+      // Rule 2: Search Input Matching inside active category
+      const cards = section.querySelectorAll('.showcase-card');
+      let visibleCardsInSection = 0;
+
+      cards.forEach(card => {
+        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
+        const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent.toLowerCase()).join(' ');
+
+        const isSearchMatching = !query || title.includes(query) || desc.includes(query) || tags.includes(query);
+
+        if (isSearchMatching) {
+          card.style.display = 'block';
+          visibleCardsInSection++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Show/Hide Section based on match count
+      if (visibleCardsInSection > 0) {
+        section.style.display = 'block';
+        totalVisibleProjects += visibleCardsInSection;
+      } else {
+        section.style.display = 'none';
+      }
+    });
+
+    // Show "No Results" message if zero matches
+    if (noResultsMsg) {
+      noResultsMsg.style.display = totalVisibleProjects === 0 ? 'block' : 'none';
+    }
+  }
+
+  // Event Listeners for Filter Chips
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      filterChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeCategory = chip.getAttribute('data-category');
+      filterProjects();
+    });
+  });
+
+  // Event Listener for Search Input
+  if (searchInput) {
+    searchInput.addEventListener('input', filterProjects);
+  }
+
+  // Event Listener for Clear Button
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      filterProjects();
+      searchInput.focus();
+    });
+  }
+});

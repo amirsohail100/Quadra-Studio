@@ -474,30 +474,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* ==========================================================================
-   MAIN.JS (Adding Interview Bot Functionality)
+   MAIN.JS - INTERVIEW BOT MODULE
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-  
-  // 1. आपका पुराना कोड (Theme Switcher, Canvas, etc.) यहाँ रहेगा...
-  // initThemeToggle();
-  // initCanvasAnimation();
-
-
-  // 2. इंटरव्यू बॉट की लॉजिक को नीचे एक सेफ फंक्शन में कॉल करें:
   initInterviewBot();
 });
 
-
-/**
- * Interview Bot Module - Safe Initializer
- */
 function initInterviewBot() {
   const roleCard = document.getElementById("role-select-card");
   const quizCard = document.getElementById("quiz-card");
   const resultCard = document.getElementById("result-card");
 
-  // अगर वर्तमान पेज पर इंटरव्यू बॉट के DOM एलिमेंट्स नहीं हैं, तो आगे न बढ़ें
   if (!roleCard || !quizCard || !resultCard) return;
 
   const questionText = document.getElementById("question-text");
@@ -508,14 +496,14 @@ function initInterviewBot() {
   const progressPercent = document.getElementById("progress-percent");
   const progressFill = document.getElementById("progress-fill");
 
-  // App State
+  // State
   let selectedRole = "";
   let currentQuestions = [];
   let currentIndex = 0;
   let userAnswers = [];
   let selectedOptionIndex = null;
 
-  // Role Selection Click
+  // Role Selection
   document.querySelectorAll(".role-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
       selectedRole = btn.getAttribute("data-role");
@@ -526,37 +514,37 @@ function initInterviewBot() {
     });
   });
 
-  // Fetch Questions Function
+  // Fetch Questions (Backend Call)
   async function fetchQuestionsForRole(role) {
-    questionText.textContent = "सवाल लोड हो रहे हैं...";
+    questionText.textContent = "Fetching assessment questions...";
     optionsContainer.innerHTML = "";
 
     try {
-      /* 
-         आपकी FastAPI Backend Call:
-         const res = await fetch(`/api/v1/interview/questions?role=${encodeURIComponent(role)}`);
-         const data = await res.json();
-         currentQuestions = data.questions; 
+      /*
+        FastAPI Backend Call Example:
+        const res = await fetch(`/api/v1/interview/questions?role=${encodeURIComponent(role)}`);
+        const data = await res.json();
+        currentQuestions = data.questions;
       */
 
-      // Temporary Mock Data Structure
+      // Dynamic Schema Response structure placeholder
       currentQuestions = [
         {
           id: "q1",
-          question: "Javascript में Event Loop का मुख्य कार्य क्या है?",
+          question: "What is the primary role of the Event Loop in JavaScript?",
           options: [
-            "DOM को रेंडर करना",
-            "Call Stack और Callback Queue का प्रबंधन करना",
-            "CSS स्टाइल को अपडेट करना",
-            "Memory Leak रोकना"
+            "Render DOM nodes to screen",
+            "Manage Call Stack and Callback Queue execution",
+            "Compile CSS style declarations",
+            "Prevent memory leaks automatically"
           ],
           correct_index: 1
         },
         {
           id: "q2",
-          question: "FastAPI में asynchronous request handling के लिए कौन सा keyword उपयोग होता है?",
-          options: ["def", "async def", "await def", "future"],
-          correct_index: 1
+          question: "Which decorator is used in FastAPI to define a GET endpoint?",
+          options: ["@app.get()", "@app.route_get()", "@app.fetch()", "@app.request_get()"],
+          correct_index: 0
         }
       ];
 
@@ -565,11 +553,11 @@ function initInterviewBot() {
       renderQuestion();
 
     } catch (err) {
-      questionText.textContent = "प्रश्न लोड करने में दिक्कत आई, कृपया बैकएंड चेक करें।";
+      questionText.textContent = "Failed to load questions. Please check your backend connection.";
     }
   }
 
-  // Render Single Question
+  // Render Question
   function renderQuestion() {
     selectedOptionIndex = null;
     nextBtn.disabled = true;
@@ -604,14 +592,13 @@ function initInterviewBot() {
     });
   }
 
-  // Next Button Logic
+  // Next Question Listener
   nextBtn.addEventListener("click", () => {
     if (selectedOptionIndex === null) return;
 
     userAnswers.push({
       question_id: currentQuestions[currentIndex].id,
-      selected_option: selectedOptionIndex,
-      is_correct: selectedOptionIndex === currentQuestions[currentIndex].correct_index
+      selected_option: selectedOptionIndex
     });
 
     if (currentIndex + 1 < currentQuestions.length) {
@@ -622,35 +609,50 @@ function initInterviewBot() {
     }
   });
 
-  // Finish Interview & Show Results
-  function finishInterview() {
+  // Finish Assessment & Send Data to AI Backend
+  async function finishInterview() {
     quizCard.classList.add("d-none");
     resultCard.classList.remove("d-none");
 
-    const correctCount = userAnswers.filter(a => a.is_correct).length;
-    const total = currentQuestions.length;
-    const percent = Math.round((correctCount / total) * 100);
-
-    document.getElementById("score-percentage").textContent = `${percent}%`;
+    // Display Loading state until AI API responds
+    document.getElementById("score-percentage").textContent = "...";
     document.getElementById("selected-role-display").textContent = selectedRole;
-    document.getElementById("correct-count").textContent = `${correctCount} / ${total}`;
+    document.getElementById("correct-count").textContent = "Evaluating...";
+    document.getElementById("qualification-status").textContent = "Calculating...";
+    document.getElementById("salary-offer").textContent = "AI Model Processing...";
 
-    let statusText = "Entry Level";
-    let salaryRange = "₹3,00,000 - ₹5,00,000 / वर्ष";
+    try {
+      /*
+        Aapka FastAPI submission endpoint execution:
+        const response = await fetch('/api/v1/interview/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ role: selectedRole, answers: userAnswers })
+        });
+        const result = await response.json();
+      */
 
-    if (percent >= 80) {
-      statusText = "Excellent (Highly Qualified)";
-      salaryRange = "₹8,00,000 - ₹12,00,000 / वर्ष";
-    } else if (percent >= 50) {
-      statusText = "Intermediate (Qualified)";
-      salaryRange = "₹5,00,000 - ₹8,00,000 / वर्ष";
+      // Mock AI Backend Response Structure (Aapke backend AI model se exact aisa json aayega)
+      const mockAiResult = {
+        score_percentage: 85,
+        correct_count: 4,
+        total_questions: 5,
+        qualification_level: "Senior / Qualified",
+        estimated_salary_range: "$85,000 - $110,000 / year" // Purely AI backend calculated
+      };
+
+      // Populate UI with pure backend AI evaluation values
+      document.getElementById("score-percentage").textContent = `${mockAiResult.score_percentage}%`;
+      document.getElementById("correct-count").textContent = `${mockAiResult.correct_count} / ${mockAiResult.total_questions}`;
+      document.getElementById("qualification-status").textContent = mockAiResult.qualification_level;
+      document.getElementById("salary-offer").textContent = mockAiResult.estimated_salary_range;
+
+    } catch (err) {
+      document.getElementById("salary-offer").textContent = "Error calculating AI score.";
     }
-
-    document.getElementById("qualification-status").textContent = statusText;
-    document.getElementById("salary-offer").textContent = salaryRange;
   }
 
-  // Restart Handler
+  // Restart Assessment
   document.getElementById("restart-btn")?.addEventListener("click", () => {
     resultCard.classList.add("d-none");
     roleCard.classList.remove("d-none");

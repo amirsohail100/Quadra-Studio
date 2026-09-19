@@ -75,17 +75,41 @@
     </ul>
   </nav>
 
-  <!-- Projects Hero -->
+  <!-- Projects Hero & Search Bar -->
   <section class="hero">
     <div class="hero-content fade-in-up">
       <span class="badge">Innovation Showcase 🚀</span>
       <h1 class="gradient-text animated-main-title">Our Featured Projects</h1>
-      <p class="hero-subtext">Explore our Machine Learning, Deep Learning, and Generative AI solutions. Hover/click cards to inspect tech stack and links.</p>
+      <p class="hero-subtext">Explore our Machine Learning, Deep Learning, and Generative AI solutions. Search or filter to discover projects.</p>
+      
+      <!-- Integrated Search Engine UI -->
+      <div class="search-engine-wrapper">
+        <div class="search-bar-container">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="project-search-input" placeholder="Search projects by title, technology, or description..." autocomplete="off">
+          <button id="clear-search-btn" class="clear-btn" aria-label="Clear Search"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div class="category-filter-tags">
+          <button class="filter-chip active" data-category="all">All</button>
+          <button class="filter-chip" data-category="ml">Machine Learning</button>
+          <button class="filter-chip" data-category="dl">Deep Learning</button>
+          <button class="filter-chip" data-category="genai">Generative AI</button>
+          <button class="filter-chip" data-category="web">Web Development</button>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- No Search Results Container (Hidden by default) -->
+  <div id="no-results-msg" class="no-results-container" style="display: none;">
+    <i class="fas fa-search-minus no-results-icon"></i>
+    <h3>No Projects Found</h3>
+    <p>Try searching with different keywords or switch back to "All" categories.</p>
+  </div>
+
   <!-- ================= SECTION 1: MACHINE LEARNING ================= -->
-  <section class="section category-section">
+  <section class="section category-section" id="ml-section">
     <div class="category-header">
       <h2 class="category-title">Machine Learning Projects</h2>
       <div class="carousel-nav-controls">
@@ -102,7 +126,7 @@
   </section>
 
   <!-- ================= SECTION 2: DEEP LEARNING ================= -->
-  <section class="section category-section">
+  <section class="section category-section" id="dl-section">
     <div class="category-header">
       <h2 class="category-title">Deep Learning Projects</h2>
       <div class="carousel-nav-controls">
@@ -119,7 +143,7 @@
   </section>
 
   <!-- ================= SECTION 3: GENERATIVE AI ================= -->
-  <section class="section category-section">
+  <section class="section category-section" id="genai-section">
     <div class="category-header">
       <h2 class="category-title">Generative AI Projects</h2>
       <div class="carousel-nav-controls">
@@ -136,7 +160,7 @@
   </section>
 
   <!-- ================= SECTION 4: WEB DEVELOPMENT ================= -->
-  <section class="section category-section">
+  <section class="section category-section" id="web-section">
     <div class="category-header">
       <h2 class="category-title">Web Development Projects</h2>
       <div class="carousel-nav-controls">

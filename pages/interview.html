@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="hi" class="dark-theme">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Interview & Skill Assessment - QUADRA</title>
+  <!-- केवल अपनी मेन CSS फाइल लिंक करें -->
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <!-- Ambient Canvases -->
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navbar -->
+  <nav class="navbar fade-in-down">
+    <a href="#" class="logo">QUADRA<span class="logo-dot">.</span></a>
+    <button class="sky-switch" id="theme-toggle" aria-label="Toggle Theme">
+      <span class="sky-bg">
+        <span class="celestial-body"><span class="sun-glow"></span></span>
+        <span class="star star-1"></span>
+        <span class="star star-2"></span>
+        <span class="star star-3"></span>
+        <span class="cloud-puff"></span>
+      </span>
+    </button>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="interview-container section">
+    <div class="interview-header">
+      <span class="badge">Automated AI Assessment</span>
+      <h1 class="animated-main-title gradient-text">Technical Interview Bot</h1>
+      <p class="hero-subtext" id="role-subtitle">अपने पद का चयन करें और एआई-संचालित इंटरव्यू शुरू करें।</p>
+    </div>
+
+    <!-- 1. Role Selection Card -->
+    <div class="interview-card showcase-card" id="role-select-card">
+      <h2 class="card-title">इंटरव्यू के लिए रोल चुनें</h2>
+      <p class="card-desc">आप किस रोल के लिए अपना आंकलन (Assessment) देना चाहते हैं?</p>
+      
+      <div class="role-grid">
+        <button class="role-btn" data-role="Frontend Developer">
+          <span class="role-icon">💻</span>
+          <span class="role-name">Frontend Developer</span>
+        </button>
+        <button class="role-btn" data-role="Backend Developer">
+          <span class="role-icon">⚙️</span>
+          <span class="role-name">Backend Developer</span>
+        </button>
+        <button class="role-btn" data-role="AI / ML Engineer">
+          <span class="role-icon">🤖</span>
+          <span class="role-name">AI / ML Engineer</span>
+        </button>
+        <button class="role-btn" data-role="Full Stack Developer">
+          <span class="role-icon">🚀</span>
+          <span class="role-name">Full Stack Developer</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. Interactive Interview Card -->
+    <div class="interview-card showcase-card d-none" id="quiz-card">
+      <div class="interview-progress">
+        <div class="progress-info">
+          <span id="question-tracker">Question 1 of 5</span>
+          <span id="progress-percent">20%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="bot-chat-box">
+        <div class="bot-avatar">🤖</div>
+        <div class="bot-speech-bubble" id="question-text">
+          लोड हो रहा है...
+        </div>
+      </div>
+
+      <div class="options-grid" id="options-container">
+        <!-- JavaScript से ऑप्शंस आएंगे -->
+      </div>
+
+      <div class="card-actions">
+        <button class="btn btn-primary rgb-hover-btn" id="next-btn" disabled>
+          <span>अगला प्रश्न →</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. Result Card -->
+    <div class="interview-card showcase-card d-none" id="result-card">
+      <div class="result-header">
+        <div class="score-badge-circle" id="score-circle">
+          <span id="score-percentage">0%</span>
+        </div>
+        <h2 class="gradient-text" id="result-title">इंटरव्यू पूरा हुआ!</h2>
+        <p class="result-role-tag">Target Role: <strong id="selected-role-display">-</strong></p>
+      </div>
+
+      <div class="result-details-grid">
+        <div class="result-stat-box">
+          <span class="stat-label">कुल स्कोर</span>
+          <span class="stat-value" id="correct-count">0 / 0</span>
+        </div>
+        <div class="result-stat-box">
+          <span class="stat-label">आंकलन स्तर</span>
+          <span class="stat-value" id="qualification-status">-</span>
+        </div>
+        <div class="result-stat-box full-width">
+          <span class="stat-label">अनुमानित वेतन सीमा (Estimated Salary Match)</span>
+          <span class="stat-value salary-text" id="salary-offer">-</span>
+        </div>
+      </div>
+
+      <div class="card-actions center-actions">
+        <button class="btn btn-secondary" id="restart-btn">पुनः प्रयास करें</button>
+        <button class="btn btn-primary rgb-hover-btn" id="submit-application-btn">
+          <span>आवेदन जमा करें</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 QUADRA. All rights reserved.</p>
+  </footer>
+
+  <!-- केवल अपनी मेन JS फाइल लिंक करें -->
+  <script src="/js/script.js"></script>
+</body>
+</html>

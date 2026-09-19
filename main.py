@@ -11,7 +11,7 @@ from schema.payload import (
     InterviewSubmitRequestSchema, 
     InterviewSubmitResponseSchema
 )
-from backend.backend import generate_interview_questions, evaluate_interview_answers
+from backend.interview import generate_interview_questions, evaluate_interview_answers
 
 # IP based Limiter setup (10 Requests per Day)
 limiter = Limiter(key_func=get_remote_address)

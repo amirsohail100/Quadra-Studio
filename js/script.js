@@ -470,3 +470,189 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+
+
+/* ==========================================================================
+   MAIN.JS (Adding Interview Bot Functionality)
+   ========================================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  // 1. आपका पुराना कोड (Theme Switcher, Canvas, etc.) यहाँ रहेगा...
+  // initThemeToggle();
+  // initCanvasAnimation();
+
+
+  // 2. इंटरव्यू बॉट की लॉजिक को नीचे एक सेफ फंक्शन में कॉल करें:
+  initInterviewBot();
+});
+
+
+/**
+ * Interview Bot Module - Safe Initializer
+ */
+function initInterviewBot() {
+  const roleCard = document.getElementById("role-select-card");
+  const quizCard = document.getElementById("quiz-card");
+  const resultCard = document.getElementById("result-card");
+
+  // अगर वर्तमान पेज पर इंटरव्यू बॉट के DOM एलिमेंट्स नहीं हैं, तो आगे न बढ़ें
+  if (!roleCard || !quizCard || !resultCard) return;
+
+  const questionText = document.getElementById("question-text");
+  const optionsContainer = document.getElementById("options-container");
+  const nextBtn = document.getElementById("next-btn");
+  
+  const questionTracker = document.getElementById("question-tracker");
+  const progressPercent = document.getElementById("progress-percent");
+  const progressFill = document.getElementById("progress-fill");
+
+  // App State
+  let selectedRole = "";
+  let currentQuestions = [];
+  let currentIndex = 0;
+  let userAnswers = [];
+  let selectedOptionIndex = null;
+
+  // Role Selection Click
+  document.querySelectorAll(".role-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      selectedRole = btn.getAttribute("data-role");
+      roleCard.classList.add("d-none");
+      quizCard.classList.remove("d-none");
+
+      await fetchQuestionsForRole(selectedRole);
+    });
+  });
+
+  // Fetch Questions Function
+  async function fetchQuestionsForRole(role) {
+    questionText.textContent = "सवाल लोड हो रहे हैं...";
+    optionsContainer.innerHTML = "";
+
+    try {
+      /* 
+         आपकी FastAPI Backend Call:
+         const res = await fetch(`/api/v1/interview/questions?role=${encodeURIComponent(role)}`);
+         const data = await res.json();
+         currentQuestions = data.questions; 
+      */
+
+      // Temporary Mock Data Structure
+      currentQuestions = [
+        {
+          id: "q1",
+          question: "Javascript में Event Loop का मुख्य कार्य क्या है?",
+          options: [
+            "DOM को रेंडर करना",
+            "Call Stack और Callback Queue का प्रबंधन करना",
+            "CSS स्टाइल को अपडेट करना",
+            "Memory Leak रोकना"
+          ],
+          correct_index: 1
+        },
+        {
+          id: "q2",
+          question: "FastAPI में asynchronous request handling के लिए कौन सा keyword उपयोग होता है?",
+          options: ["def", "async def", "await def", "future"],
+          correct_index: 1
+        }
+      ];
+
+      currentIndex = 0;
+      userAnswers = [];
+      renderQuestion();
+
+    } catch (err) {
+      questionText.textContent = "प्रश्न लोड करने में दिक्कत आई, कृपया बैकएंड चेक करें।";
+    }
+  }
+
+  // Render Single Question
+  function renderQuestion() {
+    selectedOptionIndex = null;
+    nextBtn.disabled = true;
+
+    const q = currentQuestions[currentIndex];
+    const total = currentQuestions.length;
+    const progressVal = Math.round(((currentIndex + 1) / total) * 100);
+
+    questionTracker.textContent = `Question ${currentIndex + 1} of ${total}`;
+    progressPercent.textContent = `${progressVal}%`;
+    progressFill.style.width = `${progressVal}%`;
+
+    questionText.textContent = q.question;
+    optionsContainer.innerHTML = "";
+
+    q.options.forEach((optText, idx) => {
+      const optDiv = document.createElement("div");
+      optDiv.classList.add("option-card");
+      optDiv.innerHTML = `
+        <div class="option-radio"></div>
+        <span>${optText}</span>
+      `;
+
+      optDiv.addEventListener("click", () => {
+        document.querySelectorAll(".option-card").forEach(c => c.classList.remove("selected"));
+        optDiv.classList.add("selected");
+        selectedOptionIndex = idx;
+        nextBtn.disabled = false;
+      });
+
+      optionsContainer.appendChild(optDiv);
+    });
+  }
+
+  // Next Button Logic
+  nextBtn.addEventListener("click", () => {
+    if (selectedOptionIndex === null) return;
+
+    userAnswers.push({
+      question_id: currentQuestions[currentIndex].id,
+      selected_option: selectedOptionIndex,
+      is_correct: selectedOptionIndex === currentQuestions[currentIndex].correct_index
+    });
+
+    if (currentIndex + 1 < currentQuestions.length) {
+      currentIndex++;
+      renderQuestion();
+    } else {
+      finishInterview();
+    }
+  });
+
+  // Finish Interview & Show Results
+  function finishInterview() {
+    quizCard.classList.add("d-none");
+    resultCard.classList.remove("d-none");
+
+    const correctCount = userAnswers.filter(a => a.is_correct).length;
+    const total = currentQuestions.length;
+    const percent = Math.round((correctCount / total) * 100);
+
+    document.getElementById("score-percentage").textContent = `${percent}%`;
+    document.getElementById("selected-role-display").textContent = selectedRole;
+    document.getElementById("correct-count").textContent = `${correctCount} / ${total}`;
+
+    let statusText = "Entry Level";
+    let salaryRange = "₹3,00,000 - ₹5,00,000 / वर्ष";
+
+    if (percent >= 80) {
+      statusText = "Excellent (Highly Qualified)";
+      salaryRange = "₹8,00,000 - ₹12,00,000 / वर्ष";
+    } else if (percent >= 50) {
+      statusText = "Intermediate (Qualified)";
+      salaryRange = "₹5,00,000 - ₹8,00,000 / वर्ष";
+    }
+
+    document.getElementById("qualification-status").textContent = statusText;
+    document.getElementById("salary-offer").textContent = salaryRange;
+  }
+
+  // Restart Handler
+  document.getElementById("restart-btn")?.addEventListener("click", () => {
+    resultCard.classList.add("d-none");
+    roleCard.classList.remove("d-none");
+  });
+}

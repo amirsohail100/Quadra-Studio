@@ -1,0 +1,8 @@
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+pydantic>=2.6.0
+slowapi>=0.1.9
+langchain>=0.1.0
+langchain-core>=0.1.0
+langchain-openai>=0.0.8
+python-dotenv>=1.0.1

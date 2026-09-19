@@ -1060,3 +1060,133 @@ body.nav-lock {
   flex-shrink: 0; /* Icon ka size flex box me shrink hone se rokne ke liye */
   display: block;
 }
+
+/* ==========================================================================
+   SEARCH ENGINE & FILTER BAR STYLES
+   ========================================================================== */
+.search-engine-wrapper {
+  margin-top: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-bar-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.2rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+#project-search-input {
+  width: 100%;
+  padding: 0.95rem 3rem 0.95rem 3.2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  color: var(--text-main);
+  font-size: 1rem;
+  outline: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+#project-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--glow-color);
+}
+
+#project-search-input:focus + .search-icon {
+  color: var(--accent);
+}
+
+.clear-btn {
+  position: absolute;
+  right: 1.2rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  display: none;
+  transition: color 0.3s ease;
+}
+
+.clear-btn:hover {
+  color: var(--accent);
+}
+
+/* Category Filter Chips */
+.category-filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.filter-chip {
+  padding: 0.5rem 1.2rem;
+  border-radius: 30px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-chip:hover {
+  border-color: var(--accent);
+  color: var(--text-main);
+  transform: translateY(-2px);
+}
+
+.filter-chip.active {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 15px var(--glow-color);
+}
+
+/* No Results Found State */
+.no-results-container {
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.no-results-icon {
+  font-size: 3.5rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.no-results-container h3 {
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.no-results-container p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}

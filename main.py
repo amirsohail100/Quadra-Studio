@@ -29,12 +29,11 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 # CORS Middleware Setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Production me apni domain specify kar sakte hain
+    allow_origins=["*"], # या ["http://127.0.0.1:5500"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 @app.get("/api/v1/interview/questions", response_model=QuestionsResponseSchema)
 @limiter.limit("10/day")  # Ek IP se din me sirf 10 baar questions fetch ho sakte hain

@@ -472,10 +472,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
 /* ==========================================================================
-   MAIN.JS - INTERVIEW BOT MODULE
+   MAIN.JS - INTERVIEW BOT MODULE (UPDATED FOR LOCAL FASTAPI BACKEND)
    ========================================================================== */
+
+// Backend Base URL Definition (Fixed port assignment for local development)
+const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
+const API_BASE_URL = isLocal 
+  ? "http://127.0.0.1:8000" 
+  : window.location.origin;
 
 document.addEventListener("DOMContentLoaded", () => {
   initInterviewBot();
@@ -514,46 +519,33 @@ function initInterviewBot() {
     });
   });
 
-  // Fetch Questions (Backend Call)
+  // Fetch Questions (Real FastAPI Backend Call)
   async function fetchQuestionsForRole(role) {
-    questionText.textContent = "Fetching assessment questions...";
+    questionText.textContent = "Fetching assessment questions from AI...";
     optionsContainer.innerHTML = "";
 
     try {
-      /*
-        FastAPI Backend Call Example:
-        const res = await fetch(`/api/v1/interview/questions?role=${encodeURIComponent(role)}`);
-        const data = await res.json();
-        currentQuestions = data.questions;
-      */
+      const res = await fetch(`${API_BASE_URL}/api/v1/interview/questions?role=${encodeURIComponent(role)}`);
+      
+      if (!res.ok) {
+        throw new Error(`Server returned status: ${res.status}`);
+      }
 
-      // Dynamic Schema Response structure placeholder
-      currentQuestions = [
-        {
-          id: "q1",
-          question: "What is the primary role of the Event Loop in JavaScript?",
-          options: [
-            "Render DOM nodes to screen",
-            "Manage Call Stack and Callback Queue execution",
-            "Compile CSS style declarations",
-            "Prevent memory leaks automatically"
-          ],
-          correct_index: 1
-        },
-        {
-          id: "q2",
-          question: "Which decorator is used in FastAPI to define a GET endpoint?",
-          options: ["@app.get()", "@app.route_get()", "@app.fetch()", "@app.request_get()"],
-          correct_index: 0
-        }
-      ];
+      const data = await res.json();
+      currentQuestions = data.questions || [];
+
+      if (currentQuestions.length === 0) {
+        questionText.textContent = "No questions found for this role.";
+        return;
+      }
 
       currentIndex = 0;
       userAnswers = [];
       renderQuestion();
 
     } catch (err) {
-      questionText.textContent = "Failed to load questions. Please check your backend connection.";
+      console.error("API Error:", err);
+      questionText.textContent = "Failed to load questions. Please verify your FastAPI backend is running on http://127.0.0.1:8000.";
     }
   }
 
@@ -597,7 +589,7 @@ function initInterviewBot() {
     if (selectedOptionIndex === null) return;
 
     userAnswers.push({
-      question_id: currentQuestions[currentIndex].id,
+      question_id: currentQuestions[currentIndex].id || `q_${currentIndex + 1}`,
       selected_option: selectedOptionIndex
     });
 
@@ -609,7 +601,7 @@ function initInterviewBot() {
     }
   });
 
-  // Finish Assessment & Send Data to AI Backend
+  // Finish Assessment & Send Data to FastAPI Backend
   async function finishInterview() {
     quizCard.classList.add("d-none");
     resultCard.classList.remove("d-none");
@@ -622,33 +614,28 @@ function initInterviewBot() {
     document.getElementById("salary-offer").textContent = "AI Model Processing...";
 
     try {
-      /*
-        Aapka FastAPI submission endpoint execution:
-        const response = await fetch('/api/v1/interview/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ role: selectedRole, answers: userAnswers })
-        });
-        const result = await response.json();
-      */
+      const response = await fetch(`${API_BASE_URL}/api/v1/interview/submit`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role: selectedRole, answers: userAnswers })
+      });
 
-      // Mock AI Backend Response Structure (Aapke backend AI model se exact aisa json aayega)
-      const mockAiResult = {
-        score_percentage: 85,
-        correct_count: 4,
-        total_questions: 5,
-        qualification_level: "Senior / Qualified",
-        estimated_salary_range: "$85,000 - $110,000 / year" // Purely AI backend calculated
-      };
+      if (!response.ok) {
+        throw new Error(`Submission failed with status ${response.status}`);
+      }
+
+      const result = await response.json();
 
       // Populate UI with pure backend AI evaluation values
-      document.getElementById("score-percentage").textContent = `${mockAiResult.score_percentage}%`;
-      document.getElementById("correct-count").textContent = `${mockAiResult.correct_count} / ${mockAiResult.total_questions}`;
-      document.getElementById("qualification-status").textContent = mockAiResult.qualification_level;
-      document.getElementById("salary-offer").textContent = mockAiResult.estimated_salary_range;
+      document.getElementById("score-percentage").textContent = `${result.score_percentage}%`;
+      document.getElementById("correct-count").textContent = `${result.correct_count} / ${result.total_questions}`;
+      document.getElementById("qualification-status").textContent = result.qualification_level;
+      document.getElementById("salary-offer").textContent = result.estimated_salary_range;
 
     } catch (err) {
+      console.error("Submission Error:", err);
       document.getElementById("salary-offer").textContent = "Error calculating AI score.";
+      document.getElementById("qualification-status").textContent = "Evaluation Failed";
     }
   }
 

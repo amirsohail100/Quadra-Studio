@@ -1,67 +1,109 @@
+import logging
 import os
-from fastapi import FastAPI, Request, HTTPException, Depends
+
+from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 
-# Schemas and Core Backend Import
-from schema.payload import (
-    QuestionsResponseSchema, 
-    InterviewSubmitRequestSchema, 
-    InterviewSubmitResponseSchema
+load_dotenv()  # FIX: load MISTRAL_API_KEY from .env before anything else
+
+from backend.interview import (  # noqa: E402
+    LLMConfigError,
+    evaluate_interview_answers,
+    generate_interview_questions,
 )
-from backend.interview import generate_interview_questions, evaluate_interview_answers
+from schema.payload import (  # noqa: E402
+    InterviewSubmitRequestSchema,
+    InterviewSubmitResponseSchema,
+    QuestionsResponseSchema,
+)
 
-# IP based Limiter setup (10 Requests per Day)
+logger = logging.getLogger("quadra.api")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# IP based limiter (10 requests per day per endpoint)
 limiter = Limiter(key_func=get_remote_address)
 
 app = FastAPI(
     title="QUADRA-STUDIO AI Assessment API",
     description="Rate-limited backend API for AI Interview Bot",
-    version="1.0.0"
+    version="1.0.1",
 )
-
-# Rate Limiter Error Handler Register
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# CORS Middleware Setup
+# FIX: allow_origins=["*"] cannot be combined with allow_credentials=True
+# (browsers reject it). No cookies are used, so credentials are off.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # या ["http://127.0.0.1:5500"]
-    allow_credentials=True,
+    allow_origins=["*"],  # in production: ["https://your-domain.com"]
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+
 @app.get("/api/v1/interview/questions", response_model=QuestionsResponseSchema)
-@limiter.limit("10/day")  # Ek IP se din me sirf 10 baar questions fetch ho sakte hain
+@limiter.limit("10/day")
 async def get_questions(request: Request, role: str):
-    """
-    Fetch AI generated technical interview questions based on candidate role.
-    """
-    if not role or role.strip() == "":
+    """Fetch AI generated technical interview questions for a role."""
+    role = (role or "").strip()
+    if not role:
         raise HTTPException(status_code=400, detail="Role parameter is required.")
-    
+    if len(role) > 80:
+        raise HTTPException(status_code=400, detail="Role is too long.")
     try:
-        data = await generate_interview_questions(role=role)
-        return data
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to generate questions: {str(e)}")
+        return await generate_interview_questions(role=role)
+    except LLMConfigError as e:
+        logger.error("%s", e)
+        raise HTTPException(status_code=503, detail=str(e))
+    except Exception as e:  # noqa: BLE001
+        logger.exception("Question generation failed")
+        raise HTTPException(status_code=502, detail=f"AI service error: {e}")
 
 
 @app.post("/api/v1/interview/submit", response_model=InterviewSubmitResponseSchema)
-@limiter.limit("10/day")  # Submit par bhi 10/day ki limit hai
+@limiter.limit("10/day")
 async def submit_interview(request: Request, payload: InterviewSubmitRequestSchema):
-    """
-    Evaluate candidate answers via LangChain LLM and return score, qualification & salary match.
-    """
+    """Score answers (server side) and return level + salary estimate."""
     try:
-        evaluation = await evaluate_interview_answers(
-            role=payload.role, 
-            user_answers=payload.user_answers
+        return await evaluate_interview_answers(
+            session_id=payload.session_id,
+            role=payload.role,
+            user_answers=payload.user_answers,
         )
-        return evaluation
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Evaluation failed: {str(e)}")
+    except KeyError as e:
+        raise HTTPException(status_code=410, detail=str(e.args[0]))
+    except Exception as e:  # noqa: BLE001
+        logger.exception("Evaluation failed")
+        raise HTTPException(status_code=500, detail=f"Evaluation failed: {e}")
+
+
+@app.get("/api/health")
+async def health():
+    return {"status": "ok", "llm_key_configured": bool(os.getenv("MISTRAL_API_KEY"))}
+
+
+# ---- Serve the website itself (so `uvicorn main:app` runs everything) ----
+# Only whitelisted folders are exposed - never .env, .git or Python source.
+@app.get("/", include_in_schema=False)
+async def index():
+    return FileResponse(os.path.join(BASE_DIR, "index.html"))
+
+
+@app.get("/index.html", include_in_schema=False)
+async def index_html():
+    return FileResponse(os.path.join(BASE_DIR, "index.html"))
+
+
+for _folder in ("css", "js", "assets", "pages"):
+    app.mount(
+        f"/{_folder}",
+        StaticFiles(directory=os.path.join(BASE_DIR, _folder), check_dir=False),
+        name=_folder,
+    )

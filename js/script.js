@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   // CLICK / TOUCH TO TOGGLE OVERLAY (FOR MOBILE & ACCESSIBILITY)
   // ==========================================================================
-  const showcaseCards = document.querySelectorAll('.showcase-card');
+  const showcaseCards = document.querySelectorAll('.showcase-card:not(.interview-card)');
   showcaseCards.forEach(card => {
     card.addEventListener('click', (e) => {
       // Don't toggle if user clicks directly on GitHub or Live Demo links
@@ -507,6 +507,17 @@ function initInterviewBot() {
   let currentIndex = 0;
   let userAnswers = [];
   let selectedOptionIndex = null;
+  let sessionId = "";
+
+  // Read the backend error message (FastAPI sends {detail: ...}) for clearer UI errors
+  async function readError(res) {
+    try {
+      const body = await res.json();
+      if (typeof body.detail === "string") return body.detail;
+      if (Array.isArray(body.detail)) return body.detail.map((d) => d.msg).join(", ");
+    } catch (_) { /* not JSON */ }
+    return `Server returned status ${res.status}`;
+  }
 
   // Role Selection
   document.querySelectorAll(".role-btn").forEach((btn) => {
@@ -528,10 +539,13 @@ function initInterviewBot() {
       const res = await fetch(`${API_BASE_URL}/api/v1/interview/questions?role=${encodeURIComponent(role)}`);
       
       if (!res.ok) {
-        throw new Error(`Server returned status: ${res.status}`);
+        throw new Error(res.status === 429
+          ? "Daily limit reached (10 requests per day). Please try again tomorrow."
+          : await readError(res));
       }
 
       const data = await res.json();
+      sessionId = data.session_id || "";
       currentQuestions = data.questions || [];
 
       if (currentQuestions.length === 0) {
@@ -545,8 +559,24 @@ function initInterviewBot() {
 
     } catch (err) {
       console.error("API Error:", err);
-      questionText.textContent = "Failed to load questions. Please verify your FastAPI backend is running on http://127.0.0.1:8000.";
+      const offline = err instanceof TypeError; // fetch could not reach the server
+      questionText.textContent = offline
+        ? "Could not reach the backend. Start it with: uvicorn main:app --reload (http://127.0.0.1:8000)"
+        : `Failed to load questions: ${err.message}`;
+      addRetryButton();
     }
+  }
+
+  // Let the user go back to role selection when loading fails
+  function addRetryButton() {
+    const btn = document.createElement("button");
+    btn.className = "btn btn-secondary";
+    btn.textContent = "Choose role again";
+    btn.addEventListener("click", () => {
+      quizCard.classList.add("d-none");
+      roleCard.classList.remove("d-none");
+    });
+    optionsContainer.appendChild(btn);
   }
 
   // Render Question
@@ -568,10 +598,11 @@ function initInterviewBot() {
     q.options.forEach((optText, idx) => {
       const optDiv = document.createElement("div");
       optDiv.classList.add("option-card");
-      optDiv.innerHTML = `
-        <div class="option-radio"></div>
-        <span>${optText}</span>
-      `;
+      const radio = document.createElement("div");
+      radio.className = "option-radio";
+      const label = document.createElement("span");
+      label.textContent = optText;
+      optDiv.append(radio, label);
 
       optDiv.addEventListener("click", () => {
         document.querySelectorAll(".option-card").forEach(c => c.classList.remove("selected"));
@@ -617,11 +648,13 @@ function initInterviewBot() {
       const response = await fetch(`${API_BASE_URL}/api/v1/interview/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ role: selectedRole, answers: userAnswers })
+        body: JSON.stringify({ session_id: sessionId, role: selectedRole, user_answers: userAnswers })
       });
 
       if (!response.ok) {
-        throw new Error(`Submission failed with status ${response.status}`);
+        throw new Error(response.status === 429
+          ? "Daily limit reached (10 requests per day)."
+          : await readError(response));
       }
 
       const result = await response.json();
@@ -634,7 +667,9 @@ function initInterviewBot() {
 
     } catch (err) {
       console.error("Submission Error:", err);
-      document.getElementById("salary-offer").textContent = "Error calculating AI score.";
+      document.getElementById("score-percentage").textContent = "--";
+      document.getElementById("correct-count").textContent = "-";
+      document.getElementById("salary-offer").textContent = err.message || "Error calculating AI score.";
       document.getElementById("qualification-status").textContent = "Evaluation Failed";
     }
   }
@@ -643,5 +678,10 @@ function initInterviewBot() {
   document.getElementById("restart-btn")?.addEventListener("click", () => {
     resultCard.classList.add("d-none");
     roleCard.classList.remove("d-none");
+  });
+
+  // "Submit Application" had no handler before - send the candidate to the Join Us page
+  document.getElementById("submit-application-btn")?.addEventListener("click", () => {
+    window.location.href = "/pages/join_us.html";
   });
 }

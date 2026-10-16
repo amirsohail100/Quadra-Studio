@@ -10,7 +10,7 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 
-load_dotenv()  # FIX: load MISTRAL_API_KEY from .env before anything else
+load_dotenv()  # FIX: load GROQ_API_KEY from .env before anything else
 
 from backend.interview import (  # noqa: E402
     LLMConfigError,
@@ -86,7 +86,7 @@ async def submit_interview(request: Request, payload: InterviewSubmitRequestSche
 
 @app.get("/api/health")
 async def health():
-    return {"status": "ok", "llm_key_configured": bool(os.getenv("MISTRAL_API_KEY"))}
+    return {"status": "ok", "llm_key_configured": bool(os.getenv("GROQ_API_KEY"))}
 
 
 # ---- Serve the website itself (so `uvicorn main:app` runs everything) ----

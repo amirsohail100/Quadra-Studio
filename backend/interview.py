@@ -16,7 +16,7 @@ from schema.payload import (
     SingleUserAnswer,
 )
 
-# FIX: .env was never loaded before, so MISTRAL_API_KEY was always None.
+# Load GROQ_API_KEY (and optional GROQ_MODEL) from the .env file.
 load_dotenv()
 
 logger = logging.getLogger("quadra.interview")
@@ -36,20 +36,20 @@ _llm = None
 
 
 def get_llm():
-    """Create the Mistral client lazily so the server can start without a key
+    """Create the Groq client lazily so the server can start without a key
     and return a clear error instead of crashing at import time."""
     global _llm
     if _llm is None:
-        api_key = os.getenv("MISTRAL_API_KEY")
+        api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
             raise LLMConfigError(
-                "MISTRAL_API_KEY is not set. Create a .env file next to main.py "
-                "with: MISTRAL_API_KEY=your_key_here"
+                "GROQ_API_KEY is not set. Create a .env file next to main.py "
+                "with: GROQ_API_KEY=your_key_here (free key: console.groq.com/keys)"
             )
-        from langchain_mistralai import ChatMistralAI
+        from langchain_groq import ChatGroq
 
-        _llm = ChatMistralAI(
-            model=os.getenv("MISTRAL_MODEL", "mistral-small-latest"),
+        _llm = ChatGroq(
+            model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"),
             temperature=0.7,
             api_key=api_key,
             timeout=60,

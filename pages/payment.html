@@ -6,6 +6,7 @@
   <title>Payment Portal - Quadra</title>
   <link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/firebase-ui.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -195,92 +196,79 @@
   <script src="/js/script.js"></script>
   
   <!-- Email & Order ID Verification Logic JS -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('verify-order-form');
-      const emailInput = document.getElementById('user-email-input');
-      const orderInput = document.getElementById('order-id-input');
-      const displayOrderId = document.getElementById('display-order-id');
+  <script type="module">
+    import { isConfigured } from "/js/firebase/firebase-config.js";
+    import { watchAuth } from "/js/firebase/auth.js";
+    import { getOrder } from "/js/firebase/db.js";
+    import { STATUS } from "/js/firebase/ui.js";
+    const $ = (id) => document.getElementById(id);
+    const form = $('verify-order-form');
+    const modal = $('payment-modal');
+    let user;
+    watchAuth((u) => { user = u; if (u && !$('user-email-input').value) $('user-email-input').value = u.email || ""; });
 
-      // Meta Elements
-      const orderMetaInfo = document.getElementById('order-meta-info');
-      const clientNameEl = document.getElementById('display-client-name');
-      const orderAmountEl = document.getElementById('display-order-amount');
+    // Per-status look of the status badge
+    const LOOK = {
+      pending:     ['status-pending',  'fa-solid fa-clock',        'Awaiting Approval'],
+      in_progress: ['status-verified', 'fa-solid fa-circle-check', 'Approved - Payment Due'],
+      completed:   ['status-verified', 'fa-solid fa-flag-checkered','Completed'],
+      cancelled:   ['status-invalid',  'fa-solid fa-circle-xmark', 'Order Cancelled'],
+    };
 
-      // Badges
-      const statusBadge = document.getElementById('status-badge');
-      const statusIcon = document.getElementById('status-icon');
-      const statusText = document.getElementById('status-text');
+    function showModal(ok, title, html) {
+      $('modal-icon-container').className = 'modal-icon-circle ' + (ok ? 'modal-success' : 'modal-error');
+      $('modal-icon').className = ok ? 'fa-solid fa-check' : 'fa-solid fa-xmark';
+      $('modal-title').innerText = title;
+      $('modal-message').innerHTML = html;
+      modal.classList.add('active');
+    }
+    const fail = (orderVal, title, text) => {
+      $('display-order-id').innerText = `Order ID: #${orderVal} (Invalid)`;
+      $('order-meta-info').classList.add('hidden');
+      $('status-badge').className = 'status-badge status-invalid';
+      $('status-icon').className = 'fa-solid fa-circle-xmark';
+      $('status-text').innerText = 'ID Do Not Match';
+      showModal(false, title, text);
+    };
 
-      // Modal Elements
-      const modal = document.getElementById('payment-modal');
-      const modalIconContainer = document.getElementById('modal-icon-container');
-      const modalIcon = document.getElementById('modal-icon');
-      const modalTitle = document.getElementById('modal-title');
-      const modalMsg = document.getElementById('modal-message');
-      const modalCloseBtn = document.getElementById('modal-close-btn');
-      const modalXBtn = document.getElementById('modal-x-btn');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const emailVal = $('user-email-input').value.trim().toLowerCase();
+      const orderVal = $('order-id-input').value.trim().toUpperCase().replace(/^#/, '');
+      if (!emailVal || !orderVal) return;
+      if (!isConfigured) return fail(orderVal, 'Not configured', 'Firebase is not configured yet.');
+      if (!user) return showModal(false, 'Sign in required',
+        'Please <a href="/pages/login.html?redirect=/pages/payment.html" style="color:var(--accent)">sign in</a> to verify your order.');
+      let order = null;
+      try { order = await getOrder(orderVal); } catch (err) { /* not found or not yours -> same message */ }
+      const emailOk = order && [order.contactEmail, order.userEmail].includes(emailVal);
+      if (!order || !emailOk) return fail(orderVal, 'Verification Failed!',
+        'The Email or Order ID you entered does not match our records. Please verify your registered email and Order ID.');
 
-      // Simulated JSON Database
-      const dummyDatabase = {
-        "amirsohail@gmail.com": { orderId: "123", name: "Amir Sohail", price: "$500.00" },
-        "test@gmail.com": { orderId: "456", name: "Test User", price: "$250.00" }
-      };
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const emailVal = emailInput.value.trim().toLowerCase();
-        const orderVal = orderInput.value.trim();
-
-        if (!emailVal || !orderVal) return;
-
-        // Fetch user record using Email as Unique Key
-        const userRecord = dummyDatabase[emailVal];
-
-        // STRICT CHECK: Both Email must exist AND Order ID must match that Email
-        if (userRecord && userRecord.orderId === orderVal) {
-          // --- MATCH SUCCESS ---
-          displayOrderId.innerText = `Order ID: #${orderVal}`;
-          clientNameEl.innerText = userRecord.name;
-          orderAmountEl.innerText = userRecord.price;
-          orderMetaInfo.classList.remove('hidden');
-
-          statusBadge.className = 'status-badge status-verified';
-          statusIcon.className = 'fa-solid fa-circle-check';
-          statusText.innerText = 'Order Verified';
-
-          modalIconContainer.className = 'modal-icon-circle modal-success';
-          modalIcon.className = 'fa-solid fa-check';
-          modalTitle.innerText = 'Order Verified!';
-          modalMsg.innerHTML = `Email <strong>${emailVal}</strong> & Order <strong>#${orderVal}</strong> matched.<br><br>Client Name: <strong>${userRecord.name}</strong><br>Total Amount: <strong style="color:#10b981; font-size:1.1rem;">${userRecord.price}</strong>`;
-
-        } else {
-          // --- MISMATCH / STRICT FAILURE ---
-          displayOrderId.innerText = `Order ID: #${orderVal} (Invalid)`;
-          orderMetaInfo.classList.add('hidden');
-
-          statusBadge.className = 'status-badge status-invalid';
-          statusIcon.className = 'fa-solid fa-circle-xmark';
-          statusText.innerText = 'ID Do Not Match';
-
-          modalIconContainer.className = 'modal-icon-circle modal-error';
-          modalIcon.className = 'fa-solid fa-xmark';
-          modalTitle.innerText = 'Verification Failed!';
-          modalMsg.innerText = `The Email or Order ID you entered does not match our records. Please verify your registered email and Order ID.`;
-        }
-
-        modal.classList.add('active');
-      });
-
-      // Close Modal Functions
-      const closeModal = () => modal.classList.remove('active');
-
-      modalCloseBtn.addEventListener('click', closeModal);
-      modalXBtn.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-      });
+      const [cls, icon, label] = LOOK[order.status] || LOOK.pending;
+      $('display-order-id').innerText = `Order ID: #${order.orderId}`;
+      $('display-client-name').innerText = order.userName;
+      $('display-order-amount').innerText = order.price;
+      $('order-meta-info').classList.remove('hidden');
+      $('status-badge').className = 'status-badge ' + cls;
+      $('status-icon').className = icon;
+      $('status-text').innerText = label;
+      const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      const hint = {
+        pending: 'Your order is waiting for approval. You can pay once it is approved.',
+        in_progress: 'Your order is approved. You can complete the payment below.',
+        completed: 'This order is completed. Thank you!',
+        cancelled: 'This order was cancelled.' + (order.adminNote ? ' Reason: ' + esc(order.adminNote) : ''),
+      }[order.status];
+      showModal(order.status !== 'cancelled', order.status === 'cancelled' ? 'Order Cancelled' : 'Order Verified!',
+        `Order <strong>#${esc(order.orderId)}</strong> matched.<br><br>Client Name: <strong>${esc(order.userName)}</strong><br>Service: <strong>${esc(order.service)}</strong><br>Total Amount: <strong style="color:#10b981; font-size:1.1rem;">${esc(order.price)}</strong><br><br>${hint}`);
     });
+
+    const closeModal = () => modal.classList.remove('active');
+    $('modal-close-btn').addEventListener('click', closeModal);
+    $('modal-x-btn').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   </script>
+  <script type="module" src="/js/firebase/nav-auth.js"></script>
 </body>
 </html>

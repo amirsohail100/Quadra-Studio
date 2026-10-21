@@ -6,6 +6,7 @@
   <title>Pricing Services - Quadra</title>
   <link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/firebase-ui.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -154,5 +155,47 @@
       });
     });
   </script>
+
+  <script type="module">
+    import { isConfigured } from "/js/firebase/firebase-config.js";
+    import { watchAuth, friendlyError } from "/js/firebase/auth.js";
+    import { createOrder } from "/js/firebase/db.js";
+    import { toast } from "/js/firebase/ui.js";
+    let user = null, service = "", price = "";
+    watchAuth((u) => {
+      user = u;
+      if (u) {
+        const n = document.getElementById("order-name"), m = document.getElementById("order-email");
+        if (!n.value) n.value = u.displayName || "";
+        if (!m.value) m.value = u.email || "";
+      }
+    });
+    document.addEventListener("click", (e) => {
+      const b = e.target.closest(".open-modal-btn");
+      if (b) { service = b.dataset.service; price = b.dataset.price || ""; }
+    });
+    document.getElementById("order-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!isConfigured) return toast("Firebase is not configured yet.", "error");
+      if (!user) { toast("Please sign in to place an order.", "error"); return setTimeout(() => location.href = "/pages/login.html?redirect=/pages/pricing.html", 1200); }
+      const btn = e.target.querySelector("button[type=submit]");
+      btn.disabled = true;
+      try {
+        const orderId = await createOrder(user, {
+          service, price,
+          name: document.getElementById("order-name").value.trim(),
+          contactEmail: document.getElementById("order-email").value.trim(),
+          description: document.getElementById("order-req").value.trim(),
+        });
+        toast(`Order placed! Your Order ID is #${orderId}`, "success");
+        e.target.reset();
+        document.getElementById("orderModal").classList.add("hidden");
+        document.body.style.overflow = "auto";
+        setTimeout(() => location.href = "/pages/account.html", 2200);
+      } catch (err) { toast(friendlyError(err), "error"); }
+      btn.disabled = false;
+    });
+  </script>
+  <script type="module" src="/js/firebase/nav-auth.js"></script>
 </body>
 </html>

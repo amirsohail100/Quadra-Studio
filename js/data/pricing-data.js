@@ -63,7 +63,7 @@ function renderPricingCards() {
       <h3>${item.title}</h3>
       <p>${item.description}</p>
       <div class="price-tag">Starting at <span>${item.price}</span></div>
-      <button class="btn btn-primary particle-trigger glow-btn open-modal-btn" data-service="${item.serviceTag}">Order Now</button>
+      <button class="btn btn-primary particle-trigger glow-btn open-modal-btn" data-service="${item.serviceTag}" data-price="${item.price}">Order Now</button>
     </div>
   `).join('');
 

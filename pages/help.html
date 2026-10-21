@@ -6,6 +6,7 @@
   <title>User Walkthrough & Help - Quadra</title>
   <link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/firebase-ui.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -399,13 +400,43 @@
       });
     });
 
-    // Feedback Submit Handler
-    function handleFeedbackSubmit(event) {
-      event.preventDefault();
-      const name = document.getElementById('fb-name').value;
-      alert(`Shukriya ${name}! Aapka feedback successfully submit ho gaya hai.`);
-      document.getElementById('feedbackForm').reset();
-    }
   </script>
+
+  <script type="module">
+    import { isConfigured } from "/js/firebase/firebase-config.js";
+    import { watchAuth, friendlyError } from "/js/firebase/auth.js";
+    import { addFeedback } from "/js/firebase/db.js";
+    import { toast } from "/js/firebase/ui.js";
+    let user = null;
+    watchAuth((u) => {
+      user = u;
+      if (u) {
+        const n = document.getElementById("fb-name"), m = document.getElementById("fb-email");
+        if (!n.value) n.value = u.displayName || "";
+        if (!m.value) m.value = u.email || "";
+      }
+    });
+    window.handleFeedbackSubmit = async (event) => {
+      event.preventDefault();
+      if (!isConfigured) return toast("Firebase is not configured yet.", "error");
+      if (!user) { toast("Please sign in to send feedback.", "error"); return setTimeout(() => location.href = "/pages/login.html?redirect=/pages/help.html", 1200); }
+      const form = document.getElementById("feedbackForm");
+      const btn = form.querySelector("button[type=submit]");
+      btn.disabled = true;
+      try {
+        await addFeedback(user, {
+          name: document.getElementById("fb-name").value.trim(),
+          email: document.getElementById("fb-email").value.trim(),
+          rating: form.querySelector('input[name="rating"]:checked').value,
+          category: document.getElementById("fb-category").value,
+          message: document.getElementById("fb-message").value.trim(),
+        });
+        toast("Thank you! Your feedback has been submitted.", "success");
+        form.reset();
+      } catch (err) { toast(friendlyError(err), "error"); }
+      btn.disabled = false;
+    };
+  </script>
+  <script type="module" src="/js/firebase/nav-auth.js"></script>
 </body>
 </html>

@@ -1,96 +1,156 @@
-QUADRA STUDIO - PROPRIETARY SOURCE-AVAILABLE LICENSE
+================================================================================
+QUADRA STUDIO PROPRIETARY SOURCE-AVAILABLE LICENSE
+================================================================================
 
-Copyright (c) 2026 Quadra Collective. All rights reserved.
+Project: Quadra Studio (Website and AI Assessment Platform)
+Version: 3.5
+Main Author: Amir Sohail (GitHub: @amirsohail100)
+Copyright: (c) 2026 Quadra Collective. All rights reserved.
+Repository: https://github.com/amirsohail100/Quadra-Studio
 
-1. PURPOSE OF THIS PROJECT
+---
 
-This repository ("the Project") is built by its owner solely for the owner's
-own purposes: the owner's own business and startup, Quadra Studio. It is not
-an open-source project, a template, a starter kit or a product made for
-other people to reuse.
+1. PURPOSE OF THE PROJECT
 
-2. WHAT YOU MAY DO
+---
 
-You are allowed to:
-(a) view and read the source code on GitHub;
-(b) clone or fork the repository ONLY to read it, to evaluate the
-owner's work (for example as a recruiter, client or reviewer), or to
-learn from it privately;
-(c) quote short snippets with credit for review or discussion.
+Quadra Studio (the "Project") is developed and maintained by its Main Author
+exclusively for his own purposes, namely the operation of his own business and
+startup. The Project is not open-source software, a template, a starter kit or
+a product intended for reuse by third parties.
 
-GitHub's Terms of Service allow forking within GitHub. This license does
-not take that away, but a fork gives you NO right to use the code beyond
-what is stated in this section.
+This license applies to Version 3.5 of the Project and to every earlier and
+later version, unless a later version is released with a different license
+notice signed by the Main Author.
 
-3. WHAT YOU MAY NOT DO
+---
 
-Without prior written permission from the owner, you may not:
-(a) copy, modify, merge or build upon the Project or any part of it;
-(b) deploy, host or run it publicly or privately as a website, app,
-service or portfolio, whether free or paid;
-(c) use it, in whole or in part, for any commercial purpose, business,
-startup, client work or product;
-(d) sell, sublicense, redistribute or republish the Project or any part
+2. PERMITTED USE
+
+---
+
+Subject to the terms of this license, you may:
+
+(a) view and read the source code in the public repository;
+(b) clone or fork the repository solely for the purpose of reading it,
+evaluating the Main Author's work (for example, as a prospective
+employer, client or reviewer), or private, non-commercial study;
+(c) quote short excerpts with proper attribution for the purposes of
+review, criticism or discussion.
+
+The GitHub Terms of Service permit forking of public repositories within the
+GitHub platform. This license does not restrict that technical ability;
+however, a fork or clone grants you no right to use the Project beyond the
+permissions expressly listed in this Section.
+
+---
+
+3. PROHIBITED USE
+
+---
+
+Without the prior written permission of the Main Author, you must not:
+
+(a) copy, modify, adapt, merge or create derivative works of the Project or
+any part of it;
+(b) deploy, host or operate the Project or any part of it, publicly or
+privately, as a website, application, service or portfolio, whether
+free of charge or for payment;
+(c) use the Project or any part of it for any commercial purpose, including
+any business, startup, client engagement or product;
+(d) sell, sublicense, lease, distribute or republish the Project or any part
 of it, in source or compiled form;
-(e) use the name "Quadra", "Quadra Studio", "Quadra Collective", the
-logo, banner, designs, texts, project descriptions, team details,
-pricing or any other branding, or anything confusingly similar;
-(f) remove or alter this license or any copyright notice;
-(g) use the Project, its content or its code to train AI/ML models.
+(e) use the names "Quadra", "Quadra Studio" or "Quadra Collective", or the
+logo, banner, visual designs, texts, project descriptions, team
+information, pricing or any other branding associated with the Project,
+or any confusingly similar names or marks;
+(f) remove or alter this license or any copyright or attribution notice;
+(g) use the Project, its content or its source code to train, fine-tune or
+evaluate machine learning or artificial intelligence models.
 
-4. WHY CLONING THIS PROJECT WILL NOT HELP YOU
+---
 
-The repository is intentionally not a ready-to-run copy of the live
-business. Even if you clone it, it will not work as a finished product
-for you:
+4. LIMITED PRACTICAL VALUE OF CLONING
 
-- Private files are not included: environment files (.env), API keys,
-  Firebase and database credentials, service accounts and admin setup.
-- Image and brand assets (the assets folder) are not included.
-- The site depends on the owner's own accounts and services (Groq API
-  key, Firebase project, Firestore rules, admin UID list). None of these
-  are shared, and you would have to create your own.
-- All branding, text, team data, projects, pricing and contact details
-  belong to the owner and describe the owner's business. You would have
-  to replace every one of them, at which point you are building your own
-  project, not using this one.
-- Using it as-is, or with only light edits, would break Section 3 and
-  would be unlawful.
+---
 
-In short: you would have to change nearly everything, and you are not
-permitted to use the Project for your own purposes anyway.
+The repository is intentionally not a turnkey copy of the live business. A
+clone of this repository will not function as a finished product for you,
+because:
+
+(a) Private and environment-specific files are excluded, including .env
+files, API keys, Firebase and database credentials, service accounts
+and the administrator configuration.
+(b) Image and brand assets are not included in the repository.
+(c) The Project depends on accounts and services owned by the Main Author
+(including the Groq API key, the Firebase project, the Firestore
+security rules and the administrator UID list). None of these are
+shared and you would need to create your own.
+(d) All branding, text, team data, projects, pricing and contact details
+belong to the Main Author and describe his business. You would have to
+replace every one of them, at which point you would be building your
+own project rather than using this one.
+(e) Using the Project as-is, or with only superficial modifications, would
+violate Section 3 of this license.
+
+In summary, a clone requires substantial changes in order to work, and you are
+not permitted to use the Project for your own purposes in any case.
+
+---
 
 5. THIRD-PARTY COMPONENTS
 
-The Project uses third-party software and services, for example FastAPI,
-Pydantic, SlowAPI, LangChain, the Firebase web SDK, Font Awesome and Google
-Fonts, and calls APIs such as Groq. These are NOT covered by this license.
-They remain under their own licenses and terms, which you must follow
-yourself.
+---
 
-6. NO USER DATA
+The Project relies on third-party software, libraries and services, including
+but not limited to FastAPI, Pydantic, SlowAPI, LangChain, the Firebase web SDK,
+Font Awesome and Google Fonts, and it accesses external APIs such as Groq.
+These components are NOT covered by this license. They remain subject to their
+own licenses and terms of service, with which you are solely responsible for
+complying.
 
-This license does not give you any access to the owner's users, orders,
-feedback or any other data stored in the owner's services. Such data is
-private and protected by law.
+---
 
-7. NO WARRANTY
+6. NO ACCESS TO USER DATA
+
+---
+
+This license does not grant any access to users, orders, feedback or other
+data stored in the Main Author's services. All such data is private and
+protected by applicable law.
+
+---
+
+7. DISCLAIMER OF WARRANTY AND LIMITATION OF LIABILITY
+
+---
 
 THE PROJECT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NON-INFRINGEMENT. IN NO EVENT SHALL THE OWNER BE LIABLE FOR ANY CLAIM,
-DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-PROJECT OR ITS USE.
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+MAIN AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE PROJECT OR ITS USE.
+
+---
 
 8. TERMINATION AND ENFORCEMENT
 
-Any use outside Section 2 automatically ends your permission to access the
-Project. The owner may take legal action and file takedown requests (for
-example under the DMCA) against any unauthorised copy, deployment or use.
+---
 
-9. PERMISSION AND CONTACT
+Any use of the Project that falls outside Section 2 automatically terminates
+the permissions granted under this license. The Main Author reserves the right
+to pursue all available legal remedies and to submit takedown notices (for
+example, under the Digital Millennium Copyright Act) against any unauthorised
+copy, deployment or use of the Project.
 
-To ask for permission or a separate license, contact the owner through the
-contact details on the Quadra Studio website or the owner's GitHub profile
-(github.com/amirsohail100). Any permission is valid only if written and
-signed or sent by the owner.
+---
+
+9. REQUESTING PERMISSION
+
+---
+
+To request permission or a separate license, please contact the Main Author
+through the contact details published on the Quadra Studio website or through
+his GitHub profile (https://github.com/amirsohail100). Permission is valid
+only if granted in writing by the Main Author.

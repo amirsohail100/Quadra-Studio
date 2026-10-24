@@ -1,0 +1,96 @@
+QUADRA STUDIO - PROPRIETARY SOURCE-AVAILABLE LICENSE
+
+Copyright (c) 2026 Quadra Collective. All rights reserved.
+
+1. PURPOSE OF THIS PROJECT
+
+This repository ("the Project") is built by its owner solely for the owner's
+own purposes: the owner's own business and startup, Quadra Studio. It is not
+an open-source project, a template, a starter kit or a product made for
+other people to reuse.
+
+2. WHAT YOU MAY DO
+
+You are allowed to:
+(a) view and read the source code on GitHub;
+(b) clone or fork the repository ONLY to read it, to evaluate the
+owner's work (for example as a recruiter, client or reviewer), or to
+learn from it privately;
+(c) quote short snippets with credit for review or discussion.
+
+GitHub's Terms of Service allow forking within GitHub. This license does
+not take that away, but a fork gives you NO right to use the code beyond
+what is stated in this section.
+
+3. WHAT YOU MAY NOT DO
+
+Without prior written permission from the owner, you may not:
+(a) copy, modify, merge or build upon the Project or any part of it;
+(b) deploy, host or run it publicly or privately as a website, app,
+service or portfolio, whether free or paid;
+(c) use it, in whole or in part, for any commercial purpose, business,
+startup, client work or product;
+(d) sell, sublicense, redistribute or republish the Project or any part
+of it, in source or compiled form;
+(e) use the name "Quadra", "Quadra Studio", "Quadra Collective", the
+logo, banner, designs, texts, project descriptions, team details,
+pricing or any other branding, or anything confusingly similar;
+(f) remove or alter this license or any copyright notice;
+(g) use the Project, its content or its code to train AI/ML models.
+
+4. WHY CLONING THIS PROJECT WILL NOT HELP YOU
+
+The repository is intentionally not a ready-to-run copy of the live
+business. Even if you clone it, it will not work as a finished product
+for you:
+
+- Private files are not included: environment files (.env), API keys,
+  Firebase and database credentials, service accounts and admin setup.
+- Image and brand assets (the assets folder) are not included.
+- The site depends on the owner's own accounts and services (Groq API
+  key, Firebase project, Firestore rules, admin UID list). None of these
+  are shared, and you would have to create your own.
+- All branding, text, team data, projects, pricing and contact details
+  belong to the owner and describe the owner's business. You would have
+  to replace every one of them, at which point you are building your own
+  project, not using this one.
+- Using it as-is, or with only light edits, would break Section 3 and
+  would be unlawful.
+
+In short: you would have to change nearly everything, and you are not
+permitted to use the Project for your own purposes anyway.
+
+5. THIRD-PARTY COMPONENTS
+
+The Project uses third-party software and services, for example FastAPI,
+Pydantic, SlowAPI, LangChain, the Firebase web SDK, Font Awesome and Google
+Fonts, and calls APIs such as Groq. These are NOT covered by this license.
+They remain under their own licenses and terms, which you must follow
+yourself.
+
+6. NO USER DATA
+
+This license does not give you any access to the owner's users, orders,
+feedback or any other data stored in the owner's services. Such data is
+private and protected by law.
+
+7. NO WARRANTY
+
+THE PROJECT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT. IN NO EVENT SHALL THE OWNER BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+PROJECT OR ITS USE.
+
+8. TERMINATION AND ENFORCEMENT
+
+Any use outside Section 2 automatically ends your permission to access the
+Project. The owner may take legal action and file takedown requests (for
+example under the DMCA) against any unauthorised copy, deployment or use.
+
+9. PERMISSION AND CONTACT
+
+To ask for permission or a separate license, contact the owner through the
+contact details on the Quadra Studio website or the owner's GitHub profile
+(github.com/amirsohail100). Any permission is valid only if written and
+signed or sent by the owner.
